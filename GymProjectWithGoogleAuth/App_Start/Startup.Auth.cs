@@ -58,11 +58,11 @@ namespace GymProjectWithGoogleAuth
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "460731563332-c6u3253nsqf6s3tbcpkl52vmuvk3ccol.apps.googleusercontent.com",
+                ClientSecret = "-nP9JA-dIOH6XSXK8YgB5UBO"
+            });
         }
     }
 }
