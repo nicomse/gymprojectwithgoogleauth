@@ -7,6 +7,6 @@ namespace GymProject.Models.Clases
 {
     public class Profesor : Persona
     {
-        private int IdProfesor { get; set; }
+        public int IdProfesor { get; set; }
     }
 }

@@ -7,11 +7,11 @@ namespace GymProject.Models.Clases
 {
     public class Sucursal
     {
-        private int NroSucursal { get; set; }
-        private List<Pack> Packs { get; set; }
-        private String Barrio { get; set; }
-        private String Direccion { get; set; }
-        private String Telefono { get; set; }
-        private int Estado { get; set; }
+        public int NroSucursal { get; set; }
+        public List<Pack> Packs { get; set; }
+        public String Barrio { get; set; }
+        public String Direccion { get; set; }
+        public String Telefono { get; set; }
+        public int Estado { get; set; }
     }
 }

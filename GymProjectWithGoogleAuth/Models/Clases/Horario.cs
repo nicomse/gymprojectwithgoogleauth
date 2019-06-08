@@ -7,13 +7,13 @@ namespace GymProject.Models.Clases
 {
     public class Horario
     {
-        private int IdHorario { get; set; }
-        private Actividad Actividad { get; set; }
-        private Sucursal Sucursal { get; set; }
-        private Profesor Profesor { get; set; }
-        private List<Alumno> Alumnos { get; set; }
-        private TimeSpan HoraInicio { get; set; } // VERIFICAR TIPO DE DATO
-        private TimeSpan HoraFin { get; set; } // VERIFICAR TIPO DE DATO
-        private String Dia { get; set; }
+        public int IdHorario { get; set; }
+        public Actividad Actividad { get; set; }
+        public Sucursal Sucursal { get; set; }
+        public Profesor Profesor { get; set; }
+        public List<Alumno> Alumnos { get; set; }
+        public TimeSpan HoraInicio { get; set; } // VERIFICAR TIPO DE DATO
+        public TimeSpan HoraFin { get; set; } // VERIFICAR TIPO DE DATO
+        public String Dia { get; set; }
     }
 }

@@ -7,12 +7,12 @@ namespace GymProject.Models.Clases
 {
     public class Persona
     {
-        private int IdPersona { get; set; }
-        private String Nombre { get; set; }
-        private String Apellido { get; set; }
-        private String Email { get; set; }
-        private String Telefono { get; set; }
-        private int Estado { get; set; }
-        private String Rol { get; set; }
+        public int IdPersona { get; set; }
+        public String Nombre { get; set; }
+        public String Apellido { get; set; }
+        public String Email { get; set; }
+        public String Telefono { get; set; }
+        public int Estado { get; set; }
+        public String Rol { get; set; }
     }
 }

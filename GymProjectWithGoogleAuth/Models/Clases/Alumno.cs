@@ -7,8 +7,8 @@ namespace GymProject.Models.Clases
 {
     public class Alumno : Persona
     {
-        private int IdAlumno { get; set; }
-        private List<Credito> Creditos { get; set; }
-        private List<Horario> Horarios { get; set; }
+        public int IdAlumno { get; set; }
+        public List<Credito> Creditos { get; set; }
+        public List<Horario> Horarios { get; set; }
     }
 }

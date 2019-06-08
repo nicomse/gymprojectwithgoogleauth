@@ -7,10 +7,10 @@ namespace GymProject.Models.Clases
 {
     public class Pack
     {
-        private int IdPack { get; set; }
-        private Sucursal Sucursal { get; set; }
-        private int CantCreditos { get; set; }
-        private int DiasVigencia { get; set; }
-        private float Precio { get; set; }
+        public int IdPack { get; set; }
+        public Sucursal Sucursal { get; set; }
+        public int CantCreditos { get; set; }
+        public int DiasVigencia { get; set; }
+        public float Precio { get; set; }
     }
 }

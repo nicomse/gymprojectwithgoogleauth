@@ -7,9 +7,9 @@ namespace GymProject.Models.Clases
 {
     public class Actividad
     {
-        private int IdActividad { get; set; }
-        private String Nombre { get; set; }
-        private List<Horario> Horarios { get; set; }
-        private int Estado { get; set; }
+        public int IdActividad { get; set; }
+        public String Nombre { get; set; }
+        public List<Horario> Horarios { get; set; }
+        public int Estado { get; set; }
     }
 }
