@@ -273,9 +273,10 @@
     <Content Include="Views\Profesor\HomeProfesor.cshtml" />
     <Content Include="Views\Administrador\HomeAdministrador.cshtml" />
     <Content Include="Views\Profesor\Presentismo.cshtml" />
+    <Content Include="Views\Alumno\ListarAlumnos.cshtml" />
+    <Content Include="Views\Alumno\ListadoAlumnos.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Alumno\" />
     <Folder Include="Views\Templates\" />
   </ItemGroup>
   <ItemGroup>

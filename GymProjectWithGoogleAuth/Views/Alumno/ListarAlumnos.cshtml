@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GymProject.Models.Clases.Alumno>
+
+@{
+    ViewBag.Title = "Listar Alumnos";
+}
+
+<h2>Listar alumnos</h2>
+
+<div class="form-horizontal">
+    <form action="/" method="post">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input class="form-control" type="text" name="email" value="" id="inputBuscar" placeholder="email a buscar" />
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnBuscar">Buscar alumnos</button>
+    </form>
+</div>
+
+<div id="resultados">
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('#btnBuscar').on('click', function () {
+            var email = document.getElementById('inputBuscar').value
+            ListarAlumnos(email);
+        });
+
+
+        function ListarAlumnos(email) {
+              $.ajax({
+                url: '/Alumno/BuscarAlumnosAjax',
+                data: {
+                    'email': email
+                },
+                type: 'post',
+                success: function (result) {
+                    //devuelve un partial view
+                    $('#resultados').empty()
+                    $('#resultados').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+
+    </script>
+}

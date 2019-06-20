@@ -161,6 +161,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         // fin modulo actividades
 
         // inicio modulo alumnos
+
         public bool AltaAlumno(Alumno alumno)
         {
             bool insertado = false;
@@ -227,6 +228,91 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
 
             return miAlumno;
+        }
+
+        //OBTENER TODOS LOS ALUMNOS
+
+        public List<Alumno> GetTodosLosAlumnos()
+        {
+            List<Alumno> misAlumnos = new List<Alumno>();
+            Alumno miAlumno;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosAlumnos", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            //@ TO DO falta llenar atributo CREDITOS y HORARIOS
+                        };
+                        misAlumnos.Add(miAlumno);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misAlumnos;
+        }
+
+        // buscar alumno por mail
+        public List<Alumno> BuscarAlumnoPorEmail(String EmailAlumno)
+        {
+            List<Alumno> misAlumnos = new List<Alumno>();
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand(
+                    "dbo.buscarAlumnoPorMail", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(
+                    new SqlParameter("@email", EmailAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        Alumno miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                        };
+                        misAlumnos.Add(miAlumno);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misAlumnos;
         }
 
         // GET ALUMNO POR EMAIL
@@ -299,6 +385,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
             return modificado;
         }
+
+        //BAJA ALUMNO
 
         public bool BajaAlumno(Alumno alumnoAEliminar)
         {
