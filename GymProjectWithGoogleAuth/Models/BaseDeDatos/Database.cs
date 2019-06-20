@@ -8,9 +8,9 @@ using System.Web;
 
 namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 {
-    public class Database 
-    {        
-     
+    public class Database
+    {
+
         public static string DATABASE_NAME = "Taller6";
         // ABRIR CONEXION DE LA BASE DE DATOS
         public static SqlConnection AbrirConexion()
@@ -62,7 +62,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     insertado = true;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 throw e;
             }
 
@@ -73,7 +74,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         {
             Actividad miActividad = null;
 
-            try {
+            try
+            {
                 SqlConnection conn = AbrirConexion();
                 SqlCommand cmd = new SqlCommand(
                     "dbo.getActividadPorId", conn);
@@ -82,7 +84,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     new SqlParameter("@idActividad", idActividad));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
-                
+
                 if (miLectorDeDatos.HasRows)
                 {
                     if (miLectorDeDatos.Read())
@@ -90,7 +92,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         miActividad = new Actividad
                         {
                             IdActividad = Convert.ToInt32(miLectorDeDatos["idActividad"]),
-                            Nombre =miLectorDeDatos["idActividad"].ToString(),
+                            Nombre = miLectorDeDatos["idActividad"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                     }
@@ -119,11 +121,13 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     new SqlParameter("@idActividad", actividadAModificar.IdActividad));
                 cmd.Parameters.Add(
                    new SqlParameter("@nombre", actividadAModificar.Nombre));
-                if (cmd.ExecuteNonQuery() > 0) {
+                if (cmd.ExecuteNonQuery() > 0)
+                {
                     modificado = true;
-                } 
+                }
             }
-            catch (Exception e){
+            catch (Exception e)
+            {
                 throw e;
             }
 
@@ -156,49 +160,44 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         // fin modulo actividades
 
-
         // inicio modulo alumnos
-        public bool altaAlumno(Alumno alumno)
+        public bool AltaAlumno(Alumno alumno)
         {
             bool insertado = false;
-            try {
+            try
+            {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.altaActividad", conn);
+                SqlCommand cmd = new SqlCommand("dbo.altaAlumno", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@nombre", alumno.Nombre));
-                cmd.Parameters.Add(
-                    new SqlParameter("@apellido", alumno.Apellido));
-                cmd.Parameters.Add(
-                    new SqlParameter("@email", alumno.Email));
-                cmd.Parameters.Add(
-                    new SqlParameter("@telefono", alumno.Telefono));
-                cmd.Parameters.Add(
-                    new SqlParameter("@rol", alumno.Rol));
+                cmd.Parameters.Add(new SqlParameter("@nombre", alumno.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", alumno.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", alumno.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", alumno.Telefono));
+                // cmd.Parameters.Add(new SqlParameter("@rol", alumno.Rol));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     insertado = true;
                 }
-            } catch(Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
 
             return insertado;
         }
 
-        public Alumno getAlumno(int idAlumno)
+        // GET ALUMNO POR ID
+        public Alumno GetAlumno(int idAlumno)
         {
             Alumno miAlumno = null;
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.getAlumnoPorId", conn);
+                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorId", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@idAlumno", idAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -230,26 +229,64 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miAlumno;
         }
 
-        public bool modificarAlumno(Alumno alumnoAModificar)
+        // GET ALUMNO POR EMAIL
+
+        public Alumno GetAlumnoPorEmail(String EmailAlumno)
+        {
+            Alumno miAlumno = null;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand(
+                    "dbo.getAlumnoPorEmail", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(
+                    new SqlParameter("@emailAlumno", EmailAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                        };
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miAlumno;
+        }
+
+        // MODIFICAR ALUMNO
+        public bool ModificarAlumno(Alumno alumnoAModificar)
         {
             bool modificado = false;
 
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.modificarAlumno", conn);
+                SqlCommand cmd = new SqlCommand("dbo.modificarAlumno", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@idAlumno", alumnoAModificar.IdAlumno));
-                cmd.Parameters.Add(
-                   new SqlParameter("@nombre", alumnoAModificar.Nombre));
-                cmd.Parameters.Add(
-                  new SqlParameter("@apellido", alumnoAModificar.Apellido));
-                cmd.Parameters.Add(
-                  new SqlParameter("@email", alumnoAModificar.Email));
-                cmd.Parameters.Add(
-                  new SqlParameter("@telefono", alumnoAModificar.Telefono));
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", alumnoAModificar.IdAlumno));
+                cmd.Parameters.Add(new SqlParameter("@nombre", alumnoAModificar.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", alumnoAModificar.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", alumnoAModificar.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", alumnoAModificar.Telefono));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
@@ -260,11 +297,10 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
-
             return modificado;
         }
 
-        public bool bajaAlumno(Alumno alumnoAEliminar)
+        public bool BajaAlumno(Alumno alumnoAEliminar)
         {
             bool baja = false;
             try
@@ -292,7 +328,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         // inicio modulo sucursales
 
-        public bool altaSucursal (Sucursal sucursal)
+        public bool altaSucursal(Sucursal sucursal)
         {
             bool insertado = false;
             try
@@ -313,7 +349,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     insertado = true;
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 throw e;
             }
 
@@ -355,8 +392,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return miSucursal;
         }
-
-
 
         public bool modificarSucursal(Sucursal sucursalAModificar)
         {
@@ -415,17 +450,16 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         }
 
 
-
         //fin modulo sucursales
-
-
+        
 
         // inicio modulo packs
         public bool altaPack(Pack pack)
         {
             bool insertado = false;
 
-            try {
+            try
+            {
                 SqlConnection conn = AbrirConexion();
                 SqlCommand cmd = new SqlCommand(
                     "dbo.altaPack", conn);
@@ -444,7 +478,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw e;
             }
@@ -554,7 +589,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         //inicio modulo profesores
 
-        public bool altaProfesor(Profesor profesor)
+        public bool AltaProfesor(Profesor profesor)
         {
             bool insertado = false;
             try
@@ -571,7 +606,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     new SqlParameter("@email", profesor.Email));
                 cmd.Parameters.Add(
                     new SqlParameter("@telefono", profesor.Telefono));
-               
+
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
@@ -586,7 +621,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
-        public Profesor getProfesor(int idProfesor)
+        // GET PROFESOR POR ID
+        public Profesor GetProfesor(int idProfesor)
         {
             Profesor miProfesor = null;
             try
@@ -628,8 +664,48 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miProfesor;
         }
 
+        // GET PROFESOR POR EMAIL
+        public Profesor GetProfesorPorEmail(String EmailProfesor)
+        {
+            Profesor miProfesor = null;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getProfesorPorEmail", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@EmailProfesor", EmailProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
-        public bool modificarProfesor(Profesor profesorAModificar)
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            //@ TO DO falta llenar atributo CREDITOS y HORARIOS
+                        };
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miProfesor;
+        }
+
+        public bool ModificarProfesor(Profesor profesorAModificar)
         {
             bool modificado = false;
 
@@ -687,7 +763,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return baja;
         }
 
-     
+
 
 
         //fin modulo profesores

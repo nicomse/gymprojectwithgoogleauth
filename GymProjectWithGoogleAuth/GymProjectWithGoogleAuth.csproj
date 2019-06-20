@@ -168,8 +168,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActividadController.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\AlumnoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PackController.cs" />
+    <Compile Include="Controllers\ProfesorController.cs" />
+    <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +200,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\HomersGym.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -221,8 +230,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -244,6 +251,28 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Alumno\AgregarAlumno.cshtml" />
+    <Content Include="Views\Alumno\ModificarAlumno.cshtml" />
+    <Content Include="Views\Alumno\EliminarAlumno.cshtml" />
+    <Content Include="Views\Profesor\AgregarProfesor.cshtml" />
+    <Content Include="Views\Profesor\ModificarProfesor.cshtml" />
+    <Content Include="Views\Profesor\EliminarProfesor.cshtml" />
+    <Content Include="Views\Sucursal\AgregarSucursal.cshtml" />
+    <Content Include="Views\Sucursal\ModificarSucursal.cshtml" />
+    <Content Include="Views\Sucursal\EliminarSucursal.cshtml" />
+    <Content Include="Views\Actividad\AgregarActividad.cshtml" />
+    <Content Include="Views\Actividad\ModificarActividad.cshtml" />
+    <Content Include="Views\Actividad\EliminarActividad.cshtml" />
+    <Content Include="Views\Pack\AgregarPack.cshtml" />
+    <Content Include="Views\Pack\ModificarPack.cshtml" />
+    <Content Include="Views\Pack\EliminarPack.cshtml" />
+    <Content Include="Views\Horario\AgregarHorario.cshtml" />
+    <Content Include="Views\Horario\ModificarHorario.cshtml" />
+    <Content Include="Views\Horario\EliminarHorario.cshtml" />
+    <Content Include="Views\Alumno\HomeAlumno.cshtml" />
+    <Content Include="Views\Profesor\HomeProfesor.cshtml" />
+    <Content Include="Views\Administrador\HomeAdministrador.cshtml" />
+    <Content Include="Views\Profesor\Presentismo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Alumno\" />
