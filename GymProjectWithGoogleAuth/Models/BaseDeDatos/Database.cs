@@ -160,7 +160,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         // fin modulo actividades
 
-
         // inicio modulo alumnos
         public bool AltaAlumno(Alumno alumno)
         {
@@ -196,11 +195,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.getAlumnoPorId", conn);
+                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorId", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@idAlumno", idAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -294,14 +291,12 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     modificado = true;
-                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-
             return modificado;
         }
 
@@ -398,8 +393,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miSucursal;
         }
 
-
-
         public bool modificarSucursal(Sucursal sucursalAModificar)
         {
             bool modificado = false;
@@ -457,10 +450,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         }
 
 
-
         //fin modulo sucursales
-
-
+        
 
         // inicio modulo packs
         public bool altaPack(Pack pack)
