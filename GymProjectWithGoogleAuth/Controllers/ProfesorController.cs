@@ -1,10 +1,10 @@
-﻿using GymProject.Models.Clases;
-using GymProjectWithGoogleAuth.Models.BaseDeDatos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GymProject.Models.Clases;
+using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 
 namespace GymProjectWithGoogleAuth.Controllers
 {
@@ -34,7 +34,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 if (ModelState.IsValid)
                 {
                     db.AltaProfesor(Profesor);
-                    return RedirectToAction("ListarProfesores"); // NO EXISTE EL LISTADO. A DONDE VA ??
+                    return RedirectToAction("ListarProfesores"); // NO EXISTE EL LISTADO. ¿A DÓNDE VA?
                 }
                 else
                 {
@@ -47,6 +47,30 @@ namespace GymProjectWithGoogleAuth.Controllers
                 {
                     ModelState.AddModelError("Email", "El profesor ingresado ya existe.");
                 }
+                return View();
+            }
+        }
+
+        // MODIFICAR PROFESOR
+        public ActionResult ModificarProfesor(int id)
+        {
+            Database db = new Database();
+            Profesor profesor = db.GetProfesor(id);
+            return View(profesor);
+        }
+
+        [HttpPost]
+        public ActionResult ModificarProfesor(Profesor profesor)
+        {
+            Database db = new Database();
+
+            if (ModelState.IsValid)
+            {
+                db.ModificarProfesor(profesor);
+                return RedirectToAction("ListarProfesores"); // NO EXISTE EL LISTADO. ¿A DÓNDE VA?
+            }
+            else
+            {
                 return View();
             }
         }

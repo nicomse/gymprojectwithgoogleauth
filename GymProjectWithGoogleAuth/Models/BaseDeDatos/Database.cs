@@ -262,7 +262,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
 
-                            //@ TO DO falta llenar atributo CREDITOS y HORARIOS
                         };
                     }
                 }
@@ -295,6 +294,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     modificado = true;
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
@@ -631,7 +631,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         }
 
         // GET PROFESOR POR ID
-        public Profesor getProfesor(int idProfesor)
+        public Profesor GetProfesor(int idProfesor)
         {
             Profesor miProfesor = null;
             try
@@ -714,7 +714,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miProfesor;
         }
 
-        public bool modificarProfesor(Profesor profesorAModificar)
+        public bool ModificarProfesor(Profesor profesorAModificar)
         {
             bool modificado = false;
 

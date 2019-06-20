@@ -34,7 +34,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 if (ModelState.IsValid)
                 {
                     db.AltaAlumno(alumno);
-                    return RedirectToAction("ListarAlumnos"); // NO EXISTE EL LISTADO DE ALUMNOS. A DONDE VA ??
+                    return RedirectToAction("ListarAlumnos"); // NO EXISTE EL LISTADO. ¿A DÓNDE VA?
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             if (ModelState.IsValid)
             {
                 db.ModificarAlumno(alumno);
-                return RedirectToAction("ListarAlumnos"); // NO EXISTE EL LISTADO DE ALUMNOS. A DONDE VA ??
+                return RedirectToAction("ListarAlumnos"); // NO EXISTE EL LISTADO. ¿A DÓNDE VA?
             }
             else
             {
