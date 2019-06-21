@@ -16,11 +16,11 @@ namespace GymProjectWithGoogleAuth.Controllers
             return View();
         }
 
+        // LISTAR ALUMNOS
         public ActionResult ListarAlumnos()
         {
             Database db = new Database();
             List<Alumno> alumnos = db.GetTodosLosAlumnos();
-
             return View(alumnos);
         }
 
@@ -42,7 +42,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 if (ModelState.IsValid)
                 {
                     db.AltaAlumno(alumno);
-                    return RedirectToAction("ListarAlumnos");
+                    return RedirectToAction("AgregarAlumno");
                 }
                 else
                 {
@@ -93,7 +93,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 try
                 {
                     List<Alumno> alumnos = db.GetTodosLosAlumnos();
-                    return PartialView("ListadoAlumnos", alumnos);
+                    return PartialView("ListarAlumnosParcial", alumnos);
                 }
                 catch (Exception e)
                 {
@@ -104,7 +104,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 try
                 {
                     List<Alumno> alumnos = db.BuscarAlumnoPorEmail(email);
-                    return PartialView("ListadoAlumnos", alumnos);
+                    return PartialView("ListarAlumnosParcial", alumnos);
                 }
                 catch (Exception e)
                 {
@@ -127,9 +127,6 @@ namespace GymProjectWithGoogleAuth.Controllers
                 return RedirectToAction("ListarAlumnos","error");
             }
         }
-
-
-
 
     }
 }

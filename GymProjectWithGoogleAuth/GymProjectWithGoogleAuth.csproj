@@ -202,7 +202,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\HomersGym.jpg" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -253,28 +252,24 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Alumno\AgregarAlumno.cshtml" />
     <Content Include="Views\Alumno\ModificarAlumno.cshtml" />
-    <Content Include="Views\Alumno\EliminarAlumno.cshtml" />
     <Content Include="Views\Profesor\AgregarProfesor.cshtml" />
     <Content Include="Views\Profesor\ModificarProfesor.cshtml" />
-    <Content Include="Views\Profesor\EliminarProfesor.cshtml" />
     <Content Include="Views\Sucursal\AgregarSucursal.cshtml" />
     <Content Include="Views\Sucursal\ModificarSucursal.cshtml" />
-    <Content Include="Views\Sucursal\EliminarSucursal.cshtml" />
     <Content Include="Views\Actividad\AgregarActividad.cshtml" />
     <Content Include="Views\Actividad\ModificarActividad.cshtml" />
-    <Content Include="Views\Actividad\EliminarActividad.cshtml" />
     <Content Include="Views\Pack\AgregarPack.cshtml" />
     <Content Include="Views\Pack\ModificarPack.cshtml" />
-    <Content Include="Views\Pack\EliminarPack.cshtml" />
     <Content Include="Views\Horario\AgregarHorario.cshtml" />
     <Content Include="Views\Horario\ModificarHorario.cshtml" />
-    <Content Include="Views\Horario\EliminarHorario.cshtml" />
     <Content Include="Views\Alumno\HomeAlumno.cshtml" />
     <Content Include="Views\Profesor\HomeProfesor.cshtml" />
     <Content Include="Views\Administrador\HomeAdministrador.cshtml" />
     <Content Include="Views\Profesor\Presentismo.cshtml" />
     <Content Include="Views\Alumno\ListarAlumnos.cshtml" />
-    <Content Include="Views\Alumno\ListadoAlumnos.cshtml" />
+    <Content Include="Views\Alumno\ListarAlumnosParcial.cshtml" />
+    <Content Include="Views\Profesor\ListarProfesores.cshtml" />
+    <Content Include="Views\Profesor\ListarProfesoresParcial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Templates\" />

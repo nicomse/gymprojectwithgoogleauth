@@ -1,7 +1,7 @@
-﻿@model IEnumerable<GymProject.Models.Clases.Alumno>
+﻿@model IEnumerable<GymProject.Models.Clases.Profesor>
 
 @{
-    ViewBag.Title = "Listar Alumnos";
+    ViewBag.Title = "Listar Profesores";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -13,7 +13,7 @@
                 <input class="form-control" type="text" name="email" value="" id="inputBuscar" placeholder="Ingrese e-mail" />
             </div>
         </div>
-        <button type="button" class="btn btn-primary" id="btnBuscar">Buscar Alumnos</button>
+        <button type="button" class="btn btn-primary" id="btnBuscar">Buscar Profesores</button>
     </form>
 </div>
 
@@ -28,13 +28,13 @@
     <script>
         $('#btnBuscar').on('click', function () {
             var email = document.getElementById('inputBuscar').value
-            ListarAlumnos(email);
+            ListarProfesores(email);
         });
 
 
-        function ListarAlumnos(email) {
+        function ListarProfesores(email) {
             $.ajax({
-                url: '/Alumno/BuscarAlumnosAjax',
+                url: '/Profesor/BuscarProfesoresAjax',
                 data: {
                     'email': email
                 },
@@ -49,6 +49,5 @@
                 }
             })
         }
-
     </script>
 }

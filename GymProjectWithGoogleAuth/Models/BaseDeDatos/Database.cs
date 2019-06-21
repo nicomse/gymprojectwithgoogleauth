@@ -43,7 +43,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return "Server=.\\SQLEXPRESS;Database=" + DATABASE_NAME + ";Integrated Security= true";
         }
 
-        // inicio modulo actividades
+        // INICIO MODULO DE ACTIVIDADES
         public bool altaActividad(Actividad actividad)
         {
             bool insertado = false;
@@ -160,7 +160,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         // fin modulo actividades
 
-        // inicio modulo alumnos
+        // INICIO MODULO ALUMNOS
 
         public bool AltaAlumno(Alumno alumno)
         {
@@ -268,11 +268,10 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
-
             return misAlumnos;
         }
 
-        // buscar alumno por mail
+        // BUSCAR ALUMNOS POR EMAIL CON EL OPERADOR LIKE
         public List<Alumno> BuscarAlumnoPorEmail(String EmailAlumno)
         {
             List<Alumno> misAlumnos = new List<Alumno>();
@@ -675,7 +674,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         //fin modulo packs
 
-        //inicio modulo profesores
+        // INICIO MODULO PROFESORES
 
         public bool AltaProfesor(Profesor profesor)
         {
@@ -683,18 +682,12 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.altaProfesor", conn);
+                SqlCommand cmd = new SqlCommand("dbo.altaProfesor", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@nombre", profesor.Nombre));
-                cmd.Parameters.Add(
-                    new SqlParameter("@apellido", profesor.Apellido));
-                cmd.Parameters.Add(
-                    new SqlParameter("@email", profesor.Email));
-                cmd.Parameters.Add(
-                    new SqlParameter("@telefono", profesor.Telefono));
-
+                cmd.Parameters.Add(new SqlParameter("@nombre", profesor.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", profesor.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", profesor.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", profesor.Telefono));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
@@ -707,6 +700,45 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
 
             return insertado;
+        }
+
+        // BUSCAR PROFESORES POR EMAIL CON EL OPERADOR LIKE
+        public List<Profesor> BuscarProfesorPorEmail(String EmailProfesor)
+        {
+            List<Profesor> misProfesores = new List<Profesor>();
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.buscarProfesorPorMail", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@email", EmailProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        Profesor miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        misProfesores.Add(miProfesor);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misProfesores;
         }
 
         // GET PROFESOR POR ID
@@ -750,6 +782,46 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
 
             return miProfesor;
+        }
+
+        //OBTENER TODOS LOS PROFESORES
+
+        public List<Profesor> GetTodosLosProfesores()
+        {
+            List<Profesor> misProfesores = new List<Profesor>();
+            Profesor miProfesor;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosProfesores", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        misProfesores.Add(miProfesor);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misProfesores;
         }
 
         // GET PROFESOR POR EMAIL
@@ -823,11 +895,10 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
-
             return modificado;
         }
 
-        public bool bajaProfesor(Profesor profesorAEliminar)
+        public bool BajaProfesor(Profesor profesorAEliminar)
         {
             bool baja = false;
             try

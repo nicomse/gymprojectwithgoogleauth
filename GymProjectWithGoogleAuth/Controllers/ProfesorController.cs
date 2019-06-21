@@ -16,6 +16,15 @@ namespace GymProjectWithGoogleAuth.Controllers
             return View();
         }
 
+        // LISTAR PROFESORES
+        public ActionResult ListarProfesores()
+        {
+            Database db = new Database();
+            List<Profesor> profesores = db.GetTodosLosProfesores();
+
+            return View(profesores);
+        }
+
         // AGREGAR PROFESOR
         public ActionResult AgregarProfesor()
         {
@@ -34,7 +43,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 if (ModelState.IsValid)
                 {
                     db.AltaProfesor(Profesor);
-                    return RedirectToAction("ListarProfesores"); // NO EXISTE EL LISTADO. ¿A DÓNDE VA?
+                    return RedirectToAction("AgregarProfesor");
                 }
                 else
                 {
@@ -67,12 +76,62 @@ namespace GymProjectWithGoogleAuth.Controllers
             if (ModelState.IsValid)
             {
                 db.ModificarProfesor(profesor);
-                return RedirectToAction("ListarProfesores"); // NO EXISTE EL LISTADO. ¿A DÓNDE VA?
+                return RedirectToAction("ListarProfesores");
             }
             else
             {
                 return View();
             }
         }
+
+        // BUSCAR PROFESORES
+
+        [HttpPost]
+        public PartialViewResult BuscarProfesoresAjax(FormCollection form)
+        {
+            String email = form["email"];
+            Database db = new Database();
+            if (email == "")
+            {
+                try
+                {
+                    List<Profesor> profesores = db.GetTodosLosProfesores();
+                    return PartialView("ListarProfesoresParcial", profesores);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            else
+            {
+                try
+                {
+                    List<Profesor> profesores = db.BuscarProfesorPorEmail(email);
+                    return PartialView("ListarProfesoresParcial", profesores);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        //ELIMINAR PROFESOR
+        public ActionResult EliminarProfesor(int idProfesor)
+        {
+            Database db = new Database();
+            try
+            {
+                Profesor profesor = db.GetProfesor(idProfesor);
+                db.BajaProfesor(profesor);
+                return RedirectToAction("ListarProfesores");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListarProfesores", "error");
+            }
+        }
+
     }
 }

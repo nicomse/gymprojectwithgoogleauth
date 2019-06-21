@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GymProject.Models.Clases.Alumno>
+
+<table class="table table-striped" id="TablaListarAlumnosParcial">
+
+    <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>E-Mail</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAlumno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarAlumno", "Alumno", new { id = item.IdAlumno })'" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="location.href='@Url.Action("EliminarAlumno", "Alumno", new { idAlumno = item.IdAlumno })'"
+            </td>
+
+        </tr>
+    }
+
+</table>
