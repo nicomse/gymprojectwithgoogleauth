@@ -178,6 +178,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
+                    Alumno alu = GetAlumnoPorEmail(alumno.Email);
+                    String idRol = getIdRol("ALUMNO");
+                    insertarRelacionPersonaRol(alu.IdPersona, idRol);
                     insertado = true;
                 }
             }
@@ -691,6 +694,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
+                    Profesor prof = GetProfesorPorEmail(profesor.Email);
+                    String idRol = getIdRol("PROFESOR");
+                    insertarRelacionPersonaRol(profesor.IdPersona, idRol);
                     insertado = true;
                 }
             }
@@ -967,6 +973,51 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
                 throw e;
             }
+        }
+
+        public String getIdRol(String rol)
+        {
+            SqlConnection conn = AbrirConexion();
+            SqlCommand cmd = new SqlCommand("dbo.getIdRol", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@nombre", rol));
+            SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+            String myRol = null;
+
+            if (miLectorDeDatos.HasRows)
+            {
+                while (miLectorDeDatos.Read())
+                {
+                    myRol = miLectorDeDatos["Id"].ToString();
+                }
+            }
+
+            return myRol;
+        }
+
+        public bool insertarRelacionPersonaRol(int idPersona, String idRol)
+        {
+            bool insertado = false;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand(
+                    "dbo.insertarRelacionPersonasRoles", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@idPersona", idPersona));
+                cmd.Parameters.Add(new SqlParameter("@idRol", idRol));
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insertado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return insertado;
         }
 
     }
