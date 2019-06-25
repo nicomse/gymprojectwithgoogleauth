@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GymProjectWithGoogleAuth.Models;
+using GymProjectWithGoogleAuth.Models.Middleware;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GymProjectWithGoogleAuth.Controllers
 {
@@ -325,6 +327,7 @@ namespace GymProjectWithGoogleAuth.Controllers
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -332,6 +335,18 @@ namespace GymProjectWithGoogleAuth.Controllers
 
             // Si el usuario ya tiene un inicio de sesión, iniciar sesión del usuario con este proveedor de inicio de sesión externo
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+
+            crearRoles();
+
+            // si esta previamente agregado en la db de alumnos
+            if (!Middleware.PuedePasar(loginInfo.Email))
+            {
+                return View("NotAllowedPage");
+            } else
+            {
+                Console.Write("Pudiste pasar!");
+            }
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -346,6 +361,33 @@ namespace GymProjectWithGoogleAuth.Controllers
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+            }
+        }
+
+        private void crearRoles()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+
+            if (!roleManager.RoleExists("ADMIN"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "ADMIN";
+                roleManager.Create(role);
+            }
+            if (!roleManager.RoleExists("ALUMNO"))
+            {
+                var role2 = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role2.Name = "ALUMNO";
+                roleManager.Create(role2);
+            }
+            if (!roleManager.RoleExists("PROFESOR"))
+            {
+                var role3 = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role3.Name = "PROFESOR";
+                roleManager.Create(role3);
             }
         }
 

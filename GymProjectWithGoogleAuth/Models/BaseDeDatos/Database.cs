@@ -929,7 +929,45 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
 
 
+        // get persona por email
 
+        public Persona getPersonaPorEmail(String emailPersona)
+        {
+            Persona miPersona = null;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.buscarPersonaPorMail", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@email", emailPersona));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        miPersona = new Persona
+                        {
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+
+                return miPersona;
+        
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
 
     }
 }

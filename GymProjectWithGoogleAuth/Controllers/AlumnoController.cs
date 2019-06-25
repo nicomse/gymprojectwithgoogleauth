@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GymProject.Models.Clases;
 using GymProjectWithGoogleAuth.Models.BaseDeDatos;
+using GymProjectWithGoogleAuth.Models.Middleware;
 
 namespace GymProjectWithGoogleAuth.Controllers
 {

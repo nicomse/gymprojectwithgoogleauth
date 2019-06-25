@@ -192,6 +192,7 @@
     <Compile Include="Models\Clases\Sucursal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Middleware\Middleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -270,8 +271,10 @@
     <Content Include="Views\Alumno\ListarAlumnosParcial.cshtml" />
     <Content Include="Views\Profesor\ListarProfesores.cshtml" />
     <Content Include="Views\Profesor\ListarProfesoresParcial.cshtml" />
+    <Content Include="Views\Account\NotAllowedPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Middleware\" />
     <Folder Include="Views\Templates\" />
   </ItemGroup>
   <ItemGroup>
