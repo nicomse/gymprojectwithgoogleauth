@@ -272,6 +272,7 @@
     <Content Include="Views\Profesor\ListarProfesores.cshtml" />
     <Content Include="Views\Profesor\ListarProfesoresParcial.cshtml" />
     <Content Include="Views\Account\NotAllowedPage.cshtml" />
+    <Content Include="Views\Sucursal\ListarSucursales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Middleware\" />

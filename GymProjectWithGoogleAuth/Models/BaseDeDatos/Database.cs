@@ -413,23 +413,20 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         // fin modulo alumnos
 
 
-        // inicio modulo sucursales
+        // INICIO MODULO SUCURSALES
 
-        public bool altaSucursal(Sucursal sucursal)
+        // ALTA SUCURSAL
+        public bool AltaSucursal(Sucursal sucursal)
         {
             bool insertado = false;
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.altaSucursal", conn);
+                SqlCommand cmd = new SqlCommand("dbo.altaSucursal", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@barrio", sucursal.Barrio));
-                cmd.Parameters.Add(
-                    new SqlParameter("@direccion", sucursal.Direccion));
-                cmd.Parameters.Add(
-                    new SqlParameter("@telefono", sucursal.Telefono));
+                cmd.Parameters.Add(new SqlParameter("@barrio", sucursal.Barrio));
+                cmd.Parameters.Add(new SqlParameter("@direccion", sucursal.Direccion));
+                cmd.Parameters.Add(new SqlParameter("@telefono", sucursal.Telefono));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
@@ -444,29 +441,31 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
-        public Sucursal getSucursal(int nroSucursal)
+        // GET SUCURSAL
+        public Sucursal GetSucursal(int numeroSucursal)
         {
-            Sucursal miSucursal = null;
+            Sucursal sucursal = null;
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.getSucursalPorId", conn);
+                SqlCommand cmd = new SqlCommand("dbo.getSucursalPorId", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@nroSucursal", nroSucursal));
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", numeroSucursal));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
                 {
                     if (miLectorDeDatos.Read())
                     {
-                        miSucursal = new Sucursal
+                        sucursal = new Sucursal
                         {
                             NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
                             Barrio = miLectorDeDatos["barrio"].ToString(),
                             Direccion = miLectorDeDatos["direccion"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString()
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // PACKS ?
                         };
                     }
                 }
@@ -477,27 +476,62 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 throw e;
             }
 
-            return miSucursal;
+            return sucursal;
         }
 
-        public bool modificarSucursal(Sucursal sucursalAModificar)
+        //OBTENER TODAS LAS SUCURSALES
+
+        public List<Sucursal> GetTodasLasSucursales()
+        {
+            List<Sucursal> sucursales = new List<Sucursal>();
+            Sucursal sucursal;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasSucursales", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        sucursal = new Sucursal
+                        {
+                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
+                            Barrio = miLectorDeDatos["barrio"].ToString(),
+                            Direccion = miLectorDeDatos["direccion"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // PACKS ?
+                        };
+                        sucursales.Add(sucursal);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return sucursales;
+        }
+
+        // MODIFICAR SUCURSAL
+
+        public bool ModificarSucursal(Sucursal sucursalAModificar)
         {
             bool modificado = false;
 
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.modificarSucursal", conn);
+                SqlCommand cmd = new SqlCommand("dbo.modificarSucursal", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@nroSucursal", sucursalAModificar.NroSucursal));
-                cmd.Parameters.Add(
-                   new SqlParameter("@barrio", sucursalAModificar.Barrio));
-                cmd.Parameters.Add(
-                  new SqlParameter("@direccion", sucursalAModificar.Direccion));
-                cmd.Parameters.Add(
-                  new SqlParameter("@telefono", sucursalAModificar.Telefono));
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", sucursalAModificar.NroSucursal));
+                cmd.Parameters.Add(new SqlParameter("@barrio", sucursalAModificar.Barrio));
+                cmd.Parameters.Add(new SqlParameter("@direccion", sucursalAModificar.Direccion));
+                cmd.Parameters.Add(new SqlParameter("@telefono", sucursalAModificar.Telefono));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
@@ -512,7 +546,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return modificado;
         }
 
-        public bool bajaSucursal(Sucursal sucursalAEliminar)
+        public bool BajaSucursal(Sucursal sucursalAEliminar)
         {
             bool baja = false;
             try
@@ -535,10 +569,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
-
-
-        //fin modulo sucursales
         
+        // FIN MODULO SUCURSALES
+
 
         // inicio modulo packs
         public bool altaPack(Pack pack)
@@ -594,7 +627,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         miPack = new Pack
                         {
                             IdPack = Convert.ToInt32(miLectorDeDatos["idPack"]),
-                            Sucursal = getSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
                             CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
                             DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
                             Precio = float.Parse(miLectorDeDatos["precio"].ToString()),// chequear esta func
@@ -960,7 +993,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 }
 
                 return miPersona;
-        
+
             }
             catch (Exception e)
             {
