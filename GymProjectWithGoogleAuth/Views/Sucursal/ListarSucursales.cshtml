@@ -1,0 +1,43 @@
+﻿@model IEnumerable<GymProject.Models.Clases.Sucursal>
+
+@{
+    ViewBag.Title = "Listar Sucursales";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped" id="TablaListarSucursales">
+
+    <thead>
+        <tr>
+            <th>Nro Sucursal</th>
+            <th>Barrio</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroSucursal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Barrio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'"
+            </td>
+        </tr>
+    }
+
+</table>
