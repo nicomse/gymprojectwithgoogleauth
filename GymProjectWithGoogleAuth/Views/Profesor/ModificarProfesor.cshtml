@@ -8,11 +8,12 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
+        @Html.AntiForgeryToken()
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdProfesor)
+        @Html.HiddenFor(m => m.IdProfesor, new { IdProfesor = "IdProfesor" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
