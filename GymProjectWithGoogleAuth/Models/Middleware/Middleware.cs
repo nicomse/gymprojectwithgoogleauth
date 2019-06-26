@@ -27,17 +27,20 @@ namespace GymProjectWithGoogleAuth.Models.Middleware
 
                 throw e;
             }
-        }
+       }
         
-       public static bool tienePermiso (Persona persona, String permisoRequerido)
+       public static bool tienePermiso (Persona persona, String permisoRequeridoParaPasar)
        {
-            if (persona.Rol == permisoRequerido)
+            Database db = new Database();
+            bool tienePermiso = db.tienePermisoBuscado(persona, permisoRequeridoParaPasar);
+            if(tienePermiso)
             {
                 return true;
             }
-
             return false;
        }
+
+
 
     }
 }

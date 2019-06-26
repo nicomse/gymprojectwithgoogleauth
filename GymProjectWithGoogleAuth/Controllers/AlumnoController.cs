@@ -6,11 +6,17 @@ using System.Web.Mvc;
 using GymProject.Models.Clases;
 using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Middleware;
+using Microsoft.AspNet.Identity;
 
 namespace GymProjectWithGoogleAuth.Controllers
 {
     public class AlumnoController : Controller
     {
+        public AlumnoController()
+        {
+            validarController();
+        }
+
         // GET: Alumno
         public ActionResult Index()
         {
@@ -22,6 +28,12 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
             List<Alumno> alumnos = db.GetTodosLosAlumnos();
+
+
+           
+            
+
+            //
             return View(alumnos);
         }
 
@@ -126,6 +138,42 @@ namespace GymProjectWithGoogleAuth.Controllers
             catch (Exception e)
             {
                 return RedirectToAction("ListarAlumnos","error");
+            }
+        }
+        [HttpGet]
+        public ActionResult validarController()
+        {
+            if (User != null) { 
+                string email = User.Identity.Name;
+                Database db = new Database();
+                Persona persona = null;
+                try
+                {
+                    persona = db.getPersonaPorEmail(email);
+                    if (persona != null)
+                    {
+                        if (!db.tienePermisoBuscado(persona, "ALUMNO"))
+                        {
+                            return RedirectToAction("NotAllowedPage", "Account");
+                        }
+                        else
+                        {
+                            return RedirectToRoute("/");
+                            ;
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToRoute("/");
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            } else
+            {
+                return RedirectToRoute("/");
             }
         }
 

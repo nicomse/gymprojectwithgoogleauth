@@ -79,7 +79,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 Sucursal sucursal = db.GetSucursal(idSucursal);
                 db.BajaSucursal(sucursal);
-                return RedirectToAction("ListarSucursal");
+                return RedirectToAction("ListarSucursales");
             }
             catch (Exception e)
             {

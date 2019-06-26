@@ -1053,5 +1053,27 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
+
+        public bool tienePermisoBuscado(Persona persona, String rolABuscar)
+        {
+            SqlConnection conn = AbrirConexion();
+            SqlCommand cmd = new SqlCommand("dbo.tieneRolAsignado", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@idPersona", persona.IdPersona));
+            cmd.Parameters.Add(new SqlParameter("@nombreRol", rolABuscar));
+            SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+            bool tienePermiso = false;
+
+            if (miLectorDeDatos.HasRows)
+            {
+                while (miLectorDeDatos.Read())
+                {
+                    tienePermiso = true;
+                }
+            }
+            return tienePermiso;
+        }
+
     }
 }
