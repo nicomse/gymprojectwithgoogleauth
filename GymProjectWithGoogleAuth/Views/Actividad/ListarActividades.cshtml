@@ -1,0 +1,35 @@
+﻿@model IEnumerable<GymProject.Models.Clases.Actividad>
+
+@{
+    ViewBag.Title = "Listar Actividades";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped" id="TablaListarActividades">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdActividad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarActividad", "Actividad", new { id = item.IdActividad })'" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="location.href='@Url.Action("EliminarActividad", "Actividad", new { idActividad = item.IdActividad })'" />
+            </td>
+        </tr>
+    }
+
+</table>

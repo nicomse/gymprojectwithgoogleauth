@@ -10,7 +10,7 @@
 
     <thead>
         <tr>
-            <th>Nro Sucursal</th>
+            <th>Nro. Sucursal</th>
             <th>Barrio</th>
             <th>Dirección</th>
             <th>Teléfono</th>
@@ -35,7 +35,7 @@
             </td>
             <td>
                 <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
-                <input type="button" class="btn btn-danger" value="Eliminar" onclick="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'"
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" />
             </td>
         </tr>
     }

@@ -10,7 +10,7 @@
     <form action="/" method="post">
         <div class="form-group">
             <div class="col-md-10">
-                <input class="form-control" type="text" name="email" value="" id="inputBuscar" placeholder="Ingrese e-mail" />
+                <input class="form-control" type="text" name="email" value="" id="inputBuscar" placeholder="Ingrese E-Mail" />
             </div>
         </div>
         <button type="button" class="btn btn-primary" id="btnBuscar">Buscar Profesores</button>
@@ -21,7 +21,6 @@
 
 </div>
 
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -31,13 +30,10 @@
             ListarProfesores(email);
         });
 
-
         function ListarProfesores(email) {
             $.ajax({
                 url: '/Profesor/BuscarProfesoresAjax',
-                data: {
-                    'email': email
-                },
+                data: { 'email': email },
                 type: 'post',
                 success: function (result) {
                     //devuelve un partial view
