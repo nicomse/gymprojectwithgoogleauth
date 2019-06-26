@@ -30,8 +30,8 @@ namespace GymProjectWithGoogleAuth.Controllers
             List<Alumno> alumnos = db.GetTodosLosAlumnos();
 
 
-           
-            
+
+
 
             //
             return View(alumnos);
@@ -85,13 +85,26 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            if (ModelState.IsValid)
+            Alumno AlumnoEmail = db.GetAlumnoPorEmail(alumno.Email);
+
+            if (AlumnoEmail == null)
             {
-                db.ModificarAlumno(alumno);
-                return RedirectToAction("ListarAlumnos");
+                if (ModelState.IsValid)
+                {
+                    db.ModificarAlumno(alumno);
+                    return RedirectToAction("ListarAlumnos");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
+                if (AlumnoEmail != null)
+                {
+                    ModelState.AddModelError("Email", "El E-Mail ingresado ya existe.");
+                }
                 return View();
             }
         }
@@ -113,7 +126,8 @@ namespace GymProjectWithGoogleAuth.Controllers
                     throw e;
                 }
             }
-            else {
+            else
+            {
                 try
                 {
                     List<Alumno> alumnos = db.BuscarAlumnoPorEmail(email);
@@ -127,7 +141,8 @@ namespace GymProjectWithGoogleAuth.Controllers
         }
 
         //ELIMINAR ALUMNO
-        public ActionResult EliminarAlumno(int idAlumno) {
+        public ActionResult EliminarAlumno(int idAlumno)
+        {
             Database db = new Database();
             try
             {
@@ -137,13 +152,14 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarAlumnos","error");
+                return RedirectToAction("ListarAlumnos", "error");
             }
         }
         [HttpGet]
         public ActionResult validarController()
         {
-            if (User != null) { 
+            if (User != null)
+            {
                 string email = User.Identity.Name;
                 Database db = new Database();
                 Persona persona = null;
@@ -171,7 +187,8 @@ namespace GymProjectWithGoogleAuth.Controllers
                 {
                     throw e;
                 }
-            } else
+            }
+            else
             {
                 return RedirectToRoute("/");
             }
