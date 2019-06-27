@@ -36,18 +36,8 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
+            Profesor ProfesorEmail = db.GetProfesorPorEmail(Profesor.Email);
 
-            Profesor ProfesorEmail = null;
-            if (Profesor.Email == null)
-            {
-                ModelState.AddModelError("Email", "Debe ingresar un email");
-            }
-            else
-            {
-                ProfesorEmail = db.GetProfesorPorEmail(Profesor.Email);
-            }
-
-            //si encontro un profesor que existe con ese email
             if (ProfesorEmail == null)
             {
                 if (ModelState.IsValid)
@@ -83,26 +73,13 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            Profesor ProfesorEmail = db.GetProfesorPorEmail(profesor.Email);
-
-            if (ProfesorEmail == null)
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.ModificarProfesor(profesor);
-                    return RedirectToAction("ListarProfesores");
-                }
-                else
-                {
-                    return View();
-                }
+                db.ModificarProfesor(profesor);
+                return RedirectToAction("ListarProfesores");
             }
             else
             {
-                if (ProfesorEmail != null)
-                {
-                    ModelState.AddModelError("Email", "El E-Mail ingresado ya existe.");
-                }
                 return View();
             }
         }
