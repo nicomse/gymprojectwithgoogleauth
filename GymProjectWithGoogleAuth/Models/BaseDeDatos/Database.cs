@@ -281,11 +281,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.buscarAlumnoPorMail", conn);
+                SqlCommand cmd = new SqlCommand("dbo.buscarAlumnoPorMail", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@email", EmailAlumno));
+                cmd.Parameters.Add(new SqlParameter("@email", EmailAlumno));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -325,11 +323,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.getAlumnoPorEmail", conn);
+                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorEmail", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@emailAlumno", EmailAlumno));
+                cmd.Parameters.Add(new SqlParameter("@emailAlumno", EmailAlumno));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -572,7 +568,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
-        
+
         // FIN MODULO SUCURSALES
 
 

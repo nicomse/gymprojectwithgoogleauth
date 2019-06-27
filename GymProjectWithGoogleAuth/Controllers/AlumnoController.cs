@@ -14,7 +14,7 @@ namespace GymProjectWithGoogleAuth.Controllers
     {
         public AlumnoController()
         {
-            validarController();
+            // validarController();
         }
 
         // GET: Alumno
