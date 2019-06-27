@@ -174,9 +174,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 cmd.Parameters.Add(new SqlParameter("@apellido", alumno.Apellido));
                 cmd.Parameters.Add(new SqlParameter("@email", alumno.Email));
                 cmd.Parameters.Add(new SqlParameter("@telefono", alumno.Telefono));
-                // cmd.Parameters.Add(new SqlParameter("@rol", alumno.Rol));
+                
 
-                if (cmd.ExecuteNonQuery() > 0)
+                if (cmd.ExecuteNonQuery() == 0)
                 {
                     Alumno alu = GetAlumnoPorEmail(alumno.Email);
                     String idRol = getIdRol("ALUMNO");
@@ -216,7 +216,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
 
                             //@ TO DO falta llenar atributo CREDITOS y HORARIOS
@@ -258,7 +257,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
+
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
 
                             //@ TO DO falta llenar atributo CREDITOS y HORARIOS
@@ -298,7 +297,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
 
                         };
@@ -340,9 +338,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
                         };
                     }
                 }
@@ -721,7 +717,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 cmd.Parameters.Add(new SqlParameter("@email", profesor.Email));
                 cmd.Parameters.Add(new SqlParameter("@telefono", profesor.Telefono));
 
-                if (cmd.ExecuteNonQuery() > 0)
+                if (cmd.ExecuteNonQuery() == 0)
                 {
                     Profesor prof = GetProfesorPorEmail(profesor.Email);
                     String idRol = getIdRol("PROFESOR");
@@ -761,7 +757,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                         misProfesores.Add(miProfesor);
@@ -802,7 +797,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
 
                             //@ TO DO falta llenar atributo CREDITOS y HORARIOS
@@ -844,7 +838,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                         misProfesores.Add(miProfesor);
@@ -883,7 +876,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
 
                             //@ TO DO falta llenar atributo CREDITOS y HORARIOS
@@ -988,7 +980,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Apellido = miLectorDeDatos["apellido"].ToString(),
                             Email = miLectorDeDatos["email"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                     }

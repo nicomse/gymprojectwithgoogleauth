@@ -29,6 +29,5 @@ namespace GymProject.Models.Clases
         [StringLength(255)]
         public String Telefono { get; set; }
         public int Estado { get; set; }
-        public String Rol { get; set; }
     }
 }
