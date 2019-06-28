@@ -44,7 +44,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         }
 
         // INICIO MODULO DE ACTIVIDADES
-        public bool altaActividad(Actividad actividad)
+        public bool AltaActividad(Actividad actividad)
         {
             bool insertado = false;
             try
@@ -70,7 +70,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
-        public Actividad getActividad(int idActividad)
+        public Actividad GetActividad(int idActividad)
         {
             Actividad miActividad = null;
 
@@ -107,20 +107,51 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miActividad;
         }
 
-        public bool modificarActividad(Actividad actividadAModificar)
+        //OBTENER TODAS LAS ACTIVIDADES
+        public List<Actividad> GetTodasLasActividades()
+        {
+            List<Actividad> actividades = new List<Actividad>();
+            Actividad actividad;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasActividades", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        actividad = new Actividad
+                        {
+                            IdActividad = Convert.ToInt32(miLectorDeDatos["idActividad"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        actividades.Add(actividad);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return actividades;
+        }
+
+        public bool ModificarActividad(Actividad actividadAModificar)
         {
             bool modificado = false;
 
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.modificarActividad", conn);
+                SqlCommand cmd = new SqlCommand("dbo.modificarActividad", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@idActividad", actividadAModificar.IdActividad));
-                cmd.Parameters.Add(
-                   new SqlParameter("@nombre", actividadAModificar.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@idActividad", actividadAModificar.IdActividad));
+                cmd.Parameters.Add(new SqlParameter("@nombre", actividadAModificar.Nombre));
+
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     modificado = true;
@@ -130,21 +161,19 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
-
             return modificado;
         }
 
-        public bool bajaActividad(Actividad actividadAEliminar)
+        public bool BajaActividad(Actividad actividadAEliminar)
         {
             bool baja = false;
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.bajaActividad", conn);
+                SqlCommand cmd = new SqlCommand("dbo.bajaActividad", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@idActividad", actividadAEliminar.IdActividad));
+                cmd.Parameters.Add(new SqlParameter("@idActividad", actividadAEliminar.IdActividad));
+
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     baja = true;
@@ -154,11 +183,10 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
-
             return baja;
         }
 
-        // fin modulo actividades
+        // FIN MODULO ACTIVIDADES
 
         // INICIO MODULO ALUMNOS
 
@@ -174,7 +202,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 cmd.Parameters.Add(new SqlParameter("@apellido", alumno.Apellido));
                 cmd.Parameters.Add(new SqlParameter("@email", alumno.Email));
                 cmd.Parameters.Add(new SqlParameter("@telefono", alumno.Telefono));
-                
+
 
                 if (cmd.ExecuteNonQuery() == 0)
                 {

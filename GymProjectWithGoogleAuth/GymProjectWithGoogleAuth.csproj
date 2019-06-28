@@ -258,7 +258,6 @@
     <Content Include="Views\Sucursal\AgregarSucursal.cshtml" />
     <Content Include="Views\Sucursal\ModificarSucursal.cshtml" />
     <Content Include="Views\Actividad\AgregarActividad.cshtml" />
-    <Content Include="Views\Actividad\ModificarActividad.cshtml" />
     <Content Include="Views\Pack\AgregarPack.cshtml" />
     <Content Include="Views\Pack\ModificarPack.cshtml" />
     <Content Include="Views\Horario\AgregarHorario.cshtml" />
@@ -274,6 +273,7 @@
     <Content Include="Views\Account\NotAllowedPage.cshtml" />
     <Content Include="Views\Sucursal\ListarSucursales.cshtml" />
     <Content Include="Views\Actividad\ListarActividades.cshtml" />
+    <Content Include="Views\Actividad\ModificarActividad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Middleware\" />
