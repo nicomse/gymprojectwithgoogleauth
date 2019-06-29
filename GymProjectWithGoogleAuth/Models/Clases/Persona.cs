@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
-namespace GymProject.Models.Clases
+namespace GymProjectWithGoogleAuth.Models.Clases
 {
     public class Persona
     {
@@ -28,6 +25,9 @@ namespace GymProject.Models.Clases
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         [StringLength(255)]
         public String Telefono { get; set; }
+
+        public String Rol { get; set; }
+
         public int Estado { get; set; }
     }
 }

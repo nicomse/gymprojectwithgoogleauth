@@ -1,9 +1,6 @@
-﻿using GymProject.Models.Clases;
-using GymProjectWithGoogleAuth.Models.BaseDeDatos;
+﻿using GymProjectWithGoogleAuth.Models.BaseDeDatos;
+using GymProjectWithGoogleAuth.Models.Clases;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace GymProjectWithGoogleAuth.Models.Middleware
 {
@@ -13,34 +10,35 @@ namespace GymProjectWithGoogleAuth.Models.Middleware
         {
             Database db = new Database();
             bool puedePasar = false;
+
             try
             {
-                Persona p = db.getPersonaPorEmail(email);
-                if (p != null)
+                Persona persona = db.getPersonaPorEmail(email);
+
+                if (persona != null)
                 {
                     puedePasar = true;
                 }
+
                 return puedePasar;
             }
             catch (Exception e)
             {
-
                 throw e;
             }
-       }
-        
-       public static bool tienePermiso (Persona persona, String permisoRequeridoParaPasar)
-       {
+        }
+
+        public static bool TienePermiso(Persona persona, String permisoRequeridoParaPasar)
+        {
             Database db = new Database();
             bool tienePermiso = db.tienePermisoBuscado(persona, permisoRequeridoParaPasar);
-            if(tienePermiso)
+
+            if (tienePermiso)
             {
                 return true;
             }
+
             return false;
-       }
-
-
-
+        }
     }
 }

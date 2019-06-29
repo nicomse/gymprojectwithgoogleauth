@@ -1,26 +1,25 @@
-﻿using GymProject.Models.Clases;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+using GymProjectWithGoogleAuth.Models.Clases;
 
 namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 {
     public class Database
     {
-
         public static string DATABASE_NAME = "Taller6";
-        // ABRIR CONEXION DE LA BASE DE DATOS
+
+        // ABRIR LA CONEXIÓN DE LA BASE DE DATOS
         public static SqlConnection AbrirConexion()
         {
             SqlConnection conn;
+
             try
             {
                 conn = new SqlConnection
                 {
-                    ConnectionString = getConnectionString()
+                    ConnectionString = GetConnectionString()
                 };
                 conn.Open();
             }
@@ -28,34 +27,36 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
+
             return conn;
         }
 
-        // CERRAR CONEXION DE LA BASE DE DATOSs
-
+        // CERRAR LA CONEXIÓN DE LA BASE DE DATOS
         public static void CerrarConexion(SqlConnection conn)
         {
             conn.Close();
         }
-        // OBTENER EL CONNECTION STRING DE LA BASE DE DATOS
-        public static String getConnectionString()
+
+        // OBTENER LA CADENA DE CONEXIÓN DE LA BASE DE DATOS
+        public static String GetConnectionString()
         {
             return "Server=.\\SQLEXPRESS;Database=" + DATABASE_NAME + ";Integrated Security= true";
         }
 
-        // INICIO MODULO DE ACTIVIDADES
+        // INICIO DEL MÓDULO DE ACTIVIDADES
         public bool AltaActividad(Actividad actividad)
         {
             bool insertado = false;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
 
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.altaActividad", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@nombre", actividad.Nombre));
+                SqlCommand cmd = new SqlCommand("dbo.altaActividad", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nombre", actividad.Nombre));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
@@ -70,6 +71,61 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
+        public bool ModificarActividad(Actividad actividadAModificar)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+
+                SqlCommand cmd = new SqlCommand("dbo.modificarActividad", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idActividad", actividadAModificar.IdActividad));
+                cmd.Parameters.Add(new SqlParameter("@nombre", actividadAModificar.Nombre));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return modificado;
+        }
+
+        public bool BajaActividad(Actividad actividadAEliminar)
+        {
+            bool baja = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+
+                SqlCommand cmd = new SqlCommand("dbo.bajaActividad", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idActividad", actividadAEliminar.IdActividad));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    baja = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return baja;
+        }
+
         public Actividad GetActividad(int idActividad)
         {
             Actividad miActividad = null;
@@ -77,13 +133,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.getActividadPorId", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(
-                    new SqlParameter("@idActividad", idActividad));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
+                SqlCommand cmd = new SqlCommand("dbo.getActividadPorId", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
+
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
                 {
@@ -92,12 +149,11 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         miActividad = new Actividad
                         {
                             IdActividad = Convert.ToInt32(miLectorDeDatos["idActividad"]),
-                            Nombre = miLectorDeDatos["idActividad"].ToString(),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                     }
                 }
-
             }
             catch (Exception e)
             {
@@ -107,16 +163,19 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miActividad;
         }
 
-        //OBTENER TODAS LAS ACTIVIDADES
         public List<Actividad> GetTodasLasActividades()
         {
             List<Actividad> actividades = new List<Actividad>();
             Actividad actividad;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getTodasLasActividades", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasActividades", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -137,59 +196,12 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             {
                 throw e;
             }
+
             return actividades;
         }
+        // FIN DEL MÓDULO DE ACTIVIDADES
 
-        public bool ModificarActividad(Actividad actividadAModificar)
-        {
-            bool modificado = false;
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.modificarActividad", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@idActividad", actividadAModificar.IdActividad));
-                cmd.Parameters.Add(new SqlParameter("@nombre", actividadAModificar.Nombre));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    modificado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return modificado;
-        }
-
-        public bool BajaActividad(Actividad actividadAEliminar)
-        {
-            bool baja = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.bajaActividad", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@idActividad", actividadAEliminar.IdActividad));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    baja = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return baja;
-        }
-
-        // FIN MODULO ACTIVIDADES
-
-        // INICIO MODULO ALUMNOS
-
+        // INICIO DEL MÓDULO DE ALUMNOS
         public bool AltaAlumno(Alumno alumno)
         {
             bool insertado = false;
