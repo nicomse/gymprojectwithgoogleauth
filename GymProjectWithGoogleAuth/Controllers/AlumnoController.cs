@@ -24,12 +24,6 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
             List<Alumno> alumnos = db.GetTodosLosAlumnos();
-
-
-
-
-
-            //
             return View(alumnos);
         }
 
@@ -148,10 +142,10 @@ namespace GymProjectWithGoogleAuth.Controllers
                 Persona persona = null;
                 try
                 {
-                    persona = db.getPersonaPorEmail(email);
+                    persona = db.GetPersonaPorEmail(email);
                     if (persona != null)
                     {
-                        if (!db.tienePermisoBuscado(persona, "ALUMNO"))
+                        if (!db.TienePermisoBuscado(persona, "ALUMNO"))
                         {
                             return RedirectToAction("NotAllowedPage", "Account");
                         }

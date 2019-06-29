@@ -13,7 +13,13 @@ namespace GymProjectWithGoogleAuth.Models.Middleware
 
             try
             {
-                Persona persona = db.getPersonaPorEmail(email);
+                Persona persona = db.GetPersonaPorEmail(email);
+
+                if(persona == null && db.DameCantPersonas() == 0)
+                {
+                    db.AltaAdministrador(email);
+                    puedePasar = true;
+                }
 
                 if (persona != null)
                 {
@@ -31,7 +37,7 @@ namespace GymProjectWithGoogleAuth.Models.Middleware
         public static bool TienePermiso(Persona persona, String permisoRequeridoParaPasar)
         {
             Database db = new Database();
-            bool tienePermiso = db.tienePermisoBuscado(persona, permisoRequeridoParaPasar);
+            bool tienePermiso = db.TienePermisoBuscado(persona, permisoRequeridoParaPasar);
 
             if (tienePermiso)
             {
