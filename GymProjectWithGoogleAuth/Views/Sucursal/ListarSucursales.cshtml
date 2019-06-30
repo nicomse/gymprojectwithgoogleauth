@@ -35,7 +35,7 @@
             </td>
             <td>
                 <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
-                <input type="button" class="btn btn-danger btn-eliminar" value="Eliminar" />
+                <input type="button" class="btn btn-danger btn-eliminar" value="Eliminar" onclick="CambiarEstado(@item.NroSucursal)" />
             </td>
         </tr>
     }
@@ -61,28 +61,51 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        var modalConfirm = function (callback) {
 
-            $(".btn-eliminar").on("click", function () {
-                $("#mi-modal").modal('show');
-            });
+        var confirmado = false;
+
+        $(".btn-eliminar").on("click", function () {
+            $("#mi-modal").modal('show');
+        });
+
+        var modalConfirm = function () {
 
             $("#modal-btn-si").on("click", function () {
-                callback(true);
+                // callback(true);
+                confirmado = true;
                 $("#mi-modal").modal('hide');
+                return confirmado;
             });
 
             $("#modal-btn-no").on("click", function () {
-                callback(false);
+                // callback(false);
+                confirmado = false;
                 $("#mi-modal").modal('hide');
+                return confirmado;
             });
         };
 
-        modalConfirm(function (confirm) {
-            if (confirm) {
-                // ACCIONES SI EL USUARIO CONFIRMA
-                // FALTA COMPLETAR PARA QUE ELIMINE A LA SUCURSAL SELECCIONADA
-            }
-        });
+        function CambiarEstado(nroSucursal) {
+            console.log(confirmado)
+            modalConfirm(function () {
+                if (confirmado) {
+                    // ACCIONES SI EL USUARIO CONFIRMA
+                    $.ajax({
+                        url: '/Sucursal/EliminarSucursal',
+                        data: { 'idSucursal': nroSucursal },
+                        type: 'get',
+                        success: function () {
+                            window.location.reload()
+                        },
+                        fail: function (result) {
+                            console.log(result)
+                        }
+                    })
+                } else {
+                    // ACCIONES SI EL USUARIO NO CONFIRMA
+                    console.log('No confirma')
+                }
+            });
+        }
     </script>
 }
