@@ -261,3 +261,79 @@ DECLARE @telefono varchar(255)
 
 EXECUTE @RC = [dbo].[altaProfesor]'Gerard', 'Butler', 'gerard.butler@gmail.com', '1162305533'
 GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+
+EXECUTE @RC = [dbo].[altaActividad]'Natación'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+
+EXECUTE @RC = [dbo].[altaActividad]'Musculación'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+
+EXECUTE @RC = [dbo].[altaActividad]'Spinning'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+
+EXECUTE @RC = [dbo].[altaActividad]'Cardio'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+
+EXECUTE @RC = [dbo].[altaActividad]'Yoga'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+
+EXECUTE @RC = [dbo].[altaActividad]'Taekwondo'
+GO
+
+DECLARE @RC int
+DECLARE @barrio varchar(100)
+DECLARE @direccion varchar(100)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaSucursal]'Almagro','Yatay 240','40204321'
+GO
+
+DECLARE @RC int
+DECLARE @barrio varchar(100)
+DECLARE @direccion varchar(100)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaSucursal]'Saavedra','Vedia 3600','011 5777-9971'
+GO
+
+DECLARE @RC int
+DECLARE @barrio varchar(100)
+DECLARE @direccion varchar(100)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaSucursal]'Devoto','Quevedo 3365','011 4019-6000'
+GO
+
+DECLARE @RC int
+DECLARE @barrio varchar(100)
+DECLARE @direccion varchar(100)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaSucursal]'Monserrat','Lima 775','011 4000-7600'
+GO
+
+DECLARE @RC int
+DECLARE @barrio varchar(100)
+DECLARE @direccion varchar(100)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaSucursal]'Palermo','Costa Rica 4677','15-6739-0110'
+GO
