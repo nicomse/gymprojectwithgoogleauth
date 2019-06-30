@@ -33,7 +33,7 @@
             </td>
             <td>
                 <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarAlumno", "Alumno", new { id = item.IdAlumno })'" />
-                <input type="button" class="btn btn-danger" value="Eliminar" onclick="location.href='@Url.Action("EliminarAlumno", "Alumno", new { idAlumno = item.IdAlumno })'" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del alumno seleccionado?')) location.href='@Url.Action("EliminarAlumno", "Alumno", new { idAlumno = item.IdAlumno })'" />
             </td>
         </tr>
     }
