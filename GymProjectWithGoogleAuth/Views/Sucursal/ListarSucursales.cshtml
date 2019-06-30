@@ -36,7 +36,7 @@
             <td>
                 <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
                 
-                <input type="button" class="btn btn-danger btn-eliminar" data-href="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" data-toggle="modal" data-target="#confirm-delete" value="Eliminar" />
+                <input type="button" class="btn btn-danger btn-eliminar" data-href="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" data-toggle="modal" data-target="#mi-modal" value="Eliminar" />
 
 
 
@@ -66,8 +66,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $('#mi-modal').on('show.bs.modal', function(e) {
-            $(this).find('.modal-btn-si').attr('href', $(e.relatedTarget).data('href'));
+    $('#mi-modal').on('show.bs.modal', function (e) {
+            console.log('holaaa')
+            $(this).find('#modal-btn-si').attr('href', $(e.relatedTarget).data('href'));
             
             //$('.debug-url').html('Delete URL: <strong>' + $(this).find('.modal-btn-si').attr('href') + '</strong>');
         });        
