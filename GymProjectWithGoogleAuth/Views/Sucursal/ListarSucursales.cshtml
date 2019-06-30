@@ -35,42 +35,9 @@
             </td>
             <td>
                 <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
-                
-                <input type="button" class="btn btn-danger btn-eliminar" data-href="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" data-toggle="modal" data-target="#mi-modal" value="Eliminar" />
-
-
-
-                <input type="button" class="btn btn-danger btn-eliminar" value="Eliminar" onclick="CambiarEstado(@item.NroSucursal)" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación de la sucursal seleccionada?')) location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" />
             </td>
         </tr>
     }
 
 </table>
-
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 class="modal-title" id="myModalLabel">¿Confirma?</h3>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="modal-btn-si">Sí</button>
-                <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script>
-    $('#mi-modal').on('show.bs.modal', function (e) {
-            console.log('holaaa')
-            $(this).find('#modal-btn-si').attr('href', $(e.relatedTarget).data('href'));
-            
-            //$('.debug-url').html('Delete URL: <strong>' + $(this).find('.modal-btn-si').attr('href') + '</strong>');
-        });        
-    </script>
-}
