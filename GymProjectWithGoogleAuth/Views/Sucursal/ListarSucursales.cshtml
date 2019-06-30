@@ -35,6 +35,11 @@
             </td>
             <td>
                 <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
+                
+                <input type="button" class="btn btn-danger btn-eliminar" data-href="location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" data-toggle="modal" data-target="#confirm-delete" value="Eliminar" />
+
+
+
                 <input type="button" class="btn btn-danger btn-eliminar" value="Eliminar" onclick="CambiarEstado(@item.NroSucursal)" />
             </td>
         </tr>
@@ -61,51 +66,10 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-
-        var confirmado = false;
-
-        $(".btn-eliminar").on("click", function () {
-            $("#mi-modal").modal('show');
-        });
-
-        var modalConfirm = function () {
-
-            $("#modal-btn-si").on("click", function () {
-                // callback(true);
-                confirmado = true;
-                $("#mi-modal").modal('hide');
-                return confirmado;
-            });
-
-            $("#modal-btn-no").on("click", function () {
-                // callback(false);
-                confirmado = false;
-                $("#mi-modal").modal('hide');
-                return confirmado;
-            });
-        };
-
-        function CambiarEstado(nroSucursal) {
-            console.log(confirmado)
-            modalConfirm(function () {
-                if (confirmado) {
-                    // ACCIONES SI EL USUARIO CONFIRMA
-                    $.ajax({
-                        url: '/Sucursal/EliminarSucursal',
-                        data: { 'idSucursal': nroSucursal },
-                        type: 'get',
-                        success: function () {
-                            window.location.reload()
-                        },
-                        fail: function (result) {
-                            console.log(result)
-                        }
-                    })
-                } else {
-                    // ACCIONES SI EL USUARIO NO CONFIRMA
-                    console.log('No confirma')
-                }
-            });
-        }
+        $('#mi-modal').on('show.bs.modal', function(e) {
+            $(this).find('.modal-btn-si').attr('href', $(e.relatedTarget).data('href'));
+            
+            //$('.debug-url').html('Delete URL: <strong>' + $(this).find('.modal-btn-si').attr('href') + '</strong>');
+        });        
     </script>
 }
