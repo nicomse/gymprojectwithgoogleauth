@@ -656,6 +656,44 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
+        public List<Pack> GetTodosLosPacks()
+        {
+            List<Pack> packs = new List<Pack>();
+            Pack pack;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosPacks", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        pack = new Pack
+                        {
+                            IdPack = Convert.ToInt32(miLectorDeDatos["idPack"]),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
+                            DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
+                            Precio = float.Parse(miLectorDeDatos["precio"].ToString()),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        packs.Add(pack);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return packs;
+        }
+
         public Pack GetPack(int idPack)
         {
             Pack miPack = null;
@@ -679,9 +717,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
                             CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
                             DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
-                            Precio = float.Parse(miLectorDeDatos["precio"].ToString()),// chequear esta func
-
-                            //@ TO DO falta llenar atributo CREDITOS y HORARIOS
+                            Precio = float.Parse(miLectorDeDatos["precio"].ToString()),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                     }
                 }

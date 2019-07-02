@@ -1,64 +1,64 @@
 ﻿@model GymProjectWithGoogleAuth.Models.Clases.Pack
 
 @{
-    ViewBag.Title = "AgregarPack";
+    ViewBag.Title = "Agregar Pack";
 }
 
-<h2>AgregarPack</h2>
-
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Pack</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.IdPack, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Sucursal, "Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdPack, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdPack, "", new { @class = "text-danger" })
+                <select class="form-control" name="idSucursal">
+                    @foreach (var sucursal in ViewBag.data)
+                    {
+                        <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
+                    }
+                </select>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CantCreditos, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CantCreditos, "Cantidad de Créditos", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CantCreditos, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CantCreditos, new { htmlAttributes = new { @type = "number", min = "1", @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.CantCreditos, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DiasVigencia, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DiasVigencia, "Días de Vigencia", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DiasVigencia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DiasVigencia, new { htmlAttributes = new { @type = "number", min = "1", @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.DiasVigencia, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Precio, "Precio", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                 @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="reset" value="Borrar Campos" class="btn btn-danger" />
+                <input type="submit" value="Crear Pack" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarPacks", "Pack")'" />
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

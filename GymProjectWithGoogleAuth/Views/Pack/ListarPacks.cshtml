@@ -1,0 +1,47 @@
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Pack>
+
+@{
+    ViewBag.Title = "Listar Packs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped" id="TablaListarPacks">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Sucursal</th>
+            <th>Cantidad de Créditos</th>
+            <th>Días de Vigencia</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sucursal.Barrio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantCreditos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiasVigencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarPack", "Pack", new { id = item.IdPack })'" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del pack seleccionado?')) location.href='@Url.Action("EliminarPack", "Pack", new { idPack = item.IdPack })'" />
+            </td>
+        </tr>
+    }
+
+</table>

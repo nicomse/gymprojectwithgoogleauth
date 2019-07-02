@@ -1,4 +1,6 @@
-﻿namespace GymProjectWithGoogleAuth.Models.Clases
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GymProjectWithGoogleAuth.Models.Clases
 {
     public class Pack
     {
@@ -6,10 +8,13 @@
 
         public Sucursal Sucursal { get; set; }
 
+        [Required(ErrorMessage = "Este campo es obligatorio.")]
         public int CantCreditos { get; set; }
 
+        [Required(ErrorMessage = "Este campo es obligatorio.")]
         public int DiasVigencia { get; set; }
 
+        [Required(ErrorMessage = "Este campo es obligatorio.")]
         public float Precio { get; set; }
 
         public int Estado { get; set; }

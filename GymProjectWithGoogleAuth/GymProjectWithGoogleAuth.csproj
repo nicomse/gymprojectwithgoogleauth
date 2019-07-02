@@ -274,6 +274,7 @@
     <Content Include="Views\Sucursal\ListarSucursales.cshtml" />
     <Content Include="Views\Actividad\ListarActividades.cshtml" />
     <Content Include="Views\Actividad\ModificarActividad.cshtml" />
+    <Content Include="Views\Pack\ListarPacks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Middleware\" />
