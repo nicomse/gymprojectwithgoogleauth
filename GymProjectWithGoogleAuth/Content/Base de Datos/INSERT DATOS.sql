@@ -16,6 +16,15 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
+EXECUTE @RC = [dbo].[altaAlumno]'Fer', 'Net', 'findwayoutsoft@gmail.com', '1196587989'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+DECLARE @apellido varchar(100)
+DECLARE @email varchar(255)
+DECLARE @telefono varchar(255)
+
 EXECUTE @RC = [dbo].[altaAlumno]'Johnny', 'Deep', 'johnny.deep@gmail.com', '1160548582'
 GO
 
@@ -336,4 +345,58 @@ DECLARE @direccion varchar(100)
 DECLARE @telefono varchar(255)
 
 EXECUTE @RC = [dbo].[altaSucursal]'Palermo','Costa Rica 4677','15-6739-0110'
+GO
+
+DECLARE @RC int
+DECLARE	@nroSucursal int
+DECLARE	@cantCreditos int
+DECLARE	@diasVigencia int
+DECLARE	@precio float
+
+EXECUTE @RC = [dbo].[altaPack] 1, 10, 30, 100
+GO
+
+DECLARE @RC int
+DECLARE	@nroSucursal int
+DECLARE	@cantCreditos int
+DECLARE	@diasVigencia int
+DECLARE	@precio float
+
+EXECUTE @RC = [dbo].[altaPack] 1, 50, 120, 400
+GO
+
+DECLARE @RC int
+DECLARE	@nroSucursal int
+DECLARE	@cantCreditos int
+DECLARE	@diasVigencia int
+DECLARE	@precio float
+
+EXECUTE @RC = [dbo].[altaPack] 2, 10, 30, 120
+GO
+
+DECLARE @RC int
+DECLARE	@nroSucursal int
+DECLARE	@cantCreditos int
+DECLARE	@diasVigencia int
+DECLARE	@precio float
+
+EXECUTE @RC = [dbo].[altaPack] 2, 50, 120, 500
+GO
+
+DECLARE @RC int
+DECLARE	@nroSucursal int
+DECLARE	@cantCreditos int
+DECLARE	@diasVigencia int
+DECLARE	@precio float
+
+EXECUTE @RC = [dbo].[altaPack] 3, 10, 30, 75.50
+GO
+
+DECLARE @RC int
+DECLARE	@nroSucursal int
+DECLARE	@cantCreditos int
+DECLARE	@diasVigencia int
+DECLARE	@precio float
+
+EXECUTE @RC = [dbo].[altaPack] 3, 50, 120, 300
 GO
