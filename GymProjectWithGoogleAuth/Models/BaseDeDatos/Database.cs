@@ -1041,6 +1041,179 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
         //FIN MODULO PROFESORES
 
+        // INICIO MODULO HORARIOS
+
+        public Horario GetHorario(int idHorario)
+        {
+            Horario horario = null;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getHorarioPorId", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        horario = new Horario
+                        {
+                            IdHorario = Convert.ToInt32(miLectorDeDatos["idHorario"]),
+                            Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
+                            Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            // alumnos ??
+                            HoraInicio = Convert.ToDateTime(miLectorDeDatos["horaInicio"]),
+                            HoraFin = Convert.ToDateTime(miLectorDeDatos["horaFin"]),
+                            Dia = miLectorDeDatos["dia"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return horario;
+        }
+
+        public List<Horario> GetTodosLosHorarios()
+        {
+            List<Horario> horarios = new List<Horario>();
+            Horario horario;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosHorarios", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        horario = new Horario
+                        {
+                            IdHorario = Convert.ToInt32(miLectorDeDatos["idHorario"]),
+                            Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
+                            Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            // alumnos ??
+                            HoraInicio = Convert.ToDateTime(miLectorDeDatos["horaInicio"]),
+                            HoraFin = Convert.ToDateTime(miLectorDeDatos["horaFin"]),
+                            Dia = miLectorDeDatos["dia"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        horarios.Add(horario);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return horarios;
+        }
+
+        public bool AltaHorario(Horario horario)
+        {
+            bool insertado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.altaHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idActividad", horario.Actividad.IdActividad));
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", horario.Profesor.IdProfesor));
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", horario.Sucursal.NroSucursal));
+                cmd.Parameters.Add(new SqlParameter("@horaInicio", horario.HoraInicio));
+                cmd.Parameters.Add(new SqlParameter("@horaFin", horario.HoraFin));
+                cmd.Parameters.Add(new SqlParameter("@dia", horario.Dia));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insertado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return insertado;
+        }
+
+        public bool ModificarHorario(Horario horario)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.modificarHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idActividad", horario.Actividad.IdActividad));
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", horario.Profesor.IdProfesor));
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", horario.Sucursal.NroSucursal));
+                cmd.Parameters.Add(new SqlParameter("@horaInicio", horario.HoraInicio));
+                cmd.Parameters.Add(new SqlParameter("@horaFin", horario.HoraFin));
+                cmd.Parameters.Add(new SqlParameter("@dia", horario.Dia));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return modificado;
+        }
+
+        public bool BajaHorario(Horario horarioAEliminar)
+        {
+            bool baja = false;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.bajaHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idHorario", horarioAEliminar.IdHorario));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    baja = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return baja;
+        }
+
+        // FIN MODULO HORARIOS
+
         // INICIO MODULO PERSONAS
         public Persona GetPersonaPorEmail(String emailPersona)
         {

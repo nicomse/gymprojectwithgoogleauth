@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Horario>
+
+@{
+    ViewBag.Title = "Listar Horarios";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped" id="TablaListarHorarios">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Actividad</th>
+            <th>Profesor</th>
+            <th>Sucursal</th>
+            <th>Hora Inicio</th>
+            <th>Hora Fin</th>
+            <th>Día</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdHorario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actividad.Nombre)
+            </td>
+            <td>
+                @item.Profesor.Nombre @item.Profesor.Apellido
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sucursal.Barrio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dia)
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarHorario", "Horario", new { id = item.IdHorario })'" />
+                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del horario seleccionado?')) location.href='@Url.Action("EliminarHorario", "Horario", new { idHorario = item.IdHorario })'" />
+            </td>
+        </tr>
+    }
+
+</table>
