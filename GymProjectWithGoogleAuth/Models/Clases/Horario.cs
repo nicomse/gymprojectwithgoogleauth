@@ -17,14 +17,12 @@ namespace GymProjectWithGoogleAuth.Models.Clases
         public List<Alumno> Alumnos { get; set; }
 
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
-        public DateTime HoraInicio { get; set; }
+        public TimeSpan HoraInicio { get; set; }
 
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
-        public DateTime HoraFin { get; set; }
+        public TimeSpan HoraFin { get; set; }
 
         public String Dia { get; set; }
 

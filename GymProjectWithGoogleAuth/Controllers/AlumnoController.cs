@@ -96,44 +96,5 @@ namespace GymProjectWithGoogleAuth.Controllers
                 return RedirectToAction("ListarAlumnos", "error");
             }
         }
-        [HttpGet]
-        public ActionResult validarController()
-        {
-            if (User != null)
-            {
-                string email = User.Identity.Name;
-                Database db = new Database();
-                Persona persona = null;
-                try
-                {
-                    persona = db.GetPersonaPorEmail(email);
-                    if (persona != null)
-                    {
-                        if (!db.TienePermisoBuscado(persona, "ALUMNO"))
-                        {
-                            return RedirectToAction("NotAllowedPage", "Account");
-                        }
-                        else
-                        {
-                            return RedirectToRoute("/");
-                            ;
-                        }
-                    }
-                    else
-                    {
-                        return RedirectToRoute("/");
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-            else
-            {
-                return RedirectToRoute("/");
-            }
-        }
-
     }
 }

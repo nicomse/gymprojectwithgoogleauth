@@ -43,6 +43,666 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return "Server=.\\SQLEXPRESS;Database=" + DATABASE_NAME + ";Integrated Security= true";
         }
 
+        // INICIO DEL MÓDULO DE ALUMNOS
+        public bool AltaAlumno(Alumno alumno)
+        {
+            bool insertado = false;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.altaAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nombre", alumno.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", alumno.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", alumno.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", alumno.Telefono));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insertado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return insertado;
+        }
+
+        public Alumno GetAlumno(int idAlumno)
+        {
+            Alumno miAlumno = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorId", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // FALTAN COMPLETAR LOS ATRIBUTOS CRÉDITOS y HORARIOS
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miAlumno;
+        }
+
+        public List<Alumno> GetTodosLosAlumnos()
+        {
+            List<Alumno> misAlumnos = new List<Alumno>();
+            Alumno miAlumno;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosAlumnos", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // FALTAN COMPLETAR LOS ATRIBUTOS CRÉDITOS y HORARIOS
+                        };
+                        misAlumnos.Add(miAlumno);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misAlumnos;
+        }
+
+        public List<Alumno> BuscarAlumnoPorEmail(String EmailAlumno)
+        {
+            List<Alumno> misAlumnos = new List<Alumno>();
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.buscarAlumnoPorMail", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@email", EmailAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        Alumno miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                        };
+                        misAlumnos.Add(miAlumno);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misAlumnos;
+        }
+
+        public Alumno GetAlumnoPorEmail(String EmailAlumno)
+        {
+            Alumno miAlumno = null;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorEmail", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@emailAlumno", EmailAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miAlumno;
+        }
+
+        public bool ModificarAlumno(Alumno alumnoAModificar)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.modificarAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", alumnoAModificar.IdAlumno));
+                cmd.Parameters.Add(new SqlParameter("@nombre", alumnoAModificar.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", alumnoAModificar.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", alumnoAModificar.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", alumnoAModificar.Telefono));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return modificado;
+        }
+
+        public bool BajaAlumno(Alumno alumnoAEliminar)
+        {
+            bool baja = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.bajaAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", alumnoAEliminar.IdAlumno));
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    baja = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return baja;
+        }
+        // FIN DEL MÓDULO DE ALUMNOS
+
+        // INICIO DEL MÓDULO DE PROFESORES
+        public bool AltaProfesor(Profesor profesor)
+        {
+            bool insertado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.altaProfesor", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nombre", profesor.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", profesor.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", profesor.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", profesor.Telefono));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insertado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return insertado;
+        }
+
+        public List<Profesor> BuscarProfesorPorEmail(String EmailProfesor)
+        {
+            List<Profesor> misProfesores = new List<Profesor>();
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.buscarProfesorPorMail", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@email", EmailProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        Profesor miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        misProfesores.Add(miProfesor);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misProfesores;
+        }
+
+        public Profesor GetProfesor(int idProfesor)
+        {
+            Profesor miProfesor = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getProfesorPorId", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miProfesor;
+        }
+
+        public List<Profesor> GetTodosLosProfesores()
+        {
+            List<Profesor> misProfesores = new List<Profesor>();
+            Profesor miProfesor;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosProfesores", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        misProfesores.Add(miProfesor);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misProfesores;
+        }
+
+        public Profesor GetProfesorPorEmail(String EmailProfesor)
+        {
+            Profesor miProfesor = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getProfesorPorEmail", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@EmailProfesor", EmailProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miProfesor = new Profesor
+                        {
+                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miProfesor;
+        }
+
+        public bool ModificarProfesor(Profesor profesorAModificar)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.modificarProfesor", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", profesorAModificar.IdProfesor));
+                cmd.Parameters.Add(new SqlParameter("@nombre", profesorAModificar.Nombre));
+                cmd.Parameters.Add(new SqlParameter("@apellido", profesorAModificar.Apellido));
+                cmd.Parameters.Add(new SqlParameter("@email", profesorAModificar.Email));
+                cmd.Parameters.Add(new SqlParameter("@telefono", profesorAModificar.Telefono));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return modificado;
+        }
+
+        public bool BajaProfesor(Profesor profesorAEliminar)
+        {
+            bool baja = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.bajaProfesor", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", profesorAEliminar.IdProfesor));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    baja = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return baja;
+        }
+        // FIN DEL MÓDULO DE PROFESORES
+
+        // INICIO DEL MÓDULO DE SUCURSALES
+        public bool AltaSucursal(Sucursal sucursal)
+        {
+            bool insertado = false;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.altaSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@barrio", sucursal.Barrio));
+                cmd.Parameters.Add(new SqlParameter("@direccion", sucursal.Direccion));
+                cmd.Parameters.Add(new SqlParameter("@telefono", sucursal.Telefono));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insertado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return insertado;
+        }
+
+        public Sucursal GetSucursal(int numeroSucursal)
+        {
+            Sucursal sucursal = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getSucursalPorId", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", numeroSucursal));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        sucursal = new Sucursal
+                        {
+                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
+                            Barrio = miLectorDeDatos["barrio"].ToString(),
+                            Direccion = miLectorDeDatos["direccion"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // FALTA COMPLETAR EL ATRIBUTO PACK
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return sucursal;
+        }
+
+        public List<Sucursal> GetTodasLasSucursales()
+        {
+            List<Sucursal> sucursales = new List<Sucursal>();
+            Sucursal sucursal;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasSucursales", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        sucursal = new Sucursal
+                        {
+                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
+                            Barrio = miLectorDeDatos["barrio"].ToString(),
+                            Direccion = miLectorDeDatos["direccion"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // FALTA COMPLETAR EL ATRIBUTO PACK
+                        };
+                        sucursales.Add(sucursal);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return sucursales;
+        }
+
+        public bool ModificarSucursal(Sucursal sucursalAModificar)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.modificarSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", sucursalAModificar.NroSucursal));
+                cmd.Parameters.Add(new SqlParameter("@barrio", sucursalAModificar.Barrio));
+                cmd.Parameters.Add(new SqlParameter("@direccion", sucursalAModificar.Direccion));
+                cmd.Parameters.Add(new SqlParameter("@telefono", sucursalAModificar.Telefono));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return modificado;
+        }
+
+        public bool BajaSucursal(Sucursal sucursalAEliminar)
+        {
+            bool baja = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.bajaSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nroSucursal", sucursalAEliminar.NroSucursal));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    baja = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return baja;
+        }
+        // FIN DEL MÓDULO DE SUCURSALES
+
         // INICIO DEL MÓDULO DE ACTIVIDADES
         public bool AltaActividad(Actividad actividad)
         {
@@ -201,432 +861,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         }
         // FIN DEL MÓDULO DE ACTIVIDADES
 
-        // INICIO DEL MÓDULO DE ALUMNOS
-        public bool AltaAlumno(Alumno alumno)
-        {
-            bool insertado = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.altaAlumno", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@nombre", alumno.Nombre));
-                cmd.Parameters.Add(new SqlParameter("@apellido", alumno.Apellido));
-                cmd.Parameters.Add(new SqlParameter("@email", alumno.Email));
-                cmd.Parameters.Add(new SqlParameter("@telefono", alumno.Telefono));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    insertado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return insertado;
-        }
-
-        // GET ALUMNO POR ID
-        public Alumno GetAlumno(int idAlumno)
-        {
-            Alumno miAlumno = null;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorId", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    if (miLectorDeDatos.Read())
-                    {
-                        miAlumno = new Alumno
-                        {
-                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            //@ TO DO falta llenar atributo CREDITOS y HORARIOS
-                        };
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return miAlumno;
-        }
-
-        //OBTENER TODOS LOS ALUMNOS
-
-        public List<Alumno> GetTodosLosAlumnos()
-        {
-            List<Alumno> misAlumnos = new List<Alumno>();
-            Alumno miAlumno;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getTodosLosAlumnos", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        miAlumno = new Alumno
-                        {
-                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            //@ TO DO falta llenar atributo CREDITOS y HORARIOS
-                        };
-                        misAlumnos.Add(miAlumno);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return misAlumnos;
-        }
-
-        // BUSCAR ALUMNOS POR EMAIL CON EL OPERADOR LIKE
-        public List<Alumno> BuscarAlumnoPorEmail(String EmailAlumno)
-        {
-            List<Alumno> misAlumnos = new List<Alumno>();
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.buscarAlumnoPorMail", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@email", EmailAlumno));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        Alumno miAlumno = new Alumno
-                        {
-                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                        };
-                        misAlumnos.Add(miAlumno);
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return misAlumnos;
-        }
-
-        // GET ALUMNO POR EMAIL
-
-        public Alumno GetAlumnoPorEmail(String EmailAlumno)
-        {
-            Alumno miAlumno = null;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getAlumnoPorEmail", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@emailAlumno", EmailAlumno));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    if (miLectorDeDatos.Read())
-                    {
-                        miAlumno = new Alumno
-                        {
-                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return miAlumno;
-        }
-
-        // MODIFICAR ALUMNO
-        public bool ModificarAlumno(Alumno alumnoAModificar)
-        {
-            bool modificado = false;
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.modificarAlumno", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idAlumno", alumnoAModificar.IdAlumno));
-                cmd.Parameters.Add(new SqlParameter("@nombre", alumnoAModificar.Nombre));
-                cmd.Parameters.Add(new SqlParameter("@apellido", alumnoAModificar.Apellido));
-                cmd.Parameters.Add(new SqlParameter("@email", alumnoAModificar.Email));
-                cmd.Parameters.Add(new SqlParameter("@telefono", alumnoAModificar.Telefono));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    modificado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return modificado;
-        }
-
-        //BAJA ALUMNO
-
-        public bool BajaAlumno(Alumno alumnoAEliminar)
-        {
-            bool baja = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.bajaAlumno", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idAlumno", alumnoAEliminar.IdAlumno));
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    baja = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return baja;
-        }
-        // FIN MODULO ALUMNOS
-
-        // INICIO MODULO SUCURSALES
-
-        public bool AltaSucursal(Sucursal sucursal)
-        {
-            bool insertado = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.altaSucursal", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@barrio", sucursal.Barrio));
-                cmd.Parameters.Add(new SqlParameter("@direccion", sucursal.Direccion));
-                cmd.Parameters.Add(new SqlParameter("@telefono", sucursal.Telefono));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    insertado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return insertado;
-        }
-
-        // GET SUCURSAL
-        public Sucursal GetSucursal(int numeroSucursal)
-        {
-            Sucursal sucursal = null;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getSucursalPorId", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@nroSucursal", numeroSucursal));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    if (miLectorDeDatos.Read())
-                    {
-                        sucursal = new Sucursal
-                        {
-                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
-                            Barrio = miLectorDeDatos["barrio"].ToString(),
-                            Direccion = miLectorDeDatos["direccion"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // PACKS ?
-                        };
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return sucursal;
-        }
-
-        //OBTENER TODAS LAS SUCURSALES
-
-        public List<Sucursal> GetTodasLasSucursales()
-        {
-            List<Sucursal> sucursales = new List<Sucursal>();
-            Sucursal sucursal;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getTodasLasSucursales", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        sucursal = new Sucursal
-                        {
-                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
-                            Barrio = miLectorDeDatos["barrio"].ToString(),
-                            Direccion = miLectorDeDatos["direccion"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // PACKS ?
-                        };
-                        sucursales.Add(sucursal);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return sucursales;
-        }
-
-        // MODIFICAR SUCURSAL
-
-        public bool ModificarSucursal(Sucursal sucursalAModificar)
-        {
-            bool modificado = false;
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.modificarSucursal", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@nroSucursal", sucursalAModificar.NroSucursal));
-                cmd.Parameters.Add(new SqlParameter("@barrio", sucursalAModificar.Barrio));
-                cmd.Parameters.Add(new SqlParameter("@direccion", sucursalAModificar.Direccion));
-                cmd.Parameters.Add(new SqlParameter("@telefono", sucursalAModificar.Telefono));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    modificado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return modificado;
-        }
-
-        public bool BajaSucursal(Sucursal sucursalAEliminar)
-        {
-            bool baja = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand(
-                    "dbo.bajaSucursal", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(
-                    new SqlParameter("@nroSucursal", sucursalAEliminar.NroSucursal));
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    baja = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return baja;
-        }
-
-        // FIN MODULO SUCURSALES
-
-        // INICIO MODULO PACKS
+        // INICIO DEL MÓDULO DE PACKS
         public bool AltaPack(Pack pack)
         {
             bool insertado = false;
@@ -660,6 +895,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         {
             List<Pack> packs = new List<Pack>();
             Pack pack;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -679,7 +915,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
                             CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
                             DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
-                            Precio = float.Parse(miLectorDeDatos["precio"].ToString()),
+                            Precio = Convert.ToDouble(miLectorDeDatos["precio"]),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                         packs.Add(pack);
@@ -697,6 +933,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public Pack GetPack(int idPack)
         {
             Pack miPack = null;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -717,7 +954,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
                             CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
                             DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
-                            Precio = float.Parse(miLectorDeDatos["precio"].ToString()),
+                            Precio = Convert.ToDouble(miLectorDeDatos["precio"]),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                     }
@@ -786,266 +1023,13 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
+        // FIN DEL MÓDULO DE PACKS
 
-        // FIN MODULO PACKS
-
-        // INICIO MODULO PROFESORES
-
-        public bool AltaProfesor(Profesor profesor)
-        {
-            bool insertado = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.altaProfesor", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@nombre", profesor.Nombre));
-                cmd.Parameters.Add(new SqlParameter("@apellido", profesor.Apellido));
-                cmd.Parameters.Add(new SqlParameter("@email", profesor.Email));
-                cmd.Parameters.Add(new SqlParameter("@telefono", profesor.Telefono));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    insertado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return insertado;
-        }
-
-        // BUSCAR PROFESORES POR EMAIL CON EL OPERADOR LIKE
-        public List<Profesor> BuscarProfesorPorEmail(String EmailProfesor)
-        {
-            List<Profesor> misProfesores = new List<Profesor>();
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.buscarProfesorPorMail", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@email", EmailProfesor));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        Profesor miProfesor = new Profesor
-                        {
-                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                        misProfesores.Add(miProfesor);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return misProfesores;
-        }
-
-        // GET PROFESOR POR ID
-        public Profesor GetProfesor(int idProfesor)
-        {
-            Profesor miProfesor = null;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getProfesorPorId", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    if (miLectorDeDatos.Read())
-                    {
-                        miProfesor = new Profesor
-                        {
-                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                        };
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return miProfesor;
-        }
-
-        //OBTENER TODOS LOS PROFESORES
-
-        public List<Profesor> GetTodosLosProfesores()
-        {
-            List<Profesor> misProfesores = new List<Profesor>();
-            Profesor miProfesor;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getTodosLosProfesores", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        miProfesor = new Profesor
-                        {
-                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                        misProfesores.Add(miProfesor);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return misProfesores;
-        }
-
-        // GET PROFESOR POR EMAIL
-        public Profesor GetProfesorPorEmail(String EmailProfesor)
-        {
-            Profesor miProfesor = null;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getProfesorPorEmail", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@EmailProfesor", EmailProfesor));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    if (miLectorDeDatos.Read())
-                    {
-                        miProfesor = new Profesor
-                        {
-                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                        };
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return miProfesor;
-        }
-
-        public bool ModificarProfesor(Profesor profesorAModificar)
-        {
-            bool modificado = false;
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.modificarProfesor", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idProfesor", profesorAModificar.IdProfesor));
-                cmd.Parameters.Add(new SqlParameter("@nombre", profesorAModificar.Nombre));
-                cmd.Parameters.Add(new SqlParameter("@apellido", profesorAModificar.Apellido));
-                cmd.Parameters.Add(new SqlParameter("@email", profesorAModificar.Email));
-                cmd.Parameters.Add(new SqlParameter("@telefono", profesorAModificar.Telefono));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    modificado = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return modificado;
-        }
-
-        public bool BajaProfesor(Profesor profesorAEliminar)
-        {
-            bool baja = false;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.bajaProfesor", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idProfesor", profesorAEliminar.IdProfesor));
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    baja = true;
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return baja;
-        }
-
-        //FIN MODULO PROFESORES
-
-        // INICIO MODULO HORARIOS
-
+        // INICIO DEL MÓDULO DE HORARIOS
         public Horario GetHorario(int idHorario)
         {
             Horario horario = null;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1066,15 +1050,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
                             Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
-                            // alumnos ??
-                            HoraInicio = Convert.ToDateTime(miLectorDeDatos["horaInicio"]),
-                            HoraFin = Convert.ToDateTime(miLectorDeDatos["horaFin"]),
+                            // FALTA COMPLETAR EL ATRIBUTO ALUMNOS
+                            HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
+                            HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
                             Dia = miLectorDeDatos["dia"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
                     }
                 }
-
             }
             catch (Exception e)
             {
@@ -1107,9 +1090,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
                             Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
-                            // alumnos ??
-                            HoraInicio = Convert.ToDateTime(miLectorDeDatos["horaInicio"]),
-                            HoraFin = Convert.ToDateTime(miLectorDeDatos["horaFin"]),
+                            // FALTA COMPLETAR EL ATRIBUTO ALUMNOS
+                            HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
+                            HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
                             Dia = miLectorDeDatos["dia"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
                         };
@@ -1211,10 +1194,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
+        // FIN DEL MÓDULO DE HORARIOS
 
-        // FIN MODULO HORARIOS
-
-        // INICIO MODULO PERSONAS
+        // INICIO DEL MÓDULO DE PERSONAS
         public Persona GetPersonaPorEmail(String emailPersona)
         {
             Persona miPersona = null;
@@ -1254,18 +1236,18 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 throw e;
             }
         }
+        // FIN DEL MÓDULO DE PERSONAS
 
-        // FIN MODULO PERSONAS
-
-        // INICIO MODULO ADMINISTRADOR
-
+        // INICIO DEL MÓDULO DE ADMINISTRADOR
         public bool AltaAdministrador(String email)
         {
             bool insertado = false;
+
             Persona admin = new Persona
             {
                 Email = email
             };
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1305,32 +1287,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return count;
         }
+        // FIN DEL MÓDULO DE ADMINISTRADOR
 
-        // FIN MODULO ADMINISTRADOR
-
-        public bool TienePermisoBuscado(Persona persona, String rolABuscar)
-        {
-            SqlConnection conn = AbrirConexion();
-            SqlCommand cmd = new SqlCommand("dbo.tieneRolAsignado", conn)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-            cmd.Parameters.Add(new SqlParameter("@idPersona", persona.IdPersona));
-            cmd.Parameters.Add(new SqlParameter("@nombreRol", rolABuscar));
-            SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-            bool tienePermiso = false;
-
-            if (miLectorDeDatos.HasRows)
-            {
-                while (miLectorDeDatos.Read())
-                {
-                    tienePermiso = true;
-                }
-            }
-            return tienePermiso;
-        }
-
+        // INICIO DEL MÓDULO DE PERMISOS
         public String GetRolPersona(String email)
         {
             String rol = "";
@@ -1359,7 +1318,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
             return rol;
         }
-
-
+        // FIN DEL MÓDULO DE PERMISOS
     }
 }
