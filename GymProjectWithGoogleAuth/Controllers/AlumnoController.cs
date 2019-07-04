@@ -81,37 +81,6 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
-        [HttpPost]
-        public PartialViewResult BuscarAlumnosAjax(FormCollection form)
-        {
-            String email = form["email"];
-            Database db = new Database();
-            if (email == "")
-            {
-                try
-                {
-                    List<Alumno> alumnos = db.GetTodosLosAlumnos();
-                    return PartialView("ListarAlumnosParcial", alumnos);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-            else
-            {
-                try
-                {
-                    List<Alumno> alumnos = db.BuscarAlumnoPorEmail(email);
-                    return PartialView("ListarAlumnosParcial", alumnos);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-        }
-
         //ELIMINAR ALUMNO
         public ActionResult EliminarAlumno(int idAlumno)
         {
