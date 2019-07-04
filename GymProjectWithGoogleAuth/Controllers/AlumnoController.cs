@@ -8,11 +8,6 @@ namespace GymProjectWithGoogleAuth.Controllers
 {
     public class AlumnoController : Controller
     {
-        public AlumnoController()
-        {
-            // validarController();
-        }
-
         // GET: Alumno
         public ActionResult Index()
         {

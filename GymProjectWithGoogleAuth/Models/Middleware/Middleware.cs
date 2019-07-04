@@ -1,6 +1,7 @@
 ﻿using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Clases;
 using System;
+using System.Web.Mvc;
 
 namespace GymProjectWithGoogleAuth.Models.Middleware
 {
@@ -15,7 +16,7 @@ namespace GymProjectWithGoogleAuth.Models.Middleware
             {
                 Persona persona = db.GetPersonaPorEmail(email);
 
-                if(persona == null && db.DameCantPersonas() == 0)
+                if (persona == null && db.DameCantPersonas() == 0)
                 {
                     db.AltaAdministrador(email);
                     puedePasar = true;

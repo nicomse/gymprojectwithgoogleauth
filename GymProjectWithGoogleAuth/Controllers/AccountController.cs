@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using GymProjectWithGoogleAuth.Models;
 using GymProjectWithGoogleAuth.Models.Middleware;
 using Microsoft.AspNet.Identity.EntityFramework;
+using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 
 namespace GymProjectWithGoogleAuth.Controllers
 {
@@ -81,7 +82,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToRol(model.Email);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -347,7 +348,8 @@ namespace GymProjectWithGoogleAuth.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToRol(loginInfo.Email);
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -389,7 +391,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToRol(model.Email);
                     }
                 }
                 AddErrors(result);
@@ -457,12 +459,35 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
+        public ActionResult RedirectToRol(String email)
+        {
+            Database db = new Database();
+
+            if (db.GetRolPersona(email) == "ADMIN")
+            {
+                return RedirectToAction("Index", "Administrador");
+            }
+
+            if (db.GetRolPersona(email) == "ALUMNO")
+            {
+                return RedirectToAction("Index", "Alumno");
+            }
+
+            if (db.GetRolPersona(email) == "PROFESOR")
+            {
+                return RedirectToAction("Index", "Profesor");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
+            
             return RedirectToAction("Index", "Home");
         }
 

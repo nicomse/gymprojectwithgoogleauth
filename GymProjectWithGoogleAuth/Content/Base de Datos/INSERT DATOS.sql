@@ -273,6 +273,24 @@ GO
 
 DECLARE @RC int
 DECLARE @nombre varchar(100)
+DECLARE @apellido varchar(100)
+DECLARE @email varchar(255)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaProfesor]'Federico', 'Martín', 'femartin73@gmail.com', '1162305533'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+DECLARE @apellido varchar(100)
+DECLARE @email varchar(255)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaAdministrador]'aprosoff.federico@gmail.com'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
 
 EXECUTE @RC = [dbo].[altaActividad]'Natación'
 GO

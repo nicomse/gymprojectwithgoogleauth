@@ -262,9 +262,9 @@
     <Content Include="Views\Pack\ModificarPack.cshtml" />
     <Content Include="Views\Horario\AgregarHorario.cshtml" />
     <Content Include="Views\Horario\ModificarHorario.cshtml" />
-    <Content Include="Views\Alumno\HomeAlumno.cshtml" />
-    <Content Include="Views\Profesor\HomeProfesor.cshtml" />
-    <Content Include="Views\Administrador\HomeAdministrador.cshtml" />
+    <Content Include="Views\Alumno\Index.cshtml" />
+    <Content Include="Views\Profesor\Index.cshtml" />
+    <Content Include="Views\Administrador\Index.cshtml" />
     <Content Include="Views\Profesor\Presentismo.cshtml" />
     <Content Include="Views\Alumno\ListarAlumnos.cshtml" />
     <Content Include="Views\Alumno\ListarAlumnosParcial.cshtml" />
@@ -276,6 +276,9 @@
     <Content Include="Views\Actividad\ModificarActividad.cshtml" />
     <Content Include="Views\Pack\ListarPacks.cshtml" />
     <Content Include="Views\Horario\ListarHorarios.cshtml" />
+    <Content Include="Views\Shared\_Layout_Administrador.cshtml" />
+    <Content Include="Views\Shared\_Layout_Alumno.cshtml" />
+    <Content Include="Views\Shared\_Layout_Profesor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Middleware\" />

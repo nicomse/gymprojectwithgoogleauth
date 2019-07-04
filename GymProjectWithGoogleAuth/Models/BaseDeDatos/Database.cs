@@ -1331,5 +1331,35 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return tienePermiso;
         }
 
+        public String GetRolPersona(String email)
+        {
+            String rol = "";
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getRolPersona", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@email", email));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        rol = miLectorDeDatos["rol"].ToString();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return rol;
+        }
+
+
     }
 }

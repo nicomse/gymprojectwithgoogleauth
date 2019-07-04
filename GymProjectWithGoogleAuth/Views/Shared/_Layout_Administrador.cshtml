@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homer's Gym</title>
+    <link href="~/Content/Images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Alumnos</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listar Alumnos", "ListarAlumnos", "Alumno")</li>
+                            <li>@Html.ActionLink("Agregar Alumno", "AgregarAlumno", "Alumno")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Profesores</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listar Profesores", "ListarProfesores", "Profesor")</li>
+                            <li>@Html.ActionLink("Agregar Profesor", "AgregarProfesor", "Profesor")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Sucursales</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listar Sucursales", "ListarSucursales", "Sucursal")</li>
+                            <li>@Html.ActionLink("Agregar Sucursal", "AgregarSucursal", "Sucursal")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Actividades</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listar Actividades", "ListarActividades", "Actividad")</li>
+                            <li>@Html.ActionLink("Agregar Actividad", "AgregarActividad", "Actividad")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Packs</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listar Packs", "ListarPacks", "Pack")</li>
+                            <li>@Html.ActionLink("Agregar Pack", "AgregarPack", "Pack")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Horarios</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Listar Horarios", "ListarHorarios", "Horario")</li>
+                            <li>@Html.ActionLink("Agregar Horario", "AgregarHorario", "Horario")</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>© 2019 - Homer's Gym</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
