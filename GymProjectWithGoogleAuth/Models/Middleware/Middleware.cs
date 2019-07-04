@@ -1,7 +1,6 @@
 ﻿using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Clases;
 using System;
-using System.Web.Mvc;
 
 namespace GymProjectWithGoogleAuth.Models.Middleware
 {
@@ -33,19 +32,6 @@ namespace GymProjectWithGoogleAuth.Models.Middleware
             {
                 throw e;
             }
-        }
-
-        public static bool TienePermiso(Persona persona, String permisoRequeridoParaPasar)
-        {
-            Database db = new Database();
-            bool tienePermiso = db.TienePermisoBuscado(persona, permisoRequeridoParaPasar);
-
-            if (tienePermiso)
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

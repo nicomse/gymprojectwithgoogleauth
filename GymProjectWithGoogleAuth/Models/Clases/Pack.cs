@@ -15,7 +15,7 @@ namespace GymProjectWithGoogleAuth.Models.Clases
         public int DiasVigencia { get; set; }
 
         [Required(ErrorMessage = "Este campo es obligatorio.")]
-        public float Precio { get; set; }
+        public double Precio { get; set; }
 
         public int Estado { get; set; }
     }
