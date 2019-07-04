@@ -8,7 +8,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GymProjectWithGoogleAuth.Models;
 using GymProjectWithGoogleAuth.Models.Middleware;
-using Microsoft.AspNet.Identity.EntityFramework;
 using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 
 namespace GymProjectWithGoogleAuth.Controllers
@@ -349,7 +348,6 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToRol(loginInfo.Email);
-                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -478,7 +476,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 return RedirectToAction("Index", "Profesor");
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
