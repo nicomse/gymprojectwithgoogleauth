@@ -156,48 +156,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return misAlumnos;
         }
 
-        public List<Alumno> BuscarAlumnoPorEmail(String EmailAlumno)
-        {
-            List<Alumno> misAlumnos = new List<Alumno>();
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.buscarAlumnoPorMail", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@email", EmailAlumno));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        Alumno miAlumno = new Alumno
-                        {
-                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                        };
-                        misAlumnos.Add(miAlumno);
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return misAlumnos;
-        }
-
         public Alumno GetAlumnoPorEmail(String EmailAlumno)
         {
             Alumno miAlumno = null;
@@ -320,47 +278,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 throw e;
             }
             return insertado;
-        }
-
-        public List<Profesor> BuscarProfesorPorEmail(String EmailProfesor)
-        {
-            List<Profesor> misProfesores = new List<Profesor>();
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.buscarProfesorPorMail", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@email", EmailProfesor));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        Profesor miProfesor = new Profesor
-                        {
-                            IdProfesor = Convert.ToInt32(miLectorDeDatos["idProfesor"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                        misProfesores.Add(miProfesor);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return misProfesores;
         }
 
         public Profesor GetProfesor(int idProfesor)
