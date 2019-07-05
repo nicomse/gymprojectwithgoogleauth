@@ -7,7 +7,7 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaAlumno]'Morgan', 'Freeman', 'morgan.freeman@gmail.com', '1170810538'
+EXECUTE @RC = [dbo].[altaAlumno]'Alumno', 'HomersGym', 'alumno.homersgym@gmail.com', '1196587989'
 GO
 
 DECLARE @RC int
@@ -16,7 +16,7 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaAlumno]'Fer', 'Net', 'findwayoutsoft@gmail.com', '1196587989'
+EXECUTE @RC = [dbo].[altaAlumno]'Morgan', 'Freeman', 'morgan.freeman@gmail.com', '1170810538'
 GO
 
 DECLARE @RC int
@@ -196,6 +196,24 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
+EXECUTE @RC = [dbo].[altaAlumno]'Find Way Out', 'Soft', 'findwayoutsoft@gmail.com', '1170810538'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+DECLARE @apellido varchar(100)
+DECLARE @email varchar(255)
+DECLARE @telefono varchar(255)
+
+EXECUTE @RC = [dbo].[altaProfesor]'Profesor', 'HomersGym', 'profesor.homersgym@gmail.com', '1193396555'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+DECLARE @apellido varchar(100)
+DECLARE @email varchar(255)
+DECLARE @telefono varchar(255)
+
 EXECUTE @RC = [dbo].[altaProfesor]'Will', 'Smith', 'will.smith@gmail.com', '1193396555'
 GO
 
@@ -286,6 +304,15 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
+EXECUTE @RC = [dbo].[altaAdministrador]'adm.homersgym@gmail.com'
+GO
+
+DECLARE @RC int
+DECLARE @nombre varchar(100)
+DECLARE @apellido varchar(100)
+DECLARE @email varchar(255)
+DECLARE @telefono varchar(255)
+
 EXECUTE @RC = [dbo].[altaAdministrador]'aprosoff.federico@gmail.com'
 GO
 
@@ -330,7 +357,7 @@ DECLARE @barrio varchar(100)
 DECLARE @direccion varchar(100)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaSucursal]'Almagro','Yatay 240','40204321'
+EXECUTE @RC = [dbo].[altaSucursal]'Almagro','Yatay 240','4020-4321'
 GO
 
 DECLARE @RC int
@@ -338,7 +365,7 @@ DECLARE @barrio varchar(100)
 DECLARE @direccion varchar(100)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaSucursal]'Saavedra','Vedia 3600','011 5777-9971'
+EXECUTE @RC = [dbo].[altaSucursal]'Saavedra','Vedia 3600','5777-9971'
 GO
 
 DECLARE @RC int
@@ -346,7 +373,7 @@ DECLARE @barrio varchar(100)
 DECLARE @direccion varchar(100)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaSucursal]'Devoto','Quevedo 3365','011 4019-6000'
+EXECUTE @RC = [dbo].[altaSucursal]'Devoto','Quevedo 3365','4019-6000'
 GO
 
 DECLARE @RC int
@@ -354,7 +381,7 @@ DECLARE @barrio varchar(100)
 DECLARE @direccion varchar(100)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaSucursal]'Monserrat','Lima 775','011 4000-7600'
+EXECUTE @RC = [dbo].[altaSucursal]'Monserrat','Lima 775','4000-7600'
 GO
 
 DECLARE @RC int
@@ -362,7 +389,7 @@ DECLARE @barrio varchar(100)
 DECLARE @direccion varchar(100)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaSucursal]'Palermo','Costa Rica 4677','15-6739-0110'
+EXECUTE @RC = [dbo].[altaSucursal]'Palermo','Costa Rica 4677','6739-0110'
 GO
 
 DECLARE @RC int
@@ -417,4 +444,48 @@ DECLARE	@diasVigencia int
 DECLARE	@precio float
 
 EXECUTE @RC = [dbo].[altaPack] 3, 50, 120, 300
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 1, 2, 3, '20:30', '21:30', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 3, 1, 2, '18:30', '20:30', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 4, 3, 3, '14:00', '15:45', 'Sábado'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 4, 4, '10:00', '11:30', 'Jueves'
 GO
