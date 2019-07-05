@@ -168,15 +168,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\AlumnoController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PackController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
-    <Compile Include="Controllers\SucursalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -231,7 +226,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -252,38 +246,34 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Alumno\AgregarAlumno.cshtml" />
-    <Content Include="Views\Alumno\ModificarAlumno.cshtml" />
-    <Content Include="Views\Profesor\AgregarProfesor.cshtml" />
-    <Content Include="Views\Profesor\ModificarProfesor.cshtml" />
-    <Content Include="Views\Sucursal\AgregarSucursal.cshtml" />
-    <Content Include="Views\Sucursal\ModificarSucursal.cshtml" />
-    <Content Include="Views\Actividad\AgregarActividad.cshtml" />
-    <Content Include="Views\Pack\AgregarPack.cshtml" />
-    <Content Include="Views\Pack\ModificarPack.cshtml" />
-    <Content Include="Views\Horario\AgregarHorario.cshtml" />
-    <Content Include="Views\Horario\ModificarHorario.cshtml" />
+    <Content Include="Views\Administrador\AgregarAlumno.cshtml" />
+    <Content Include="Views\Administrador\ModificarAlumno.cshtml" />
+    <Content Include="Views\Administrador\AgregarProfesor.cshtml" />
+    <Content Include="Views\Administrador\ModificarProfesor.cshtml" />
+    <Content Include="Views\Administrador\AgregarSucursal.cshtml" />
+    <Content Include="Views\Administrador\ModificarSucursal.cshtml" />
+    <Content Include="Views\Administrador\AgregarActividad.cshtml" />
+    <Content Include="Views\Administrador\AgregarPack.cshtml" />
+    <Content Include="Views\Administrador\ModificarPack.cshtml" />
+    <Content Include="Views\Administrador\AgregarHorario.cshtml" />
+    <Content Include="Views\Administrador\ModificarHorario.cshtml" />
     <Content Include="Views\Alumno\Index.cshtml" />
     <Content Include="Views\Profesor\Index.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
-    <Content Include="Views\Profesor\Presentismo.cshtml" />
-    <Content Include="Views\Alumno\ListarAlumnos.cshtml" />
-    <Content Include="Views\Profesor\ListarProfesores.cshtml" />
+    <Content Include="Views\Administrador\ListarAlumnos.cshtml" />
+    <Content Include="Views\Administrador\ListarProfesores.cshtml" />
     <Content Include="Views\Account\NotAllowedPage.cshtml" />
-    <Content Include="Views\Sucursal\ListarSucursales.cshtml" />
-    <Content Include="Views\Actividad\ListarActividades.cshtml" />
-    <Content Include="Views\Actividad\ModificarActividad.cshtml" />
-    <Content Include="Views\Pack\ListarPacks.cshtml" />
-    <Content Include="Views\Horario\ListarHorarios.cshtml" />
+    <Content Include="Views\Administrador\ListarSucursales.cshtml" />
+    <Content Include="Views\Administrador\ListarActividades.cshtml" />
+    <Content Include="Views\Administrador\ModificarActividad.cshtml" />
+    <Content Include="Views\Administrador\ListarPacks.cshtml" />
+    <Content Include="Views\Administrador\ListarHorarios.cshtml" />
     <Content Include="Views\Shared\_Layout_Administrador.cshtml" />
     <Content Include="Views\Shared\_Layout_Alumno.cshtml" />
     <Content Include="Views\Shared\_Layout_Profesor.cshtml" />
     <Content Include="Scripts\popper.min" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Middleware\" />
-    <Folder Include="Views\Templates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

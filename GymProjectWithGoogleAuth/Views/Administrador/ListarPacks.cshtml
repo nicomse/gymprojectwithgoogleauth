@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Listar Packs";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -43,8 +42,8 @@
                                 @Html.DisplayFor(modelItem => item.Precio)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarPack", "Pack", new { id = item.IdPack })'" />
-                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del pack seleccionado?')) location.href='@Url.Action("EliminarPack", "Pack", new { idPack = item.IdPack })'" />
+                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarPack", "Administrador", new { id = item.IdPack })'" />
+                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del pack seleccionado?')) location.href='@Url.Action("EliminarPack", "Administrador", new { idPack = item.IdPack })'" />
                             </td>
                         </tr>
                     }

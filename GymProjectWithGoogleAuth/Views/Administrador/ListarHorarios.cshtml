@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Listar Horarios";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -51,8 +50,8 @@
                                 @Html.DisplayFor(modelItem => item.Dia)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarHorario", "Horario", new { id = item.IdHorario })'" />
-                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del horario seleccionado?')) location.href='@Url.Action("EliminarHorario", "Horario", new { idHorario = item.IdHorario })'" />
+                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarHorario", "Administrador", new { id = item.IdHorario })'" />
+                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del horario seleccionado?')) location.href='@Url.Action("EliminarHorario", "Administrador", new { idHorario = item.IdHorario })'" />
                             </td>
                         </tr>
                     }

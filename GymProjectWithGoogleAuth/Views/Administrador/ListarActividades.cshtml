@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Listar Actividades";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -31,8 +30,8 @@
                                 @Html.DisplayFor(modelItem => item.Nombre)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarActividad", "Actividad", new { id = item.IdActividad })'" />
-                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación de la actividad seleccionada?')) location.href='@Url.Action("EliminarActividad", "Actividad", new { idActividad = item.IdActividad })'" />
+                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarActividad", "Administrador", new { id = item.IdActividad })'" />
+                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación de la actividad seleccionada?')) location.href='@Url.Action("EliminarActividad", "Administrador", new { idActividad = item.IdActividad })'" />
                             </td>
                         </tr>
                     }

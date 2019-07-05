@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Agregar Horario";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -92,5 +91,5 @@
 }
 
 <div>
-    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarHorarios", "Horario")'" />
+    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarHorarios", "Administrador")'" />
 </div>

@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Listar Profesores";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -43,8 +42,8 @@
                                 @Html.DisplayFor(modelItem => item.Telefono)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarProfesor", "Profesor", new { id = item.IdProfesor })'" />
-                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del profesor seleccionado?')) location.href='@Url.Action("EliminarProfesor", "Profesor", new { idProfesor = item.IdProfesor })'" />
+                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarProfesor", "Administrador", new { id = item.IdProfesor })'" />
+                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del profesor seleccionado?')) location.href='@Url.Action("EliminarProfesor", "Administrador", new { idProfesor = item.IdProfesor })'" />
                             </td>
                         </tr>
                     }

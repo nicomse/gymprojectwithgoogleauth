@@ -1,8 +1,7 @@
-﻿@model GymProjectWithGoogleAuth.Models.Clases.Alumno
+﻿@model GymProjectWithGoogleAuth.Models.Clases.Profesor
 
 @{
-    ViewBag.Title = "Agregar Alumno";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+    ViewBag.Title = "Agregar Profesor";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -50,12 +49,12 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="reset" value="Borrar Campos" class="btn btn-danger" />
-                <input type="submit" value="Crear Alumno" class="btn btn-primary" />
+                <input type="submit" value="Crear Profesor" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarAlumnos", "Alumno")'" />
+    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarProfesores", "Administrador")'" />
 </div>

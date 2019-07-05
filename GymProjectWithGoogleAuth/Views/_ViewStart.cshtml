@@ -1,19 +1,20 @@
 ﻿@{
-    string CurrentName = Convert.ToString(HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"]);
-    dynamic Layout;
-    switch (CurrentName)
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    string cLayout = "";
+    switch (controller)
     {
         case "Administrador":
-            Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+            cLayout = "~/Views/Shared/_Layout_Administrador.cshtml";
             break;
         case "Alumno":
-            Layout = "~/Views/Shared/_Layout_Alumno.cshtml";
+            cLayout = "~/Views/Shared/_Layout_Alumno.cshtml";
             break;
         case "Profesor":
-            Layout = "~/Views/Shared/_Layout_Profesor.cshtml";
+            cLayout = "~/Views/Shared/_Layout_Profesor.cshtml";
             break;
         default:
-            Layout = "~/Views/Shared/_Layout.cshtml";
+            cLayout = "~/Views/Shared/_Layout.cshtml";
             break;
     }
-}  
+    Layout = cLayout;
+}

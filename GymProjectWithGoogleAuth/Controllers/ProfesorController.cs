@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using GymProjectWithGoogleAuth.Models.Clases;
-using GymProjectWithGoogleAuth.Models.BaseDeDatos;
+﻿using System.Web.Mvc;
 
 namespace GymProjectWithGoogleAuth.Controllers
 {
@@ -12,90 +8,6 @@ namespace GymProjectWithGoogleAuth.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-        // LISTAR PROFESORES
-        public ActionResult ListarProfesores()
-        {
-            Database db = new Database();
-            List<Profesor> profesores = db.GetTodosLosProfesores();
-
-            return View(profesores);
-        }
-
-        // AGREGAR PROFESOR
-        public ActionResult AgregarProfesor()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AgregarProfesor(Profesor Profesor)
-        {
-            Database db = new Database();
-
-            Profesor ProfesorEmail = db.GetProfesorPorEmail(Profesor.Email);
-
-            if (ProfesorEmail == null)
-            {
-                if (ModelState.IsValid)
-                {
-                    db.AltaProfesor(Profesor);
-                    return RedirectToAction("AgregarProfesor");
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            else
-            {
-                if (ProfesorEmail != null)
-                {
-                    ModelState.AddModelError("Email", "El profesor ingresado ya existe.");
-                }
-                return View();
-            }
-        }
-
-        // MODIFICAR PROFESOR
-        public ActionResult ModificarProfesor(int id)
-        {
-            Database db = new Database();
-            Profesor profesor = db.GetProfesor(id);
-            return View(profesor);
-        }
-
-        [HttpPost]
-        public ActionResult ModificarProfesor(Profesor profesor)
-        {
-            Database db = new Database();
-
-            if (ModelState.IsValid)
-            {
-                db.ModificarProfesor(profesor);
-                return RedirectToAction("ListarProfesores");
-            }
-            else
-            {
-                return View();
-            }
-        }
-
-        //ELIMINAR PROFESOR
-        public ActionResult EliminarProfesor(int idProfesor)
-        {
-            Database db = new Database();
-            try
-            {
-                Profesor profesor = db.GetProfesor(idProfesor);
-                db.BajaProfesor(profesor);
-                return RedirectToAction("ListarProfesores");
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("ListarProfesores", "error");
-            }
         }
 
     }

@@ -1,8 +1,7 @@
-﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Sucursal>
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Alumno>
 
 @{
-    ViewBag.Title = "Listar Sucursales";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+    ViewBag.Title = "Listar Alumnos";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -15,9 +14,10 @@
 
                     <thead>
                         <tr>
-                            <th>Número de Sucursal</th>
-                            <th>Barrio</th>
-                            <th>Dirección</th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>E-Mail</th>
                             <th>Teléfono</th>
                             <th>Acciones</th>
                         </tr>
@@ -27,20 +27,23 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.NroSucursal)
+                                @Html.DisplayFor(modelItem => item.IdAlumno)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Barrio)
+                                @Html.DisplayFor(modelItem => item.Nombre)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Direccion)
+                                @Html.DisplayFor(modelItem => item.Apellido)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Telefono)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarSucursal", "Sucursal", new { id = item.NroSucursal })'" />
-                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación de la sucursal seleccionada?')) location.href='@Url.Action("EliminarSucursal", "Sucursal", new { idSucursal = item.NroSucursal })'" />
+                                <input type="button" class="btn btn-primary" value="Modificar" onclick="location.href='@Url.Action("ModificarAlumno", "Administrador", new { id = item.IdAlumno })'" />
+                                <input type="button" class="btn btn-danger" value="Eliminar" onclick="if (confirm('¿Confirma la eliminación del alumno seleccionado?')) location.href='@Url.Action("EliminarAlumno", "Administrador", new { idAlumno = item.IdAlumno })'" />
                             </td>
                         </tr>
                     }

@@ -1,19 +1,19 @@
 ﻿@model GymProjectWithGoogleAuth.Models.Clases.Pack
 
 @{
-    ViewBag.Title = "Agregar Pack";
-    Layout = "~/Views/Shared/_Layout_Administrador.cshtml";
+    ViewBag.Title = "Modificar Pack";
 }
 
 <h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
+        @Html.AntiForgeryToken()
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IdPack)
+        @Html.HiddenFor(m => m.IdPack, new { idPack = "IdPack" })
 
         <div class="form-group">
             @Html.LabelFor(model => model.Sucursal, "Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -21,7 +21,14 @@
                 <select class="form-control" name="idSucursal">
                     @foreach (var sucursal in ViewBag.data)
                     {
-                        <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
+                        if (sucursal.NroSucursal == Model.Sucursal.NroSucursal)
+                        {
+                            <option value="@sucursal.NroSucursal" selected>@sucursal.Barrio</option>
+                        }
+                        else
+                        {
+                            <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
+                        }
                     }
                 </select>
             </div>
@@ -53,13 +60,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="reset" value="Borrar Campos" class="btn btn-danger" />
-                <input type="submit" value="Crear Pack" class="btn btn-primary" />
+                <input type="reset" value="Borrar Cambios" class="btn btn-danger" />
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarPacks", "Pack")'" />
+    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarPacks", "Administrador")'" />
 </div>
