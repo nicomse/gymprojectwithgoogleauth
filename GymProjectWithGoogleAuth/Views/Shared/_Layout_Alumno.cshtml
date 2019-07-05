@@ -14,23 +14,13 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 @Html.ActionLink("Inicio", "Index", "Alumno", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">BOTON</a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("OPCION1", "ListarAlumnos", "Alumno")</li>
-                            <li>@Html.ActionLink("OPCION2", "AgregarAlumno", "Alumno")</li>
-                        </ul>
-                    </li>
+                    <li>@Html.ActionLink("Créditos", "ListarCreditos", "Alumno")</li>
+                    <li>@Html.ActionLink("Calendario", "ListarHorarios", "Alumno")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
