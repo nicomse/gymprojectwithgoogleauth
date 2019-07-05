@@ -1067,6 +1067,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     CommandType = CommandType.StoredProcedure
                 };
+                cmd.Parameters.Add(new SqlParameter("@idHorario", horario.IdHorario));
                 cmd.Parameters.Add(new SqlParameter("@idActividad", horario.Actividad.IdActividad));
                 cmd.Parameters.Add(new SqlParameter("@idProfesor", horario.Profesor.IdProfesor));
                 cmd.Parameters.Add(new SqlParameter("@nroSucursal", horario.Sucursal.NroSucursal));
