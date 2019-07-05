@@ -88,17 +88,26 @@
             </div>
         </div>
 
+        @{
+            List<String> dias = new List<string>() { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
+            ViewBag.dias = dias;
+        }
+
         <div class="form-group">
             @Html.LabelFor(model => model.Dia, "Día", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" name="dia">
-                    <option value="Lunes">Lunes</option>
-                    <option value="Martes">Martes</option>
-                    <option value="Miércoles">Miércoles</option>
-                    <option value="Jueves">Jueves</option>
-                    <option value="Viernes">Viernes</option>
-                    <option value="Sábado">Sábado</option>
-                    <option value="Domingo">Domingo</option>
+                    @foreach (var dia in ViewBag.dias)
+                    {
+                        if (dia == Model.Dia)
+                        {
+                            <option value="@dia" selected>@dia</option>
+                        }
+                        else
+                        {
+                            <option value="@dia">@dia</option>
+                        }
+                    }
                 </select>
             </div>
         </div>
