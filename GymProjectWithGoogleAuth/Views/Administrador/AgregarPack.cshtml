@@ -17,7 +17,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sucursal, "Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select class="form-control" name="idSucursal">
+                <select class="form-control" name="idSucursal" required="required">
+                    <option value="" selected disabled>Seleccione una sucursal...</option>
                     @foreach (var sucursal in ViewBag.data)
                     {
                         <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
