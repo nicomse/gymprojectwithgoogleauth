@@ -259,6 +259,7 @@
     <Content Include="Views\Alumno\ListarCreditosAlumno.cshtml" />
     <Content Include="Views\Alumno\ListarPacks.cshtml" />
     <Content Include="Views\Alumno\VerDetalleCredito.cshtml" />
+    <Content Include="Views\Alumno\NotAllowedPage.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

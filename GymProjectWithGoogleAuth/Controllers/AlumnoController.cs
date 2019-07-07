@@ -9,17 +9,26 @@ namespace GymProjectWithGoogleAuth.Controllers
 {
     public class AlumnoController : Controller
     {
+        // POSIBLE MANERA DE RESTRINGIR EL ACCESO A LOS ROLES NO PERMITIDOS.
+
+        /*public ActionResult ComprobarRol()
+        {
+            Database db = new Database();
+            String email = User.Identity.GetUserName();
+            String rol = db.GetRolPersona(email);
+
+            if (rol != "ALUMNO")
+            {
+                return RedirectToAction("NotAllowedPage");
+            }
+
+            return View();
+        }*/
+
         // GET: Alumno
         public ActionResult Index()
         {
-            if (User.Identity.GetUserName() == "")
-            {
-                return RedirectToRoute("/Account/ExternalLoginCallback");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         public ActionResult ListarCreditosAlumno()
@@ -48,12 +57,8 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-            Pack myPack = db.GetPack(idPack);
-
-            db.AltaCredito(alumno, myPack);
-            // RECIBE EL PACK COMPRADO Y EL ALUMNO QUE COMPRÓ EL PACK
-            // SE CREA EL OBJETO CREDITO CON LOS CAMPOS QUE CORRESPONDAN
-            // SE ASIGNA EL CREDITO AL ALUMNO
+            Pack pack = db.GetPack(idPack);
+            db.AltaCredito(alumno, pack);
 
             return RedirectToAction("ListarCreditosAlumno");
         }
