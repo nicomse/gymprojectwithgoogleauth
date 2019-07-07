@@ -42,7 +42,7 @@
                                 @Html.DisplayFor(modelItem => item.Precio)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Comprar" onclick="location.href='@Url.Action("ComprarPack", "Alumno", new { id = item.IdPack })'" />
+                                <input type="button" class="btn btn-primary" value="Comprar" onclick="location.href='@Url.Action("ComprarPack", "Alumno", new { idPack = item.IdPack })'" />
                             </td>
                         </tr>
                     }

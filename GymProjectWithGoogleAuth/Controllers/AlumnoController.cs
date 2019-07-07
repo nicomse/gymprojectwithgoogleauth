@@ -12,7 +12,14 @@ namespace GymProjectWithGoogleAuth.Controllers
         // GET: Alumno
         public ActionResult Index()
         {
-            return View();
+            if (User.Identity.GetUserName() == "")
+            {
+                return RedirectToRoute("/Account/ExternalLoginCallback");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult ListarCreditosAlumno()
@@ -37,15 +44,18 @@ namespace GymProjectWithGoogleAuth.Controllers
             return View(packs);
         }
 
-        public ActionResult ComprarPack()
+        public ActionResult ComprarPack(int idPack)
         {
             Database db = new Database();
-            
+            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+            Pack myPack = db.GetPack(idPack);
+
+            db.AltaCredito(alumno, myPack);
             // RECIBE EL PACK COMPRADO Y EL ALUMNO QUE COMPRÓ EL PACK
             // SE CREA EL OBJETO CREDITO CON LOS CAMPOS QUE CORRESPONDAN
             // SE ASIGNA EL CREDITO AL ALUMNO
 
-            return View();
+            return RedirectToAction("ListarCreditosAlumno");
         }
 
     }
