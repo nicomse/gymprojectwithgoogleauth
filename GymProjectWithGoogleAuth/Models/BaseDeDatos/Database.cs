@@ -940,6 +940,49 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
+
+        // SI NO SE USA -> BORRAR (Y EN LA BD TAMB)
+        public List<Pack> GetTodosLosPacksDeSucursal(int idSucursal)
+        {
+            List<Pack> packs = new List<Pack>();
+            Pack pack;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosPacksDeSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        pack = new Pack
+                        {
+                            IdPack = Convert.ToInt32(miLectorDeDatos["idPack"]),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
+                            DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
+                            Precio = Convert.ToDouble(miLectorDeDatos["precio"]),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        packs.Add(pack);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return packs;
+        }
+
         // FIN DEL MÓDULO DE PACKS
 
         // INICIO DEL MÓDULO DE HORARIOS
@@ -1155,6 +1198,87 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
         }
         // FIN DEL MÓDULO DE PERSONAS
+
+        // INICIO DEL MÓDULO DE CRÉDITOS
+
+        public List<Credito> GetCreditosAlumno(int id)
+        {
+            List<Credito> creditos = new List<Credito>();
+            Credito credito;
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getCreditosAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", id));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        credito = new Credito
+                        {
+                            IdCredito = Convert.ToInt32(miLectorDeDatos["idCredito"]),
+                            Alumno = GetAlumno(Convert.ToInt32(miLectorDeDatos["idAlumno"])),
+                            Pack = GetPack(Convert.ToInt32(miLectorDeDatos["idPack"])),
+                            Cantidad = Convert.ToInt32(miLectorDeDatos["cantidad"]),
+                            FechaCompra = Convert.ToDateTime(miLectorDeDatos["fechaCompra"]),
+                            FechaExpiracion = Convert.ToDateTime(miLectorDeDatos["fechaExpiracion"]),
+                        };
+                        creditos.Add(credito);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return creditos;
+        }
+
+        public Credito GetCredito(int idCredito)
+        {
+            Credito credito = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getCreditoPorId", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        credito = new Credito
+                        {
+                            IdCredito = Convert.ToInt32(miLectorDeDatos["idCredito"]),
+                            Alumno = GetAlumno(Convert.ToInt32(miLectorDeDatos["idAlumno"])),
+                            Pack = GetPack(Convert.ToInt32(miLectorDeDatos["idPack"])),
+                            Cantidad = Convert.ToInt32(miLectorDeDatos["cantidad"]),
+                            FechaCompra = Convert.ToDateTime(miLectorDeDatos["fechaCompra"]),
+                            FechaExpiracion = Convert.ToDateTime(miLectorDeDatos["fechaExpiracion"]),
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return credito;
+        }
+
+        // FIN DEL MÓDULO DE CRÉDITOS
 
         // INICIO DEL MÓDULO DE ADMINISTRADOR
         public bool AltaAdministrador(String email)

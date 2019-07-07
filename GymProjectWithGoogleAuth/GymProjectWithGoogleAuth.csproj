@@ -256,6 +256,9 @@
     <Content Include="Views\Shared\_Layout_Alumno.cshtml" />
     <Content Include="Views\Shared\_Layout_Profesor.cshtml" />
     <Content Include="Scripts\popper.min" />
+    <Content Include="Views\Alumno\ListarCreditosAlumno.cshtml" />
+    <Content Include="Views\Alumno\ListarPacks.cshtml" />
+    <Content Include="Views\Alumno\VerDetalleCredito.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

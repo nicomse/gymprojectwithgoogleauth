@@ -1,0 +1,59 @@
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Credito>
+
+@{
+    ViewBag.Title = "Listar Créditos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" id="datatable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Sucursal</th>
+                            <th>Cantidad</th>
+                            <th>Fecha de Compra</th>
+                            <th>Fecha de Expiración</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdCredito)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pack.Sucursal.Barrio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaCompra)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaExpiracion)
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-primary" value="Detalle" onclick="location.href='@Url.Action("VerDetalleCredito", "Alumno", new { idCredito = item.IdCredito })'" />
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/datatable.js"></script>
+}

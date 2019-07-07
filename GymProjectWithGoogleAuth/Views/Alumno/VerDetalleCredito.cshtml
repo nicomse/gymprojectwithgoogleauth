@@ -1,0 +1,52 @@
+﻿@model GymProjectWithGoogleAuth.Models.Clases.Credito
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.IdCredito)
+        @Html.HiddenFor(m => m.IdCredito, new { idCredito = "IdCredito" })
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCredito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCredito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaExpiracion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaExpiracion)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarCreditosAlumno", "Alumno")'" />
+</div>
