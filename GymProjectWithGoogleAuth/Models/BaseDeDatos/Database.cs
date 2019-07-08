@@ -37,7 +37,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 conn.Close();
-            }catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }
@@ -52,6 +54,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public bool AltaAlumno(Alumno alumno)
         {
             bool insertado = false;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -68,8 +71,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -82,6 +85,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public bool AltaCredito(Alumno alumno, Pack pack)
         {
             bool insertado = false;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -90,15 +94,15 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idPack", pack.IdPack));
-                cmd.Parameters.Add(new SqlParameter("@idAlumno",alumno.IdAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", alumno.IdAlumno));
                 cmd.Parameters.Add(new SqlParameter("@cantidad", pack.CantCreditos));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     insertado = true;
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -141,8 +145,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -156,6 +160,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         {
             List<Alumno> misAlumnos = new List<Alumno>();
             Alumno miAlumno;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -185,6 +190,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         misAlumnos.Add(miAlumno);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -198,6 +204,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public Alumno GetAlumnoPorEmail(String EmailAlumno)
         {
             Alumno miAlumno = null;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -225,6 +232,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -256,12 +264,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     modificado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
             {
                 throw e;
             }
+
             return modificado;
         }
 
@@ -277,10 +287,12 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idAlumno", alumnoAEliminar.IdAlumno));
+
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     baja = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -313,12 +325,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
             {
                 throw e;
             }
+
             return insertado;
         }
 
@@ -353,6 +367,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -395,6 +410,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         misProfesores.Add(miProfesor);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -436,6 +452,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -467,6 +484,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     modificado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -494,6 +512,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     baja = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -509,6 +528,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public bool AltaSucursal(Sucursal sucursal)
         {
             bool insertado = false;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -524,6 +544,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -564,6 +585,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -605,12 +627,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         sucursales.Add(sucursal);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
             {
                 throw e;
             }
+
             return sucursales;
         }
 
@@ -634,6 +658,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     modificado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -661,6 +686,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     baja = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -680,7 +706,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-
                 SqlCommand cmd = new SqlCommand("dbo.altaActividad", conn)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -691,6 +716,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -708,7 +734,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-
                 SqlCommand cmd = new SqlCommand("dbo.modificarActividad", conn)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -720,6 +745,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     modificado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -737,7 +763,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-
                 SqlCommand cmd = new SqlCommand("dbo.bajaActividad", conn)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -748,6 +773,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     baja = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -765,13 +791,11 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-
                 SqlCommand cmd = new SqlCommand("dbo.getActividadPorId", conn)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
-
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -786,6 +810,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -804,7 +829,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-
                 SqlCommand cmd = new SqlCommand("dbo.getTodasLasActividades", conn)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -824,6 +848,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         actividades.Add(actividad);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -856,6 +881,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -896,6 +922,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         packs.Add(pack);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -935,6 +962,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -966,6 +994,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     modificado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -979,6 +1008,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public bool BajaPack(Pack packAEliminar)
         {
             bool baja = false;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -992,6 +1022,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     baja = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -1034,6 +1065,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         packs.Add(pack);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -1079,6 +1111,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -1093,6 +1126,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         {
             List<Horario> horarios = new List<Horario>();
             Horario horario;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1121,6 +1155,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         horarios.Add(horario);
                     }
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -1153,6 +1188,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     insertado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -1186,6 +1222,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     modificado = true;
                 }
+
                 CerrarConexion(conn);
             }
             catch (Exception e)
@@ -1199,6 +1236,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public bool BajaHorario(Horario horarioAEliminar)
         {
             bool baja = false;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1212,8 +1250,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     baja = true;
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -1228,6 +1266,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public Persona GetPersonaPorEmail(String emailPersona)
         {
             Persona miPersona = null;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1254,25 +1293,24 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
+
                 CerrarConexion(conn);
 
                 return miPersona;
-
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
         // FIN DEL MÓDULO DE PERSONAS
 
         // INICIO DEL MÓDULO DE CRÉDITOS
-
         public List<Credito> GetCreditosAlumno(int id)
         {
             List<Credito> creditos = new List<Credito>();
             Credito credito;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1299,8 +1337,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         creditos.Add(credito);
                     }
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -1339,8 +1377,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         };
                     }
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -1349,7 +1387,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return credito;
         }
-
         // FIN DEL MÓDULO DE CRÉDITOS
 
         // INICIO DEL MÓDULO DE ADMINISTRADOR
@@ -1369,15 +1406,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-
                 cmd.Parameters.Add(new SqlParameter("@email", admin.Email));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     insertado = true;
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
@@ -1390,13 +1426,13 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         public int DameCantPersonas()
         {
             int count;
+
             try
             {
                 SqlConnection conn = AbrirConexion();
                 SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM dbo.Personas", conn);
                 count = (Int32)cmd.ExecuteScalar();
                 CerrarConexion(conn);
-
             }
             catch (Exception e)
             {
@@ -1429,13 +1465,14 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                         rol = miLectorDeDatos["rol"].ToString();
                     }
                 }
-                CerrarConexion(conn);
 
+                CerrarConexion(conn);
             }
             catch (Exception e)
             {
                 throw e;
             }
+
             return rol;
         }
         // FIN DEL MÓDULO DE PERMISOS

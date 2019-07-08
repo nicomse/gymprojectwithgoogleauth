@@ -1,49 +1,48 @@
-﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Credito>
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Pack>
 
 @{
-    ViewBag.Title = "Listar Créditos";
+    ViewBag.Title = "Comprar Créditos";
 }
 
 <h2>@ViewBag.Title</h2>
-
 <hr />
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover" id="datatable" style="width:100%">
+
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Sucursal</th>
-                            <th>Cantidad</th>
-                            <th>Fecha de Compra</th>
-                            <th>Fecha de Expiración</th>
+                            <th>Cantidad de Créditos</th>
+                            <th>Días de Vigencia</th>
+                            <th>Precio</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-
 
                     @foreach (var item in Model)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IdCredito)
+                                @Html.DisplayFor(modelItem => item.IdPack)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Pack.Sucursal.Barrio)
+                                @Html.DisplayFor(modelItem => item.Sucursal.Barrio)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Cantidad)
+                                @Html.DisplayFor(modelItem => item.CantCreditos)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FechaCompra)
+                                @Html.DisplayFor(modelItem => item.DiasVigencia)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FechaExpiracion)
+                                @Html.DisplayFor(modelItem => item.Precio)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Detalle" onclick="location.href='@Url.Action("VerDetalleCredito", "Alumno", new { idCredito = item.IdCredito })'" />
+                                <input type="button" class="btn btn-primary" value="Comprar" onclick="location.href='@Url.Action("ComprarPack", "Alumno", new { idPack = item.IdPack })'" />
                             </td>
                         </tr>
                     }

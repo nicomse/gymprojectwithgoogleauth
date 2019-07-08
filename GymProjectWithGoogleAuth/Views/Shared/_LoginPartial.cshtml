@@ -1,16 +1,25 @@
 ﻿@using Microsoft.AspNet.Identity
+@using GymProjectWithGoogleAuth.Models.BaseDeDatos;
+@using GymProjectWithGoogleAuth.Models.Clases;
 
 @if (Request.IsAuthenticated)
 {
+    Database db = new Database();
+    Persona persona = db.GetPersonaPorEmail(User.Identity.GetUserName());
+    ViewBag.nombre = persona.Nombre;
+    ViewBag.apellido = persona.Apellido;
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink(User.Identity.GetUserName(), "", "")
+            <li style="color: #9d9d9d" onMouseout="style.color='#9d9d9d'" onMouseover="style.color='white'">
+                <a>¡Bienvenido @ViewBag.nombre @ViewBag.apellido!</a>
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a>
+            </li>
         </ul>
     }
 }

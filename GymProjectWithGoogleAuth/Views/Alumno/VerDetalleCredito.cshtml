@@ -5,48 +5,31 @@
 }
 
 <h2>@ViewBag.Title</h2>
-
+<hr />
 <div>
-    <hr />
     <dl class="dl-horizontal">
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.IdCredito)
         @Html.HiddenFor(m => m.IdCredito, new { idCredito = "IdCredito" })
-        <dt>
-            @Html.DisplayNameFor(model => model.IdCredito)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdCredito)
-        </dd>
+        <dt>ID</dt>
+        <dd>@Html.DisplayFor(model => model.IdCredito)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
+        <dt>Sucursal</dt>
+        <dd>@Html.DisplayFor(model => model.Pack.Sucursal.Barrio)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
+        <dt>Cantidad de Créditos</dt>
+        <dd>@Html.DisplayFor(model => model.Cantidad)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaCompra)
-        </dt>
+        <dt>Fecha de Compra</dt>
+        <dd>@Html.DisplayFor(model => model.FechaCompra)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FechaCompra)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaExpiracion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaExpiracion)
-        </dd>
+        <dt>Fecha de Expiración</dt>
+        <dd>@Html.DisplayFor(model => model.FechaExpiracion)</dd>
 
     </dl>
 </div>
 
 <div>
-    <input type="button" class="btn btn-warning" value="Cancelar" onclick="location.href='@Url.Action("ListarCreditosAlumno", "Alumno")'" />
+    <input type="button" class="btn btn-warning" value="Regresar" onclick="location.href='@Url.Action("ListarCreditos", "Alumno")'" />
 </div>

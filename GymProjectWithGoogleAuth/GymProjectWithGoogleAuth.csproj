@@ -190,12 +190,17 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Base de Datos\Insert Datos.sql" />
+    <Content Include="Content\Base de Datos\Scripts de la Base de Datos.sql" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\AccesoDenegado.jpg" />
+    <Content Include="Content\Images\Administrador.jpg" />
+    <Content Include="Content\Images\Alumno.jpg" />
     <Content Include="Content\Images\favicon.ico" />
-    <Content Include="Content\Images\HomersGym.jpg" />
+    <Content Include="Content\Images\Profesor.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -256,10 +261,10 @@
     <Content Include="Views\Shared\_Layout_Alumno.cshtml" />
     <Content Include="Views\Shared\_Layout_Profesor.cshtml" />
     <Content Include="Scripts\popper.min" />
-    <Content Include="Views\Alumno\ListarCreditosAlumno.cshtml" />
-    <Content Include="Views\Alumno\ListarPacks.cshtml" />
+    <Content Include="Views\Alumno\ListarCreditos.cshtml" />
+    <Content Include="Views\Alumno\ComprarCreditos.cshtml" />
     <Content Include="Views\Alumno\VerDetalleCredito.cshtml" />
-    <Content Include="Views\Alumno\NotAllowedPage.cshtml" />
+    <Content Include="Views\Alumno\AccesoDenegado.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

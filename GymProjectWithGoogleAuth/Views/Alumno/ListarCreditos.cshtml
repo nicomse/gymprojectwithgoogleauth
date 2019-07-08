@@ -1,7 +1,7 @@
-﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Pack>
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Credito>
 
 @{
-    ViewBag.Title = "Listar Packs";
+    ViewBag.Title = "Listar Créditos";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -16,9 +16,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Sucursal</th>
-                            <th>Cantidad de Créditos</th>
-                            <th>Días de Vigencia</th>
-                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Fecha de Compra</th>
+                            <th>Fecha de Expiración</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -27,22 +27,22 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IdPack)
+                                @Html.DisplayFor(modelItem => item.IdCredito)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Sucursal.Barrio)
+                                @Html.DisplayFor(modelItem => item.Pack.Sucursal.Barrio)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.CantCreditos)
+                                @Html.DisplayFor(modelItem => item.Cantidad)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DiasVigencia)
+                                @Html.DisplayFor(modelItem => item.FechaCompra)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Precio)
+                                @Html.DisplayFor(modelItem => item.FechaExpiracion)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Comprar" onclick="location.href='@Url.Action("ComprarPack", "Alumno", new { idPack = item.IdPack })'" />
+                                <input type="button" class="btn btn-primary" value="Detalle" onclick="location.href='@Url.Action("VerDetalleCredito", "Alumno", new { idCredito = item.IdCredito })'" />
                             </td>
                         </tr>
                     }

@@ -370,7 +370,7 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("Login", "Account");
             }
 
             if (ModelState.IsValid)
