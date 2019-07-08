@@ -14,7 +14,6 @@
 
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Sucursal</th>
                             <th>Cantidad de Créditos</th>
                             <th>Días de Vigencia</th>
@@ -26,9 +25,6 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IdPack)
-                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Sucursal.Barrio)
                             </td>
