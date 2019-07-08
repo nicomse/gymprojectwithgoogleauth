@@ -467,7 +467,7 @@ DECLARE	@cantCreditos int
 DECLARE	@diasVigencia int
 DECLARE	@precio float
 
-EXECUTE @RC = [dbo].[altaPack] 2, 25, 40, 247,50
+EXECUTE @RC = [dbo].[altaPack] 2, 25, 40, 247.50
 GO
 
 DECLARE @RC int
@@ -476,7 +476,7 @@ DECLARE	@cantCreditos int
 DECLARE	@diasVigencia int
 DECLARE	@precio float
 
-EXECUTE @RC = [dbo].[altaPack] 2, 50, 75, 412,50
+EXECUTE @RC = [dbo].[altaPack] 2, 50, 75, 412.50
 GO
 
 DECLARE @RC int
@@ -503,7 +503,7 @@ DECLARE	@cantCreditos int
 DECLARE	@diasVigencia int
 DECLARE	@precio float
 
-EXECUTE @RC = [dbo].[altaPack] 3, 25, 40, 292,50
+EXECUTE @RC = [dbo].[altaPack] 3, 25, 40, 292.50
 GO
 
 DECLARE @RC int
@@ -512,7 +512,7 @@ DECLARE	@cantCreditos int
 DECLARE	@diasVigencia int
 DECLARE	@precio float
 
-EXECUTE @RC = [dbo].[altaPack] 3, 50, 75, 487,50
+EXECUTE @RC = [dbo].[altaPack] 3, 50, 75, 487.50
 GO
 
 DECLARE @RC int
@@ -539,7 +539,7 @@ DECLARE	@cantCreditos int
 DECLARE	@diasVigencia int
 DECLARE	@precio float
 
-EXECUTE @RC = [dbo].[altaPack] 4, 25, 40, 337,50
+EXECUTE @RC = [dbo].[altaPack] 4, 25, 40, 337.50
 GO
 
 DECLARE @RC int
@@ -548,7 +548,7 @@ DECLARE	@cantCreditos int
 DECLARE	@diasVigencia int
 DECLARE	@precio float
 
-EXECUTE @RC = [dbo].[altaPack] 4, 50, 75, 562,50
+EXECUTE @RC = [dbo].[altaPack] 4, 50, 75, 562.50
 GO
 
 DECLARE @RC int
