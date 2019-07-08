@@ -187,7 +187,7 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaAlumno]'Find Way Out', 'Soft', 'findwayoutsoft@gmail.com', '11-7081-0538'
+EXECUTE @RC = [dbo].[altaAlumno]'Find Way Out', 'Soft', 'findwayoutsoft@gmail.com', '11-7122-5690'
 GO
 
 DECLARE @RC int
