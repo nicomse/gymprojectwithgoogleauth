@@ -604,7 +604,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 1, 2, 3, '20:30', '21:30', 'Lunes'
+EXECUTE @RC = [dbo].[altaHorario] 1, 1, 1, '09:00', '09:45', 'Lunes'
 GO
 
 DECLARE @RC int
@@ -615,7 +615,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 3, 1, 2, '18:30', '20:30', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 2, 1, 1, '10:00', '11:00', 'Lunes'
 GO
 
 DECLARE @RC int
@@ -626,7 +626,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 4, 3, 3, '14:00', '15:45', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 3, 2, 1, '11:00', '12:45', 'Lunes'
 GO
 
 DECLARE @RC int
@@ -637,5 +637,357 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 4, 4, '10:00', '11:30', 'Jueves'
+EXECUTE @RC = [dbo].[altaHorario] 4, 2, 1, '16:00', '17:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 1, 1, '17:00', '18:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 10, 2, 1, '18:00', '19:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 1, 1, 1, '09:00', '09:45', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 2, 1, 1, '10:00', '11:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 3, 2, 1, '11:00', '12:45', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 4, 2, 1, '16:00', '17:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 1, 1, '17:00', '18:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 10, 2, 1, '18:00', '19:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 1, 1, 1, '09:00', '09:45', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 2, 1, 1, '10:00', '11:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 3, 2, 1, '11:00', '12:45', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 4, 2, 1, '16:00', '17:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 1, 1, '17:00', '18:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 10, 2, 1, '18:00', '19:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 1, 4, 2, '09:00', '09:45', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 2, 4, 2, '10:00', '11:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 3, 5, 2, '11:00', '12:45', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 4, 5, 2, '16:00', '17:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '17:00', '18:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 10, 6, 2, '18:00', '19:00', 'Lunes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 1, 4, 2, '09:00', '09:45', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 2, 4, 2, '10:00', '11:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 3, 5, 2, '11:00', '12:45', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 4, 5, 2, '16:00', '17:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '17:00', '18:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 10, 6, 2, '18:00', '19:00', 'Miércoles'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 1, 4, 2, '09:00', '09:45', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 2, 4, 2, '10:00', '11:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 3, 5, 2, '11:00', '12:45', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 4, 5, 2, '16:00', '17:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '17:00', '18:00', 'Viernes'
+GO
+
+DECLARE @RC int
+DECLARE @idActividad int
+DECLARE @idProfesor int
+DECLARE @nroSucursal int
+DECLARE @horaInicio time(0)
+DECLARE @horaFin time(0)
+DECLARE @dia varchar(10)
+
+EXECUTE @RC = [dbo].[altaHorario] 10, 6, 2, '18:00', '19:00', 'Viernes'
 GO
