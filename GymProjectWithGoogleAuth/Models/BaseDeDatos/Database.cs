@@ -638,6 +638,50 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return sucursales;
         }
 
+        public List<Sucursal> GetTodasLasSucursalesDeUnAlumno(int idAlumno)
+        {
+            List<Sucursal> sucursales = new List<Sucursal>();
+            Sucursal sucursal;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getSucursalesDeUnAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        sucursal = new Sucursal
+                        {
+                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
+                            Barrio = miLectorDeDatos["barrio"].ToString(),
+                            Direccion = miLectorDeDatos["direccion"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+
+                            // FALTA COMPLETAR EL ATRIBUTO PACK
+                        };
+                        sucursales.Add(sucursal);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return sucursales;
+        }
+
+
         public bool ModificarSucursal(Sucursal sucursalAModificar)
         {
             bool modificado = false;
@@ -1165,6 +1209,54 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return horarios;
         }
+
+        public List<Horario> GetHorariosSucursal(int idSucursal)
+        {
+            List<Horario> horarios = new List<Horario>();
+            Horario horario;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getHorariosSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        horario = new Horario
+                        {
+                            IdHorario = Convert.ToInt32(miLectorDeDatos["idHorario"]),
+                            Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
+                            Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            // FALTA COMPLETAR EL ATRIBUTO ALUMNOS
+                            HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
+                            HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
+                            Dia = miLectorDeDatos["dia"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        horarios.Add(horario);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return horarios;
+        }
+
+
 
         public bool AltaHorario(Horario horario)
         {

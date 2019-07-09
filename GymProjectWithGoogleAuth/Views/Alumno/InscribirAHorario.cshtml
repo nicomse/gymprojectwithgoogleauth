@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Inscribir Alumno a Horario";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+    <div class="row">
+        <div id="sucursales">
+
+        </div>
+        <div id="horarios">
+
+        </div>
+        <button class="btn btn-default" onclick="inscribir()">
+            inscribir
+        </button>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Alumno/damePartialSucursal',
+                type: 'get',
+                success: function (result) {
+                    //devuelve un partial view
+                    $('#sucursales').empty()
+                    $('#sucursales').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        });
+        function dameHorarioDeSucursal(selectObject) {
+            console.log("sucursal con id seleccionada: " + selectObject.value);
+            $.ajax({
+                url: '/Alumno/damePartialHorario',
+                data: {
+                    "idSucursal": selectObject.value
+                },
+                type: 'get',
+                success: function (result) {
+                    //devuelve un partial view
+                    $('#horarios').empty()
+                    $('#horarios').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+
+        function inscribir() {
+            //id sucursal 
+            var idSucursal = $("#sucursal_select").val();
+            //id horario 
+            var idHorario = $("#horario_select").val();
+            console.log(idSucursal, idHorario);
+
+        }
+
+    </script>
+
+}

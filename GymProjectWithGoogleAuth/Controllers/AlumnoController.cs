@@ -65,5 +65,41 @@ namespace GymProjectWithGoogleAuth.Controllers
 
             return View(credito);
         }
+
+        public ActionResult InscribirActividad() {
+            return View("InscribirAHorario");
+        }
+
+
+        public PartialViewResult damePartialSucursal()
+        {
+            Database db = new Database();
+            try
+            {
+                Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+                List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnAlumno(alumno.IdAlumno);
+                return PartialView("Sucursal_Partial", sucursales);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public PartialViewResult damePartialHorario(int idSucursal)
+        {
+            Database db = new Database();
+            try
+            {
+                
+                List<Horario> horarios = db.GetHorariosSucursal(idSucursal);
+                return PartialView("Horario_Partial", horarios);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
