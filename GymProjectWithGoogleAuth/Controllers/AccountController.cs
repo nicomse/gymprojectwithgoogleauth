@@ -461,17 +461,19 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            if (db.GetRolPersona(email) == "ADMINISTRADOR")
+            String rol = db.GetRolPersona(email);
+
+            if (rol == "ADMINISTRADOR")
             {
                 return RedirectToAction("Index", "Administrador");
             }
 
-            if (db.GetRolPersona(email) == "ALUMNO")
+            if (rol == "ALUMNO")
             {
                 return RedirectToAction("Index", "Alumno");
             }
 
-            if (db.GetRolPersona(email) == "PROFESOR")
+            if (rol == "PROFESOR")
             {
                 return RedirectToAction("Index", "Profesor");
             }
