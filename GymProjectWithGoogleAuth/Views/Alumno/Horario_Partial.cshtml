@@ -1,19 +1,5 @@
 ﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Horario>
 
-<div class="form-horizontal">
-    <div class="form-group">
-        <div class="col-md-10">
-            <select class="form-control" name="idHorario" id="horario_select" required="required">
-                <option value="" selected disabled>Seleccione un horario...</option>
-                @foreach (var horario in Model)
-                {
-                    <option value="@horario.IdHorario">@horario.IdHorario</option>
-                }
-            </select>
-        </div>
-    </div>
-</div>
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -22,7 +8,6 @@
 
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Actividad</th>
                             <th>Profesor</th>
                             <th>Sucursal</th>
@@ -33,35 +18,34 @@
                         </tr>
                     </thead>
 
-                    @foreach (var horario in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => horario.IdHorario)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => horario.Actividad.Nombre)
-                            </td>
-                            <td>
-                                @horario.Profesor.Nombre @horario.Profesor.Apellido
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => horario.Sucursal.Barrio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => horario.HoraInicio)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => horario.HoraFin)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => horario.Dia)
-                            </td>
-                            <td>
-                                <input type="button" class="btn btn-primary" value="Seleccionar" onclick="location.href='@Url.Action("InscribirActividad", "Alumno", new { horario_select = horario.IdHorario })'" />
-                            </td>
-                        </tr>
-                    }
+                    <tbody>
+                        @foreach (var horario in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => horario.Actividad.Nombre)
+                                </td>
+                                <td>
+                                    @horario.Profesor.Nombre @horario.Profesor.Apellido
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => horario.Sucursal.Barrio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => horario.HoraInicio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => horario.HoraFin)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => horario.Dia)
+                                </td>
+                                <td>
+                                    <input type="button" class="btn btn-primary" value="Inscribir" onclick="inscribir(@horario.IdHorario)" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
 
                 </table>
             </div>

@@ -14,9 +14,19 @@
 
         </div>
 
-        <div>
-            <input type="button" class="btn btn-success" value="Inscribir" onclick="inscribir()" />
-            <input type="button" class="btn btn-danger" value="Cancelar" onclick="location.href='@Url.Action("CalendarioActividades", "Alumno")'" />
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><b>Inscripción exitosa</b></h4>
+            </div>
+            <h4 class="modal-body" id="cuerpo_modal"></h4>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
         </div>
     </div>
 </div>
@@ -57,12 +67,26 @@
             })
         }
 
-        function inscribir() {
-            // ID SUCURSAL
+        function inscribir(idHorario) {
             var idSucursal = $("#sucursal_select").val();
-            // ID HORARIO
-            var idHorario = $("#horario_select").val();
-            console.log(idSucursal, idHorario);
+
+            $.ajax({
+                url: '/Alumno/Inscribir',
+                data: {
+                    'idSucursal': idSucursal,
+                    'idHorario': idHorario
+                },
+                type: 'post',
+                success: function (result) {
+                    $('#cuerpo_modal').empty()
+                    $('#cuerpo_modal').append('<p>' + result + '</p>')
+                    $('.modal').modal('show')
+                },
+                fail: function () {
+                    console.log("Error en la inscripción.")
+                }
+            })
+
         }
     </script>
 }

@@ -101,5 +101,21 @@ namespace GymProjectWithGoogleAuth.Controllers
                 throw e;
             }
         }
+
+        [HttpPost]
+        public JsonResult Inscribir(FormCollection form)
+        {
+            int idSucursal = Convert.ToInt32(form["idSucursal"]);
+            int idHorario = Convert.ToInt32(form["idHorario"]);
+
+            Database db = new Database();
+            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+            Credito credito = db.GetCreditoSucursalMasProximoAExpirar(idSucursal, alumno.IdAlumno);
+
+            db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito);
+
+            return Json("Usted se ha inscripto a la actividad correctamente.");
+        }
+
     }
 }

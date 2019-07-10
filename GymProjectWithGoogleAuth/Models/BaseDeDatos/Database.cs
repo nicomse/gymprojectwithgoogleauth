@@ -82,6 +82,36 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
+        public bool InsertarAlumnoAHorario(int idAlumno, int idHorario, int idCredito)
+        {
+            bool insertado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.insertarAlumnoAHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    insertado = true;
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return insertado;
+        }
+
         public bool AltaCredito(Alumno alumno, Pack pack)
         {
             bool insertado = false;
@@ -1448,6 +1478,47 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        credito = new Credito
+                        {
+                            IdCredito = Convert.ToInt32(miLectorDeDatos["idCredito"]),
+                            Alumno = GetAlumno(Convert.ToInt32(miLectorDeDatos["idAlumno"])),
+                            Pack = GetPack(Convert.ToInt32(miLectorDeDatos["idPack"])),
+                            Cantidad = Convert.ToInt32(miLectorDeDatos["cantidad"]),
+                            FechaCompra = Convert.ToDateTime(miLectorDeDatos["fechaCompra"]),
+                            FechaExpiracion = Convert.ToDateTime(miLectorDeDatos["fechaExpiracion"]),
+                        };
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return credito;
+        }
+
+        public Credito GetCreditoSucursalMasProximoAExpirar(int idSucursal, int idAlumno)
+        {
+            Credito credito = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getCreditoSucursalMasProximoAExpirar", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
