@@ -646,7 +646,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getSucursalesDeUnAlumno", conn)
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasSucursalesDeUnAlumno", conn)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -680,7 +680,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return sucursales;
         }
-
 
         public bool ModificarSucursal(Sucursal sucursalAModificar)
         {
@@ -1210,7 +1209,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return horarios;
         }
 
-        public List<Horario> GetHorariosSucursal(int idSucursal)
+        public List<Horario> GetTodosLosHorariosDeSucursal(int idSucursal)
         {
             List<Horario> horarios = new List<Horario>();
             Horario horario;
@@ -1218,12 +1217,11 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             try
             {
                 SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getHorariosSucursal", conn)
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosHorariosDeSucursal", conn)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
-
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -1255,8 +1253,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return horarios;
         }
-
-
 
         public bool AltaHorario(Horario horario)
         {

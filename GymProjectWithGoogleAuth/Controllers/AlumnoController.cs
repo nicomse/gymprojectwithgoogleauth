@@ -66,14 +66,15 @@ namespace GymProjectWithGoogleAuth.Controllers
             return View(credito);
         }
 
-        public ActionResult InscribirActividad() {
-            return View("InscribirAHorario");
+        public ActionResult InscribirActividad()
+        {
+            return View();
         }
 
-
-        public PartialViewResult damePartialSucursal()
+        public PartialViewResult DamePartialSucursal()
         {
             Database db = new Database();
+
             try
             {
                 Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
@@ -86,14 +87,13 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
-
-        public PartialViewResult damePartialHorario(int idSucursal)
+        public PartialViewResult DamePartialHorario(int idSucursal)
         {
             Database db = new Database();
+
             try
             {
-                
-                List<Horario> horarios = db.GetHorariosSucursal(idSucursal);
+                List<Horario> horarios = db.GetTodosLosHorariosDeSucursal(idSucursal);
                 return PartialView("Horario_Partial", horarios);
             }
             catch (Exception e)

@@ -1,20 +1,23 @@
 ﻿@{
-    ViewBag.Title = "Inscribir Alumno a Horario";
+    ViewBag.Title = "Inscribir a Actividad";
 }
 
 <h2>@ViewBag.Title</h2>
-
+<hr />
 <div class="container">
     <div class="row">
         <div id="sucursales">
 
         </div>
+
         <div id="horarios">
 
         </div>
-        <button class="btn btn-default" onclick="inscribir()">
-            inscribir
-        </button>
+
+        <div>
+            <input type="button" class="btn btn-success" value="Inscribir" onclick="inscribir()" />
+            <input type="button" class="btn btn-danger" value="Cancelar" onclick="location.href='@Url.Action("CalendarioActividades", "Alumno")'" />
+        </div>
     </div>
 </div>
 
@@ -22,10 +25,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: '/Alumno/damePartialSucursal',
+                url: '/Alumno/DamePartialSucursal',
                 type: 'get',
                 success: function (result) {
-                    //devuelve un partial view
+                    // DEVUELVE UN PARTIAL VIEW
                     $('#sucursales').empty()
                     $('#sucursales').append(result)
                 },
@@ -34,16 +37,17 @@
                 }
             })
         });
-        function dameHorarioDeSucursal(selectObject) {
-            console.log("sucursal con id seleccionada: " + selectObject.value);
+
+        function dameHorariosDeSucursal(selectObject) {
+            console.log("Sucursal con ID seleccionada: " + selectObject.value);
             $.ajax({
-                url: '/Alumno/damePartialHorario',
+                url: '/Alumno/DamePartialHorario',
                 data: {
                     "idSucursal": selectObject.value
                 },
                 type: 'get',
                 success: function (result) {
-                    //devuelve un partial view
+                    // DEVUELVE UN PARTIAL VIEW
                     $('#horarios').empty()
                     $('#horarios').append(result)
                 },
@@ -54,14 +58,11 @@
         }
 
         function inscribir() {
-            //id sucursal 
+            // ID SUCURSAL
             var idSucursal = $("#sucursal_select").val();
-            //id horario 
+            // ID HORARIO
             var idHorario = $("#horario_select").val();
             console.log(idSucursal, idHorario);
-
         }
-
     </script>
-
 }
