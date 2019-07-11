@@ -1566,12 +1566,11 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     while (miLectorDeDatos.Read())
                     {
                         detalleCreditos.Add(new List<String> {
-                            miLectorDeDatos["ACTIVIDAD"].ToString(),
-                            miLectorDeDatos["NOMBRE_PROFESOR"].ToString(),
-                            miLectorDeDatos["APELLIDO_PROFESOR"].ToString(),
-                            miLectorDeDatos["SUCURSAL"].ToString(),
-                            miLectorDeDatos["DIA"].ToString(),
-                            miLectorDeDatos["ASISTENCIA"].ToString(),
+                            miLectorDeDatos["Actividad"].ToString(),
+                            miLectorDeDatos["Profesor"].ToString(),
+                            miLectorDeDatos["Sucursal"].ToString(),
+                            miLectorDeDatos["Día"].ToString(),
+                            miLectorDeDatos["Asistencia"].ToString(),
                          });
                     }
                 }
@@ -1585,7 +1584,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return detalleCreditos;
         }
-
         // FIN DEL MÓDULO DE CRÉDITOS
 
         // INICIO DEL MÓDULO DE ADMINISTRADOR

@@ -38,7 +38,7 @@
                                 @Html.DisplayFor(modelItem => item.FechaExpiracion)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Detalle" onclick="location.href='@Url.Action("VerDetalleCredito", "Alumno", new { idCredito = item.IdCredito })'" />
+                                <input type="button" class="btn btn-primary" value="Detalle" onclick="location.href='@Url.Action("VerDetalleCredito", "Alumno", new { id = item.IdCredito })'" />
                             </td>
                         </tr>
                     }
