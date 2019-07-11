@@ -266,7 +266,6 @@
     <Content Include="Views\Alumno\VerDetalleCredito.cshtml" />
     <Content Include="Views\Alumno\AccesoDenegado.cshtml" />
     <Content Include="Views\Alumno\InscribirActividad.cshtml" />
-    <Content Include="Views\Alumno\Sucursal_Partial.cshtml" />
     <Content Include="Views\Alumno\Horario_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup />

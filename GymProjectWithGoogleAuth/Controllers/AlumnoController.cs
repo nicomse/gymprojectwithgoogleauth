@@ -68,23 +68,11 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult InscribirActividad()
         {
-            return View();
-        }
-
-        public PartialViewResult DamePartialSucursal()
-        {
             Database db = new Database();
+            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+            List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnAlumno(alumno.IdAlumno);
 
-            try
-            {
-                Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-                List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnAlumno(alumno.IdAlumno);
-                return PartialView("Sucursal_Partial", sucursales);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return View(sucursales);
         }
 
         public PartialViewResult DamePartialHorario(int idSucursal)
