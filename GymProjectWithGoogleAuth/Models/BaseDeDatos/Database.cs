@@ -1546,6 +1546,46 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return credito;
         }
+
+        public List<List<String>> GetDetalleCredito(int idCredito)
+        {
+            List<List<String>> detalleCreditos = new List<List<String>>();
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getDetalleCredito", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        detalleCreditos.Add(new List<String> {
+                            miLectorDeDatos["ACTIVIDAD"].ToString(),
+                            miLectorDeDatos["NOMBRE_PROFESOR"].ToString(),
+                            miLectorDeDatos["APELLIDO_PROFESOR"].ToString(),
+                            miLectorDeDatos["SUCURSAL"].ToString(),
+                            miLectorDeDatos["DIA"].ToString(),
+                            miLectorDeDatos["ASISTENCIA"].ToString(),
+                         });
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return detalleCreditos;
+        }
+
         // FIN DEL MÓDULO DE CRÉDITOS
 
         // INICIO DEL MÓDULO DE ADMINISTRADOR

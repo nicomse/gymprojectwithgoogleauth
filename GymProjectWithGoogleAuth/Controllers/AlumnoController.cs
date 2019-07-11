@@ -54,7 +54,6 @@ namespace GymProjectWithGoogleAuth.Controllers
             Database db = new Database();
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
             List<Credito> creditos = db.GetCreditosAlumno(alumno.IdAlumno);
-
             return View(creditos);
         }
 
@@ -62,7 +61,8 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
             Credito credito = db.GetCredito(idCredito);
-
+            List<List<String>> detalleCreditos = db.GetDetalleCredito(idCredito);
+            ViewBag.detalleCreditos = detalleCreditos;
             return View(credito);
         }
 
@@ -100,9 +100,13 @@ namespace GymProjectWithGoogleAuth.Controllers
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
             Credito credito = db.GetCreditoSucursalMasProximoAExpirar(idSucursal, alumno.IdAlumno);
 
-            db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito);
-
-            return Json("La inscripción a la actividad fue realizada con éxito.");
+            if(credito.Cantidad > 0)
+            {
+                db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito);
+                return Json("La inscripción a la actividad fue realizada con éxito.");
+            }
+            
+            return Json("No cuenta con créditos suficientes.");
         }
     }
 }
