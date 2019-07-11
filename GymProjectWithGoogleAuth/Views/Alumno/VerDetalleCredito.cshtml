@@ -7,25 +7,43 @@
 <h2>@ViewBag.Title</h2>
 <hr />
 
-<div>
-    <dl class="dl-horizontal">
-
-        <dt>ID</dt>
-        <dd>@Html.DisplayFor(model => model.IdCredito)</dd>
-
-        <dt>Sucursal</dt>
-        <dd>@Html.DisplayFor(model => model.Pack.Sucursal.Barrio)</dd>
-
-        <dt>Cantidad de Créditos</dt>
-        <dd>@Html.DisplayFor(model => model.Cantidad)</dd>
-
-        <dt>Fecha de Compra</dt>
-        <dd>@Html.DisplayFor(model => model.FechaCompra)</dd>
-
-        <dt>Fecha de Expiración</dt>
-        <dd>@Html.DisplayFor(model => model.FechaExpiracion)</dd>
-    </dl>
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pack.Sucursal.Barrio, "Sucursal", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pack.Sucursal.Barrio, new { htmlAttributes = new { @type = "email", @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
 </div>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cantidad, "Cantidad de Créditos", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @type = "email", @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+</div>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaCompra, "Fecha de Compra", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaCompra, new { htmlAttributes = new { @type = "email", @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+</div>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaExpiracion, "Fecha de Expiración", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FechaExpiracion, new { htmlAttributes = new { @type = "email", @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+</div>
+
+<hr />
 
 <div class="container">
     <div class="row">
@@ -62,7 +80,7 @@
     </div>
 </div>
 
-<br/>
+<br />
 
 <div>
     <input type="button" class="btn btn-warning" value="Regresar" onclick="location.href='@Url.Action("ListarCreditos", "Alumno")'" />
