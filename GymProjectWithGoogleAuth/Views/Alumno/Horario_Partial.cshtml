@@ -18,34 +18,32 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        @foreach (var horario in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => horario.Actividad.Nombre)
-                                </td>
-                                <td>
-                                    @horario.Profesor.Nombre @horario.Profesor.Apellido
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => horario.Sucursal.Barrio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => horario.HoraInicio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => horario.HoraFin)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => horario.Dia)
-                                </td>
-                                <td>
-                                    <input type="button" class="btn btn-primary" value="Inscribir" onclick="inscribir(@horario.IdHorario)" />
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
+                    @foreach (var horario in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => horario.Actividad.Nombre)
+                            </td>
+                            <td>
+                                @horario.Profesor.Nombre @horario.Profesor.Apellido
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => horario.Sucursal.Barrio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => horario.HoraInicio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => horario.HoraFin)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => horario.Dia)
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-primary" value="Inscribir" onclick="inscribir(@horario.IdHorario)" />
+                            </td>
+                        </tr>
+                    }
 
                 </table>
             </div>

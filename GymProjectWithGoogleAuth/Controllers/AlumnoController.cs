@@ -114,8 +114,7 @@ namespace GymProjectWithGoogleAuth.Controllers
 
             db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito);
 
-            return Json("Usted se ha inscripto a la actividad correctamente.");
+            return Json("La inscripción a la actividad fue realizada con éxito.");
         }
-
     }
 }
