@@ -14,6 +14,7 @@
                             <th>Hora de Inicio</th>
                             <th>Hora de Finalización</th>
                             <th>Día</th>
+                            <th>Fecha Actividad</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -40,7 +41,15 @@
                                 @Html.DisplayFor(modelItem => horario.Dia)
                             </td>
                             <td>
-                                <input type="button" class="btn btn-primary" value="Inscribir" onclick="inscribir(@horario.IdHorario)" />
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" id="fechaActividad">
+                                        </div>
+                                    </div>
+                                </div>
+                            <td>
+                                <input type="button" class="btn btn-primary" value="Inscribir" onclick="inscribir(@horario.IdHorario, document.getElementById('fechaActividad').value)" />
                             </td>
                         </tr>
                     }

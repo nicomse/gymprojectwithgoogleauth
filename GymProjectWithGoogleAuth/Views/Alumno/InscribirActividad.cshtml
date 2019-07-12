@@ -62,14 +62,15 @@
             })
         }
 
-        function inscribir(idHorario) {
+        function inscribir(idHorario, fechaActividad) {
             var idSucursal = $("#sucursal_select").val();
 
             $.ajax({
                 url: '/Alumno/Inscribir',
                 data: {
                     'idSucursal': idSucursal,
-                    'idHorario': idHorario
+                    'idHorario': idHorario,
+                    'fechaActividad': fechaActividad
                 },
                 type: 'post',
                 success: function (result) {

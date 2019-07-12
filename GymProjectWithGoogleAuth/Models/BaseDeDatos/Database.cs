@@ -82,7 +82,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return insertado;
         }
 
-        public bool InsertarAlumnoAHorario(int idAlumno, int idHorario, int idCredito)
+        public bool InsertarAlumnoAHorario(int idAlumno, int idHorario, int idCredito, DateTime fechaActividad)
         {
             bool insertado = false;
 
@@ -96,6 +96,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
                 cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
                 cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+                cmd.Parameters.Add(new SqlParameter("@fechaActividad", fechaActividad));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {

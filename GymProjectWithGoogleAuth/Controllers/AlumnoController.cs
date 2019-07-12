@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web.Mvc;
 using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Clases;
@@ -97,6 +98,7 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             int idSucursal = Convert.ToInt32(form["idSucursal"]);
             int idHorario = Convert.ToInt32(form["idHorario"]);
+            DateTime fechaActividad = DateTime.ParseExact(form["fechaActividad"], "dd/mm/yyyy", CultureInfo.InvariantCulture);
 
             Database db = new Database();
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
@@ -104,7 +106,7 @@ namespace GymProjectWithGoogleAuth.Controllers
 
             if (credito.Cantidad > 0)
             {
-                db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito);
+                db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito, fechaActividad);
 
                 return Json("La inscripción a la actividad fue realizada con éxito.");
             }
