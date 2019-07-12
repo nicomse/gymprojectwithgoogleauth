@@ -94,7 +94,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
-        // AMB PROFESORES
+        // ABM PROFESORES
         public ActionResult ListarProfesores()
         {
             Database db = new Database();
@@ -193,13 +193,26 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            if (ModelState.IsValid)
+            Sucursal sucursalDireccion = db.GetSucursalPorDireccion(sucursal.Direccion);
+
+            if (sucursalDireccion == null)
             {
-                db.AltaSucursal(sucursal);
-                return RedirectToAction("AgregarSucursal");
+                if (ModelState.IsValid)
+                {
+                    db.AltaSucursal(sucursal);
+                    return RedirectToAction("AgregarSucursal");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
+                if(sucursalDireccion != null)
+                {
+                    ModelState.AddModelError("Direccion", "La sucursal ingresada ya existe.");
+                }
                 return View();
             }
         }
@@ -260,13 +273,27 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            if (ModelState.IsValid)
+            Actividad actividadNombre = db.GetActividadPorNombre(actividad.Nombre);
+
+            if (actividadNombre == null)
             {
-                db.AltaActividad(actividad);
-                return RedirectToAction("AgregarActividad");
+
+                if (ModelState.IsValid)
+                {
+                    db.AltaActividad(actividad);
+                    return RedirectToAction("AgregarActividad");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
+                if (actividadNombre != null)
+                {
+                    ModelState.AddModelError("Nombre", "La actividad ingresada ya existe.");
+                }
                 return View();
             }
         }

@@ -627,6 +627,45 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return sucursal;
         }
 
+        public Sucursal GetSucursalPorDireccion(String direccion)
+        {
+            Sucursal sucursal = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getSucursalPorDireccion", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@direccion", direccion));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        sucursal = new Sucursal
+                        {
+                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
+                            Barrio = miLectorDeDatos["barrio"].ToString(),
+                            Direccion = miLectorDeDatos["direccion"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return sucursal;
+        }
+
         public List<Sucursal> GetTodasLasSucursales()
         {
             List<Sucursal> sucursales = new List<Sucursal>();
@@ -870,6 +909,43 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        miActividad = new Actividad
+                        {
+                            IdActividad = Convert.ToInt32(miLectorDeDatos["idActividad"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return miActividad;
+        }
+
+        public Actividad GetActividadPorNombre(String nombre)
+        {
+            Actividad miActividad = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getActividadPorNombre", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@nombre", nombre));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
