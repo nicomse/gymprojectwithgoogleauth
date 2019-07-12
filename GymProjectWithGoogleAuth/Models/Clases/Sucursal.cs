@@ -8,8 +8,6 @@ namespace GymProjectWithGoogleAuth.Models.Clases
     {
         public int NroSucursal { get; set; }
 
-        public List<Pack> Packs { get; set; }
-
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         [StringLength(100)]
         public String Barrio { get; set; }

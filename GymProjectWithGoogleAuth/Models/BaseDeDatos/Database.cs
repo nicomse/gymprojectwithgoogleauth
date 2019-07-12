@@ -171,8 +171,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Telefono = miLectorDeDatos["telefono"].ToString(),
                             Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // FALTAN COMPLETAR LOS ATRIBUTOS CRÉDITOS y HORARIOS
                         };
                     }
                 }
@@ -215,8 +213,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Telefono = miLectorDeDatos["telefono"].ToString(),
                             Rol = miLectorDeDatos["rol"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // FALTAN COMPLETAR LOS ATRIBUTOS CRÉDITOS y HORARIOS
                         };
                         misAlumnos.Add(miAlumno);
                     }
@@ -611,8 +607,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Direccion = miLectorDeDatos["direccion"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // FALTA COMPLETAR EL ATRIBUTO PACK
                         };
                     }
                 }
@@ -691,8 +685,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Direccion = miLectorDeDatos["direccion"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // FALTA COMPLETAR EL ATRIBUTO PACK
                         };
                         sucursales.Add(sucursal);
                     }
@@ -734,8 +726,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Direccion = miLectorDeDatos["direccion"].ToString(),
                             Telefono = miLectorDeDatos["telefono"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-
-                            // FALTA COMPLETAR EL ATRIBUTO PACK
                         };
                         sucursales.Add(sucursal);
                     }
@@ -1183,49 +1173,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return baja;
         }
 
-        // SI NO SE USA -> BORRAR (Y EN LA BD TAMB)
-        public List<Pack> GetTodosLosPacksDeSucursal(int idSucursal)
-        {
-            List<Pack> packs = new List<Pack>();
-            Pack pack;
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getTodosLosPacksDeSucursal", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        pack = new Pack
-                        {
-                            IdPack = Convert.ToInt32(miLectorDeDatos["idPack"]),
-                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
-                            CantCreditos = Convert.ToInt32(miLectorDeDatos["cantCreditos"]),
-                            DiasVigencia = Convert.ToInt32(miLectorDeDatos["diasVigencia"]),
-                            Precio = Convert.ToDouble(miLectorDeDatos["precio"]),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                        packs.Add(pack);
-                    }
-                }
-
-                CerrarConexion(conn);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return packs;
-        }
-
         // FIN DEL MÓDULO DE PACKS
 
         // INICIO DEL MÓDULO DE HORARIOS
@@ -1253,7 +1200,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
                             Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
-                            // FALTA COMPLETAR EL ATRIBUTO ALUMNOS
                             HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
                             HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
                             Dia = miLectorDeDatos["dia"].ToString(),
@@ -1296,7 +1242,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
                             Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
-                            // FALTA COMPLETAR EL ATRIBUTO ALUMNOS
                             HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
                             HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
                             Dia = miLectorDeDatos["dia"].ToString(),
@@ -1341,7 +1286,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
                             Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
                             Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
-                            // FALTA COMPLETAR EL ATRIBUTO ALUMNOS
                             HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
                             HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
                             Dia = miLectorDeDatos["dia"].ToString(),

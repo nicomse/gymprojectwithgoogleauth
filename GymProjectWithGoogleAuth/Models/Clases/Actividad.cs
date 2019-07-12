@@ -12,8 +12,6 @@ namespace GymProjectWithGoogleAuth.Models.Clases
         [StringLength(100)]
         public String Nombre { get; set; }
 
-        public List<Horario> Horarios { get; set; }
-
         public int Estado { get; set; }
     }
 }

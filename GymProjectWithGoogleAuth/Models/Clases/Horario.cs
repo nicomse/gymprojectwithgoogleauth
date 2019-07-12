@@ -14,8 +14,6 @@ namespace GymProjectWithGoogleAuth.Models.Clases
 
         public Sucursal Sucursal { get; set; }
 
-        public List<Alumno> Alumnos { get; set; }
-
         [DataType(DataType.Time)]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         public TimeSpan HoraInicio { get; set; }
