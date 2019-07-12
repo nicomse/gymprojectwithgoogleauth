@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Web.Mvc;
 using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Clases;
@@ -98,7 +97,7 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             int idSucursal = Convert.ToInt32(form["idSucursal"]);
             int idHorario = Convert.ToInt32(form["idHorario"]);
-            DateTime fechaActividad = DateTime.ParseExact(form["fechaActividad"], "dd/mm/yyyy", CultureInfo.InvariantCulture);
+            DateTime fechaActividad = Convert.ToDateTime(form["fechaActividad"]);
 
             Database db = new Database();
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
