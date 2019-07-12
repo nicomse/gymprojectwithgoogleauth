@@ -1570,7 +1570,8 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             miLectorDeDatos["Actividad"].ToString(),
                             miLectorDeDatos["Profesor"].ToString(),
                             miLectorDeDatos["Sucursal"].ToString(),
-                            miLectorDeDatos["Día"].ToString(),
+                            miLectorDeDatos["Dia"].ToString(),
+                            miLectorDeDatos["Fecha"].ToString(),
                             miLectorDeDatos["Asistencia"].ToString(),
                          });
                     }
