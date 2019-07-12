@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web.Mvc;
 using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Clases;
@@ -95,22 +96,61 @@ namespace GymProjectWithGoogleAuth.Controllers
         [HttpPost]
         public JsonResult Inscribir(FormCollection form)
         {
-            int idSucursal = Convert.ToInt32(form["idSucursal"]);
-            int idHorario = Convert.ToInt32(form["idHorario"]);
-            DateTime fechaActividad = Convert.ToDateTime(form["fechaActividad"]);
-
-            Database db = new Database();
-            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-            Credito credito = db.GetCreditoSucursalMasProximoAExpirar(idSucursal, alumno.IdAlumno);
-
-            if (credito.Cantidad > 0)
+            try
             {
-                db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito, fechaActividad);
+                int idSucursal = Convert.ToInt32(form["idSucursal"]);
+                int idHorario = Convert.ToInt32(form["idHorario"]);
+                DateTime fechaActividad = Convert.ToDateTime(form["fechaActividad"]);
 
-                return Json("La inscripción a la actividad fue realizada con éxito.");
+                Database db = new Database();
+                Horario horario = db.GetHorario(idHorario);
+
+                if (!FechaValida(fechaActividad, horario.Dia))
+                {
+                    return Json("La fecha seleccionada no es válida.");
+                }
+
+                Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+                Credito credito = db.GetCreditoSucursalMasProximoAExpirar(idSucursal, alumno.IdAlumno);
+
+                if (credito.Cantidad > 0)
+                {
+                    try
+                    {
+                        db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito, fechaActividad);
+                    }
+                    catch
+                    {
+                        return Json("Usted ya se encuentra inscripto a esta actividad.");
+                    }
+
+                    return Json("La inscripción a la actividad fue realizada con éxito.");
+                }
+                else
+                {
+                    return Json("No cuenta con créditos suficientes para realizar la inscripción.");
+                }
             }
+            catch
+            {
+                return Json("Debe ingresar una fecha para completar la inscripción.");
+            }
+        }
 
-            return Json("No cuenta con créditos suficientes para realizar la inscripción.");
+        public bool FechaValida(DateTime fechaActividad, String diaActividad)
+        {
+            bool valida = false;
+            CultureInfo ci = new CultureInfo("Es-Es");
+
+            String diaSeleccionado = ci.DateTimeFormat.GetDayName(fechaActividad.DayOfWeek);
+
+            TimeSpan diferencia = fechaActividad - DateTime.Today;
+
+            if (diaActividad.ToLower() == diaSeleccionado && diferencia.Days <= 30 && diferencia.Days > 0)
+            {
+                valida = true;
+            }
+            return valida;
         }
     }
 }
