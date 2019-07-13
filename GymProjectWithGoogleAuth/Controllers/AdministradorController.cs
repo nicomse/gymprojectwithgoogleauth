@@ -229,6 +229,8 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
+            try
+            {
                 if (ModelState.IsValid)
                 {
                     db.ModificarSucursal(sucursal);
@@ -238,6 +240,12 @@ namespace GymProjectWithGoogleAuth.Controllers
                 {
                     return View();
                 }
+            }
+            catch
+            {
+                ModelState.AddModelError("Direccion", "La dirección ingresada ya existe.");
+                return View();
+            }
         }
 
         public ActionResult EliminarSucursal(int idSucursal)
