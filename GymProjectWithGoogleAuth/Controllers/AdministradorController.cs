@@ -229,15 +229,15 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            if (ModelState.IsValid)
-            {
-                db.ModificarSucursal(sucursal);
-                return RedirectToAction("ListarSucursales");
-            }
-            else
-            {
-                return View();
-            }
+                if (ModelState.IsValid)
+                {
+                    db.ModificarSucursal(sucursal);
+                    return RedirectToAction("ListarSucursales");
+                }
+                else
+                {
+                    return View();
+                }
         }
 
         public ActionResult EliminarSucursal(int idSucursal)
@@ -310,13 +310,27 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
 
-            if (ModelState.IsValid)
+            Actividad actividadNombre = db.GetActividadPorNombre(actividad.Nombre);
+
+            if (actividadNombre == null)
             {
-                db.ModificarActividad(actividad);
-                return RedirectToAction("ListarActividades");
+
+                if (ModelState.IsValid)
+                {
+                    db.ModificarActividad(actividad);
+                    return RedirectToAction("ListarActividades");
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
+                if (actividadNombre != null)
+                {
+                    ModelState.AddModelError("Nombre", "La actividad ingresada ya existe.");
+                }
                 return View();
             }
         }
