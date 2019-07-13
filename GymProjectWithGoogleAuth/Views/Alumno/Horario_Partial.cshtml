@@ -41,7 +41,7 @@
                                 @Html.DisplayFor(modelItem => horario.Dia)
                             </td>
                             <td>
-                                <input type="date" class="form-control" id="fechaActividad" required="required">
+                                <input type="text" onfocus="(this.type='date')" class="form-control" id="fechaActividad" required="required" placeholder="Ingrese una fecha...">
                             <td>
                                 <input type="button" class="btn btn-primary" value="Inscribir" onclick="inscribir(@horario.IdHorario, $(this).closest('tr').find('input').val())" />
                             </td>
