@@ -1694,5 +1694,41 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return rol;
         }
         // FIN DEL MÓDULO DE PERMISOS
+
+        public List<List<String>> GetActividadesDeUnAlumno(int idAlumno)
+        {
+            List<List<String>> actividades = new List<List<String>>();
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getActividadesDeAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        actividades.Add(new List<String> {
+                            miLectorDeDatos["Actividad"].ToString(),
+                            miLectorDeDatos["HoraInicio"].ToString(),
+                            miLectorDeDatos["HoraFin"].ToString(),
+                         });
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return actividades;
+        }
     }
 }

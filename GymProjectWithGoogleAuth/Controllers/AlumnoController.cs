@@ -152,5 +152,18 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             return valida;
         }
+
+        public ActionResult CalendarioActividades ()
+        {
+            return View("CalendarioActividades");
+        }
+
+        public JsonResult getEventosAlumno()
+        {
+            Database db = new Database();
+            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+            List<List<String>> actividades = db.GetActividadesDeUnAlumno(alumno.IdAlumno);
+            return Json(actividades, JsonRequestBehavior.AllowGet);
+        }
     }
 }
