@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Calendario de un Alumno";
+}
+
+<h2>Calendario de un Alumno</h2>
+
+<div class="row">
+    <div id="calendar">
+
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            getEventosAlumno();
+        })
+
+        function getEventosAlumno() {
+               $.ajax({
+                url: '/Alumno/getEventosAlumno',
+                type: 'get',
+                   success: function (result) {
+                       console.log(result)
+                    //armo el array de eventos con la estructura de full calendar
+                       var eventos = null
+                       var eventoActual = {}
+                       if (result != null) {
+                           result.forEach(function (item) {
+                               eventoActual.title = item[0];
+                               eventoActual.start = item[1];
+                               eventoActual.end = item[2];
+                               eventos.push(eventoActual);
+                           })
+                       }
+                       console.log(eventos)
+                    //llamo a fullcalendar para que arme el calendario
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var calendarEl = document.getElementById('calendar');
+
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            plugins: ['dayGrid'],
+                            events: eventos
+                        });
+                        
+                        calendar.render();
+                    });
+                },
+                fail: function () {
+                    console.log("Error en el Ajax")
+                }
+            })
+        }
+     
+
+    </script>
+}
