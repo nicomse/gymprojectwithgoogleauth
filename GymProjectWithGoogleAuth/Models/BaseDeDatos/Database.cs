@@ -1172,7 +1172,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
-
         // FIN DEL MÓDULO DE PACKS
 
         // INICIO DEL MÓDULO DE HORARIOS
