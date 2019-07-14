@@ -1636,6 +1636,107 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return detalleCreditos;
         }
+
+        public Credito DameCreditoAlumnoHorario(int idAlumno, int idHorario, DateTime fechaActividad)
+        {
+            Credito credito = null;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.dameCreditoAlumnoHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                cmd.Parameters.Add(new SqlParameter("@fechaActividad", fechaActividad));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    if (miLectorDeDatos.Read())
+                    {
+                        credito = new Credito
+                        {
+                            IdCredito = Convert.ToInt32(miLectorDeDatos["idCredito"]),
+                            Alumno = GetAlumno(Convert.ToInt32(miLectorDeDatos["idAlumno"])),
+                            Pack = GetPack(Convert.ToInt32(miLectorDeDatos["idPack"])),
+                            Cantidad = Convert.ToInt32(miLectorDeDatos["cantidad"]),
+                            FechaCompra = Convert.ToDateTime(miLectorDeDatos["fechaCompra"]),
+                            FechaExpiracion = Convert.ToDateTime(miLectorDeDatos["fechaExpiracion"]),
+                        };
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return credito;
+        }
+
+        public bool DescontarCredito(int idCredito, int cantidad)
+        {
+            bool pudo = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.descontarCredito", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+                cmd.Parameters.Add(new SqlParameter("@cantidad", cantidad));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    pudo = true;
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return pudo;
+        }
+
+        public bool AumentarCredito(int idCredito, int cantidad)
+        {
+            bool pudo = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.aumentarCredito", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idCredito", idCredito));
+                cmd.Parameters.Add(new SqlParameter("@cantidad", cantidad));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    pudo = true;
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return pudo;
+        }
+
         // FIN DEL MÓDULO DE CRÉDITOS
 
         // INICIO DEL MÓDULO DE ADMINISTRADOR

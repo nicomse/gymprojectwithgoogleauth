@@ -23,9 +23,8 @@
                     center: '',
                     right: 'today prev,next'
                 },
-                events: '/Alumno/getEventosAlumno',
+                events: '/Alumno/GetEventosAlumno',
                 eventClick: function (info) {
-                    //alert(info.event.title);
                     if (confirm("¿Desea desuscribirse?")) {
                         var id = info.event.id
                         var desde = info.event.start
@@ -40,10 +39,9 @@
                                 location.reload();
                             },
                             fail: function () {
-                                console.log("Error en la inscripción.")
+                                console.log("Error en la desuscripción.")
                             }
                         })
-
                     }
                 }
             });

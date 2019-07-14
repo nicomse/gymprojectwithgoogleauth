@@ -118,6 +118,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                     try
                     {
                         db.InsertarAlumnoAHorario(alumno.IdAlumno, idHorario, credito.IdCredito, fechaActividad);
+                        db.DescontarCredito(credito.IdCredito, credito.Cantidad);
                     }
                     catch
                     {
@@ -147,14 +148,23 @@ namespace GymProjectWithGoogleAuth.Controllers
                 Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
                 int idHorario = Convert.ToInt32(form["id"]);
                 DateTime fechaActividad = Convert.ToDateTime(form["desde"]);
-                db.DesuscribirAlumno(alumno.IdAlumno, idHorario, fechaActividad);
-                return Json("Usted se ha desuscripto con éxito.");
+
+                if (DateTime.Today < fechaActividad)
+                {
+                    db.DesuscribirAlumno(alumno.IdAlumno, idHorario, fechaActividad);
+                    Credito credito = db.DameCreditoAlumnoHorario(alumno.IdAlumno, idHorario, fechaActividad);
+                    db.AumentarCredito(credito.IdCredito, credito.Cantidad);
+                    return Json("Usted se ha desuscripto con éxito.");
+                }
+                else
+                {
+                    return Json("No puede desuscribirse de una actividad que ya pasó.");
+                }
             }
             catch
             {
                 return Json("No pudo desuscribirse.");
             }
-
         }
 
         public bool FechaValida(DateTime fechaActividad, String diaActividad)
@@ -178,7 +188,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             return View("CalendarioActividades");
         }
 
-        public JsonResult getEventosAlumno()
+        public JsonResult GetEventosAlumno()
         {
             Database db = new Database();
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
