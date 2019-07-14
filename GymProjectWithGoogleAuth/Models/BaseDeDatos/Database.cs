@@ -1695,10 +1695,10 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
         }
         // FIN DEL MÓDULO DE PERMISOS
 
-        public List<List<String>> GetActividadesDeUnAlumno(int idAlumno)
+        public List<Dictionary<String, String>> GetActividadesDeUnAlumno(int idAlumno)
         {
-            List<List<String>> actividades = new List<List<String>>();
-
+            List<Dictionary<String, String>> actividades = new List<Dictionary<String,String>>();
+            Dictionary<String, String> actividad = null;
             try
             {
                 SqlConnection conn = AbrirConexion();
@@ -1713,11 +1713,11 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     while (miLectorDeDatos.Read())
                     {
-                        actividades.Add(new List<String> {
-                            miLectorDeDatos["Actividad"].ToString(),
-                            miLectorDeDatos["HoraInicio"].ToString(),
-                            miLectorDeDatos["HoraFin"].ToString(),
-                         });
+                        actividad = new Dictionary <String, String>();
+                        actividad.Add("title", miLectorDeDatos["Actividad"].ToString());
+                        actividad.Add("start", miLectorDeDatos["HoraInicio"].ToString());
+                        actividad.Add("end", miLectorDeDatos["HoraFin"].ToString());
+                        actividades.Add(actividad);
                     }
                 }
 

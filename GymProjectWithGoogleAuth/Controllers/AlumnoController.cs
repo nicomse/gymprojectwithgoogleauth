@@ -162,7 +162,7 @@ namespace GymProjectWithGoogleAuth.Controllers
         {
             Database db = new Database();
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-            List<List<String>> actividades = db.GetActividadesDeUnAlumno(alumno.IdAlumno);
+            List<Dictionary<String, String>> actividades = db.GetActividadesDeUnAlumno(alumno.IdAlumno);
             return Json(actividades, JsonRequestBehavior.AllowGet);
         }
     }
