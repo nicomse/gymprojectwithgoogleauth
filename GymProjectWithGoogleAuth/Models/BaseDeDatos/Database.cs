@@ -329,6 +329,37 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
+
+        public bool DesuscribirAlumno(int idAlumno, int idHorario, DateTime fechaActividad)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.desuscribirAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                cmd.Parameters.Add(new SqlParameter("@fechaActividad", fechaActividad));
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return modificado;
+        }
+
         // FIN DEL MÓDULO DE ALUMNOS
 
         // INICIO DEL MÓDULO DE PROFESORES
@@ -1713,10 +1744,13 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     while (miLectorDeDatos.Read())
                     {
-                        actividad = new Dictionary <String, String>();
-                        actividad.Add("title", miLectorDeDatos["Actividad"].ToString());
-                        actividad.Add("start", miLectorDeDatos["HoraInicio"].ToString());
-                        actividad.Add("end", miLectorDeDatos["HoraFin"].ToString());
+                        actividad = new Dictionary<String, String>
+                        {
+                            { "id", miLectorDeDatos["idHorario"].ToString() },
+                            { "title", miLectorDeDatos["Actividad"].ToString() },
+                            { "start", miLectorDeDatos["HoraInicio"].ToString() },
+                            { "end", miLectorDeDatos["HoraFin"].ToString() }
+                        };
                         actividades.Add(actividad);
                     }
                 }

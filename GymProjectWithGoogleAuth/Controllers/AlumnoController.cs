@@ -137,6 +137,26 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult Desuscribir(FormCollection form)
+        {
+
+            try
+            {
+                Database db = new Database();
+                Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+                int idHorario = Convert.ToInt32(form["id"]);
+                DateTime fechaActividad = Convert.ToDateTime(form["desde"]);
+                db.DesuscribirAlumno(alumno.IdAlumno, idHorario, fechaActividad);
+                return Json("Usted se ha desuscripto con éxito.");
+            }
+            catch
+            {
+                return Json("No pudo desuscribirse.");
+            }
+
+        }
+
         public bool FechaValida(DateTime fechaActividad, String diaActividad)
         {
             bool valida = false;
@@ -153,7 +173,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             return valida;
         }
 
-        public ActionResult CalendarioActividades ()
+        public ActionResult CalendarioActividades()
         {
             return View("CalendarioActividades");
         }

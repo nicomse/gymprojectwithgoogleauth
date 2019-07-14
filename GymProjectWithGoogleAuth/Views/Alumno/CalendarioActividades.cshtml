@@ -3,30 +3,60 @@
     ViewBag.Title = "Calendario de un Alumno";
 }
 
-<h2>Calendario de un Alumno</h2>
-
+<br />
 <div class="row">
     <div id="calendar">
 
     </div>
 </div>
+
 @section Scripts{
     <script type="text/javascript">
-         document.addEventListener('DOMContentLoaded', function () {
-                var calendarEl = document.getElementById('calendar');
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
 
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    plugins: ['dayGrid'],
-                    locale: 'es',
-                    header: {
-                      left:   'title',
-                      center: '',
-                      right:  'today prev,next'
-                    },
-                    events: '/Alumno/getEventosAlumno'
-                });
-                 calendar.render();
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid'],
+                locale: 'es',
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: 'today prev,next'
+                },
+                events: '/Alumno/getEventosAlumno',
+                eventClick: function (info) {
+                    //alert(info.event.title);
+                    if (confirm("¿Desea desuscribirse?")) {
+                        var id = info.event.id
+                        var desde = info.event.start
+                        $.ajax({
+                            url: '/Alumno/Desuscribir',
+                            data: {
+                                'id': id,
+                                'desde': convert(desde)
+                            },
+                            type: 'post',
+                            success: function (result) {
+                                location.reload();
+                            },
+                            fail: function () {
+                                console.log("Error en la inscripción.")
+                            }
+                        })
+
+                    }
+                }
             });
-        
+            calendar.render();
+        });
+    </script>
+
+    <script>
+        function convert(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        }
     </script>
 }
