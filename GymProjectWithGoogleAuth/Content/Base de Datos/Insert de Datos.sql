@@ -286,7 +286,7 @@ DECLARE @apellido varchar(100)
 DECLARE @email varchar(255)
 DECLARE @telefono varchar(255)
 
-EXECUTE @RC = [dbo].[altaProfesor]'Federico', 'Martín', 'femartin73@gmail.com', '11-3478-0064'
+EXECUTE @RC = [dbo].[altaProfesor]'Federico', 'MartÃ­n', 'femartin73@gmail.com', '11-3478-0064'
 GO
 
 DECLARE @RC int
@@ -383,13 +383,13 @@ GO
 DECLARE @RC int
 DECLARE @nombre varchar(100)
 
-EXECUTE @RC = [dbo].[altaActividad]'Musculación'
+EXECUTE @RC = [dbo].[altaActividad]'MusculaciÃ³n'
 GO
 
 DECLARE @RC int
 DECLARE @nombre varchar(100)
 
-EXECUTE @RC = [dbo].[altaActividad]'Natación'
+EXECUTE @RC = [dbo].[altaActividad]'NataciÃ³n'
 GO
 
 DECLARE @RC int
@@ -670,7 +670,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 1, 1, 1, '09:00', '09:45', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 1, 1, 1, '09:00', '09:45', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -681,7 +681,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 2, 1, 1, '10:00', '11:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 2, 1, 1, '10:00', '11:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -692,7 +692,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 3, 2, 1, '11:00', '12:45', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 3, 2, 1, '11:00', '12:45', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -703,7 +703,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 4, 2, 1, '16:00', '17:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 4, 2, 1, '16:00', '17:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -714,7 +714,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 1, 1, '17:00', '18:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 5, 1, 1, '17:00', '18:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -725,7 +725,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 2, 1, '18:00', '19:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 10, 2, 1, '18:00', '19:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -868,7 +868,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 1, 4, 2, '09:00', '09:45', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 1, 4, 2, '09:00', '09:45', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -879,7 +879,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 2, 4, 2, '10:00', '11:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 2, 4, 2, '10:00', '11:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -890,7 +890,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 3, 5, 2, '11:00', '12:45', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 3, 5, 2, '11:00', '12:45', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -901,7 +901,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 4, 5, 2, '16:00', '17:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 4, 5, 2, '16:00', '17:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -912,7 +912,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '17:00', '18:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '17:00', '18:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -923,7 +923,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 6, 2, '18:00', '19:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 10, 6, 2, '18:00', '19:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1330,7 +1330,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 1, 11, 2, '07:00', '08:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 1, 11, 2, '07:00', '08:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1341,7 +1341,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 2, 11, 3, '08:00', '09:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 2, 11, 3, '08:00', '09:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1352,7 +1352,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 3, 11, 3, '09:00', '10:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 3, 11, 3, '09:00', '10:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1363,7 +1363,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 4, 11, 3, '10:00', '11:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 4, 11, 3, '10:00', '11:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1374,7 +1374,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 11, 3, '11:00', '12:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 5, 11, 3, '11:00', '12:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1385,7 +1385,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 1, 11, 3, '12:00', '13:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 1, 11, 3, '12:00', '13:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1396,7 +1396,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 2, 11, 3, '13:00', '14:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 2, 11, 3, '13:00', '14:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1407,7 +1407,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 3, 11, 3, '14:00', '15:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 3, 11, 3, '14:00', '15:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1418,7 +1418,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 4, 11, 3, '15:00', '16:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 4, 11, 3, '15:00', '16:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1429,7 +1429,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 11, 3, '16:00', '17:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 5, 11, 3, '16:00', '17:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1440,7 +1440,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 1, 11, 3, '17:00', '18:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 1, 11, 3, '17:00', '18:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1451,7 +1451,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 2, 11, 3, '18:00', '19:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 2, 11, 3, '18:00', '19:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1462,7 +1462,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 3, 11, 3, '19:00', '20:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 3, 11, 3, '19:00', '20:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1473,7 +1473,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 4, 11, 3, '20:00', '21:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 4, 11, 3, '20:00', '21:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1484,7 +1484,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 11, 3, '21:00', '22:00', 'Miércoles'
+EXECUTE @RC = [dbo].[altaHorario] 5, 11, 3, '21:00', '22:00', 'MiÃ©rcoles'
 GO
 
 DECLARE @RC int
@@ -1825,7 +1825,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '07:00', '08:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '07:00', '08:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1836,7 +1836,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '08:00', '09:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '08:00', '09:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1847,7 +1847,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '09:00', '10:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '09:00', '10:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1858,7 +1858,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '10:00', '11:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '10:00', '11:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1869,7 +1869,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '11:00', '12:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '11:00', '12:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1880,7 +1880,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '12:00', '13:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '12:00', '13:00', 'SÃ¡bado'
 GO
 
 
@@ -1891,7 +1891,7 @@ DECLARE @nroSucursal int
 DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
-EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '13:00', '14:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '13:00', '14:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1902,7 +1902,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '14:00', '15:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '14:00', '15:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1913,7 +1913,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '15:00', '16:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '15:00', '16:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1924,7 +1924,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '16:00', '17:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '16:00', '17:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1935,7 +1935,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '17:00', '18:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '17:00', '18:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1946,7 +1946,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '18:00', '19:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '18:00', '19:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1957,7 +1957,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '19:00', '20:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 7, 11, 2, '19:00', '20:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1968,7 +1968,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '20:00', '21:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 9, 11, 2, '20:00', '21:00', 'SÃ¡bado'
 GO
 
 DECLARE @RC int
@@ -1979,7 +1979,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '21:00', '22:00', 'Sábado'
+EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '21:00', '22:00', 'SÃ¡bado'
 GO
 
 -- ALUMNOS--

@@ -72,7 +72,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
-        public PartialViewResult DamePartialAlumnos()
+        public PartialViewResult DamePartialAlumnos(int idHorario)
         {
             Database db = new Database();
 
@@ -80,6 +80,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
                 // FALTA HACER EL SP (Y SU MÉTODO EN DATABASE) PARA LLENAR LA LISTA alumnos CON LO QUE CORRESPONDE.
+                // List<Alumno> alumnos = db.GetAlumnosHorario(int idHorario);
                 List<Alumno> alumnos = new List<Alumno>();
                 return PartialView("Alumnos_Partial", alumnos);
             }
