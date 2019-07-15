@@ -846,7 +846,7 @@ DECLARE @horaInicio time(0)
 DECLARE @horaFin time(0)
 DECLARE @dia varchar(10)
 
-EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '17:00', '18:00', 'Lunes'
+EXECUTE @RC = [dbo].[altaHorario] 5, 6, 2, '19:00', '20:00', 'Lunes'
 GO
 
 DECLARE @RC int

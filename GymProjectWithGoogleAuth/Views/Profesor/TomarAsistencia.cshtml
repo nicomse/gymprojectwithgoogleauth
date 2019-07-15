@@ -1,0 +1,133 @@
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Sucursal>
+
+@{
+    ViewBag.Title = "Tomar Asistencia";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-10">
+            <select class="form-control" name="idSucursal" id="sucursal_select" required="required" onChange="dameActividadesDeProfesor()">
+                <option value="" selected disabled>Seleccione una sucursal...</option>
+                @foreach (var sucursal in Model)
+                {
+                    <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="actividades">
+
+</div>
+
+<div id="dias">
+
+</div>
+
+<div id="horarios">
+
+</div>
+
+<div id="alumnos">
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function dameActividadesDeProfesor() {
+            var idSucursal = $("#sucursal_select").val();
+
+            $.ajax({
+                url: '/Profesor/DamePartialActividades',
+                data: {
+                    "idSucursal": idSucursal
+                },
+                type: 'get',
+                success: function (result) {
+                    // DEVUELVE UN PARTIAL VIEW
+                    $('#actividades').empty()
+                    $('#actividades').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+
+        function dameDiasDeProfesor() {
+            var idSucursal = $("#sucursal_select").val();
+            var idActividad = $("#actividad_select").val();
+
+            $.ajax({
+                url: '/Profesor/DamePartialDias',
+                data: {
+                    "idSucursal": idSucursal,
+                    "idActividad": idActividad
+                },
+                type: 'get',
+                success: function (result) {
+                    // DEVUELVE UN PARTIAL VIEW
+                    $('#dias').empty()
+                    $('#dias').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+
+        function dameHorariosDeProfesor() {
+            var idSucursal = $("#sucursal_select").val();
+            var idActividad = $("#actividad_select").val();
+            var dia = $("#dia_select").val();
+
+            $.ajax({
+                url: '/Profesor/DamePartialHorarios',
+                data: {
+                    "idSucursal": idSucursal,
+                    "idActividad": idActividad,
+                    "dia": dia
+                },
+                type: 'get',
+                success: function (result) {
+                    // DEVUELVE UN PARTIAL VIEW
+                    $('#horarios').empty()
+                    $('#horarios').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+
+        function dameAlumnosDeProfesor() {
+            var idSucursal = $("#sucursal_select").val();
+            var idActividad = $("#actividad_select").val();
+            var dia = $("#dia_select").val();
+            var idHorario = $("#horario_select").val();
+
+            $.ajax({
+                url: '/Profesor/DamePartialAlumnos',
+                data: {
+                    "idSucursal": idSucursal,
+                    "idActividad": idActividad,
+                    "dia": dia,
+                    "idHorario": idHorario,
+                },
+                type: 'get',
+                success: function (result) {
+                    // DEVUELVE UN PARTIAL VIEW
+                    $('#alumnos').empty()
+                    $('#alumnos').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+    </script>
+}

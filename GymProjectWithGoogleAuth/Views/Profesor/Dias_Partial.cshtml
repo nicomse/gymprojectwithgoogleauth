@@ -1,0 +1,15 @@
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Horario>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-10">
+            <select class="form-control" name="dia" id="dia_select" required="required" onChange="dameHorariosDeProfesor()">
+                <option value="" selected disabled>Seleccione un día...</option>
+                @foreach (var dia in Model)
+                {
+                    <option value="@dia.Dia">@dia.Dia</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>

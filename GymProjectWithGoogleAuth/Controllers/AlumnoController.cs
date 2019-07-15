@@ -122,7 +122,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                     }
                     catch
                     {
-                        return Json("Usted ya se encuentra inscripto a esta actividad.");
+                        return Json("Ya se encuentra inscripto a esta actividad en la fecha seleccionada.");
                     }
 
                     return Json("La inscripción a la actividad fue realizada con éxito.");
@@ -141,7 +141,6 @@ namespace GymProjectWithGoogleAuth.Controllers
         [HttpPost]
         public JsonResult Desuscribir(FormCollection form)
         {
-
             try
             {
                 Database db = new Database();
@@ -154,38 +153,38 @@ namespace GymProjectWithGoogleAuth.Controllers
                     db.DesuscribirAlumno(alumno.IdAlumno, idHorario, fechaActividad);
                     Credito credito = db.DameCreditoAlumnoHorario(alumno.IdAlumno, idHorario, fechaActividad);
                     db.AumentarCredito(credito.IdCredito, credito.Cantidad);
-                    return Json("Usted se ha desuscripto con éxito.");
+                    return Json("La desuscripción a la actividad fue realizada con éxito.");
                 }
                 else
                 {
-                    return Json("No puede desuscribirse de una actividad que ya pasó.");
+                    return Json("No puede desuscribirse de una actividad que ya fue realizada.");
                 }
             }
             catch
             {
-                return Json("No pudo desuscribirse.");
+                return Json("No fue posible realizar la desuscripción de la actividad seleccionada.");
             }
         }
 
         public bool FechaValida(DateTime fechaActividad, String diaActividad)
         {
             bool valida = false;
+
             CultureInfo ci = new CultureInfo("Es-Es");
-
             String diaSeleccionado = ci.DateTimeFormat.GetDayName(fechaActividad.DayOfWeek);
-
             TimeSpan diferencia = fechaActividad - DateTime.Today;
 
             if (diaActividad.ToLower() == diaSeleccionado && diferencia.Days <= 30 && diferencia.Days > 0)
             {
                 valida = true;
             }
+
             return valida;
         }
 
         public ActionResult CalendarioActividades()
         {
-            return View("CalendarioActividades");
+            return View();
         }
 
         public JsonResult GetEventosAlumno()

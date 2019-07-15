@@ -359,7 +359,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return modificado;
         }
-
         // FIN DEL MÓDULO DE ALUMNOS
 
         // INICIO DEL MÓDULO DE PROFESORES
@@ -772,6 +771,47 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return sucursales;
         }
 
+        public List<Sucursal> GetTodasLasSucursalesDeUnProfesor(int idProfesor)
+        {
+            List<Sucursal> sucursales = new List<Sucursal>();
+            Sucursal sucursal;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasSucursalesDeUnProfesor", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        sucursal = new Sucursal
+                        {
+                            NroSucursal = Convert.ToInt32(miLectorDeDatos["nroSucursal"]),
+                            Barrio = miLectorDeDatos["barrio"].ToString(),
+                            Direccion = miLectorDeDatos["direccion"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        sucursales.Add(sucursal);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return sucursales;
+        }
+
         public bool ModificarSucursal(Sucursal sucursalAModificar)
         {
             bool modificado = false;
@@ -955,6 +995,46 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return miActividad;
         }
 
+        public List<Actividad> GetTodasLasActividadesDeUnProfesor(int idSucursal, int idProfesor)
+        {
+            List<Actividad> actividades = new List<Actividad>();
+            Actividad actividad;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasActividadesDeUnProfesorEnUnaSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        actividad = new Actividad
+                        {
+                            IdActividad = Convert.ToInt32(miLectorDeDatos["idActividad"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        actividades.Add(actividad);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return actividades;
+        }
+
         public Actividad GetActividadPorNombre(String nombre)
         {
             Actividad miActividad = null;
@@ -1015,6 +1095,46 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             IdActividad = Convert.ToInt32(miLectorDeDatos["idActividad"]),
                             Nombre = miLectorDeDatos["nombre"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        actividades.Add(actividad);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return actividades;
+        }
+
+        public List<Dictionary<String, String>> GetActividadesDeUnAlumno(int idAlumno)
+        {
+            List<Dictionary<String, String>> actividades = new List<Dictionary<String, String>>();
+            Dictionary<String, String> actividad;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getActividadesDeAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        actividad = new Dictionary<String, String>
+                        {
+                            { "id", miLectorDeDatos["idHorario"].ToString() },
+                            { "title", miLectorDeDatos["Actividad"].ToString() },
+                            { "start", miLectorDeDatos["HoraInicio"].ToString() },
+                            { "end", miLectorDeDatos["HoraFin"].ToString() }
                         };
                         actividades.Add(actividad);
                     }
@@ -1304,6 +1424,92 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        horario = new Horario
+                        {
+                            IdHorario = Convert.ToInt32(miLectorDeDatos["idHorario"]),
+                            Actividad = GetActividad(Convert.ToInt32(miLectorDeDatos["idActividad"])),
+                            Profesor = GetProfesor(Convert.ToInt32(miLectorDeDatos["idProfesor"])),
+                            Sucursal = GetSucursal(Convert.ToInt32(miLectorDeDatos["nroSucursal"])),
+                            HoraInicio = (TimeSpan)miLectorDeDatos["horaInicio"],
+                            HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
+                            Dia = miLectorDeDatos["dia"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        horarios.Add(horario);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return horarios;
+        }
+
+        public List<Horario> GetTodosLosDiasDeUnProfesor(int idSucursal, int idProfesor, int idActividad)
+        {
+            List<Horario> horarios = new List<Horario>();
+            Horario horario;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosDiasDeLaActividadDeUnProfesorEnUnaSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
+                cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        horario = new Horario
+                        {
+                            Dia = miLectorDeDatos["dia"].ToString(),
+                        };
+                        horarios.Add(horario);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return horarios;
+        }
+
+        public List<Horario> GetTodosLosHorariosDeUnProfesor(int idSucursal, int idProfesor, int idActividad, String dia)
+        {
+            List<Horario> horarios = new List<Horario>();
+            Horario horario;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosHorariosDelDiaDeLaActividadDeUnProfesorEnUnaSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
+                cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
+                cmd.Parameters.Add(new SqlParameter("@dia", dia));
                 SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
 
                 if (miLectorDeDatos.HasRows)
@@ -1826,44 +2032,5 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return rol;
         }
         // FIN DEL MÓDULO DE PERMISOS
-
-        public List<Dictionary<String, String>> GetActividadesDeUnAlumno(int idAlumno)
-        {
-            List<Dictionary<String, String>> actividades = new List<Dictionary<String,String>>();
-            Dictionary<String, String> actividad = null;
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getActividadesDeAlumno", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        actividad = new Dictionary<String, String>
-                        {
-                            { "id", miLectorDeDatos["idHorario"].ToString() },
-                            { "title", miLectorDeDatos["Actividad"].ToString() },
-                            { "start", miLectorDeDatos["HoraInicio"].ToString() },
-                            { "end", miLectorDeDatos["HoraFin"].ToString() }
-                        };
-                        actividades.Add(actividad);
-                    }
-                }
-
-                CerrarConexion(conn);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return actividades;
-        }
     }
 }

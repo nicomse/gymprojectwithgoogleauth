@@ -1,0 +1,15 @@
+﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Actividad>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-10">
+            <select class="form-control" name="idActividad" id="actividad_select" required="required" onChange="dameDiasDeProfesor()">
+                <option value="" selected disabled>Seleccione una actividad...</option>
+                @foreach (var actividad in Model)
+                {
+                    <option value="@actividad.IdActividad">@actividad.Nombre</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
