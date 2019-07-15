@@ -1981,3 +1981,214 @@ DECLARE @dia varchar(10)
 
 EXECUTE @RC = [dbo].[altaHorario] 10, 11, 2, '21:00', '22:00', 'Sábado'
 GO
+
+-- ALUMNOS--
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 21, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 21, 37, 1, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 22, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 22, 37, 2, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 1, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 1, 37, 3, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 2, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 2, 37, 4, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 3, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 3, 37, 5, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 4, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 4, 37, 6, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 5, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 5, 37, 7, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 6, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 6, 37, 8, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 7, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 7, 37, 9, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 8, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 8, 37, 10, '2019-07-22'
+GO
+
+-- COMPRAR PACK --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idPack int
+DECLARE @cantidad int
+
+EXECUTE @RC = [dbo].[altaCredito] 9, 1, 10
+GO
+
+-- INSCRIBIRSE ACTIVIDAD --
+DECLARE @RC int
+DECLARE @idAlumno int
+DECLARE @idHorario int
+DECLARE @idCredito int
+DECLARE @fechaActividad datetime
+
+EXECUTE @RC = [dbo].[insertarAlumnoAHorario] 9, 37, 11, '2019-07-22'
+GO
