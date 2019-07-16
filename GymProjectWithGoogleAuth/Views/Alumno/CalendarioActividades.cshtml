@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "Calendario de un Alumno";
-}
-
-<br />
+﻿<br />
 <div class="row">
     <div id="calendar">
 
@@ -47,9 +42,7 @@
             });
             calendar.render();
         });
-    </script>
 
-    <script>
         function convert(str) {
             var date = new Date(str),
                 mnth = ("0" + (date.getMonth() + 1)).slice(-2),
