@@ -47,8 +47,9 @@ namespace GymProjectWithGoogleAuth.Controllers
             try
             {
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
-                List<Horario> dias = db.GetTodosLosDiasDeUnProfesor(idSucursal, profesor.IdProfesor, idActividad);
-                return PartialView("Dias_Partial", dias);
+                List<String> dias = db.GetTodosLosDiasDeUnProfesor(idSucursal, profesor.IdProfesor, idActividad);
+                ViewBag.dias = dias;
+                return PartialView("Dias_Partial");
             }
             catch (Exception e)
             {
