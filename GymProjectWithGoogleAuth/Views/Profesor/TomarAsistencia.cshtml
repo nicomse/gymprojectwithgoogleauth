@@ -6,39 +6,47 @@
 
 <h2>@ViewBag.Title</h2>
 <hr />
-<div class="form-horizontal">
-    <div class="form-group">
-        <div class="col-md-10">
-            <select class="form-control" name="idSucursal" id="sucursal_select" required="required" onChange="dameActividadesDeProfesor()">
-                <option value="" selected disabled>Seleccione una sucursal...</option>
-                @foreach (var sucursal in Model)
-                {
-                    <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
-                }
-            </select>
-        </div>
-    </div>
-</div>
 
-<div id="actividades">
+<table>
+    <tr>
+        <td>
+            <div class="form-group col-md-10" style="width:220px">
+                        <select class="form-control" name="idSucursal" id="sucursal_select" required="required" onChange="dameActividadesDeProfesor()">
+                            <option value="" selected disabled>Sucursal</option>
+                            @foreach (var sucursal in Model)
+                            {
+                                <option value="@sucursal.NroSucursal">@sucursal.Barrio</option>
+                            }
+                        </select>
+            </div>
+        </td>
+        <td>
+            <div id="actividades">
 
-</div>
+            </div>
+        </td>
+        <td>
+            <div id="dias">
 
-<div id="dias">
+            </div>
+        </td>
+        <td>
+            <div id="horarios">
 
-</div>
+            </div>
+        </td>
+        <td>
+            <div id="fechas">
 
-<div id="horarios">
-
-</div>
-
-<div id="fechas">
-
-</div>
+            </div>
+        </td>
+    </tr>
+</table>
 
 <div id="alumnos">
 
 </div>
+
 
 @section Scripts{
     <script type="text/javascript">
