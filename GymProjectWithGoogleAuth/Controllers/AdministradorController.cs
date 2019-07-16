@@ -90,7 +90,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarAlumnos", "error");
+                throw e;
             }
         }
 
@@ -171,7 +171,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarProfesores", "error");
+                throw e;
             }
         }
 
@@ -259,7 +259,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarSucursal", "error");
+                throw e;
             }
         }
 
@@ -354,7 +354,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarActividad", "error");
+                throw e;
             }
         }
 
@@ -432,7 +432,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarPacks", "error");
+                throw e;
             }
         }
 
@@ -530,7 +530,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("ListarHorarios", "error");
+                throw e;
             }
         }
     }

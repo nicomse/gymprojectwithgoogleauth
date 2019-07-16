@@ -32,6 +32,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
                 List<Actividad> actividades = db.GetTodasLasActividadesDeUnProfesor(idSucursal, profesor.IdProfesor);
+
                 return PartialView("Actividades_Partial", actividades);
             }
             catch (Exception e)
@@ -49,6 +50,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
                 List<String> dias = db.GetTodosLosDiasDeUnProfesor(idSucursal, profesor.IdProfesor, idActividad);
                 ViewBag.dias = dias;
+
                 return PartialView("Dias_Partial");
             }
             catch (Exception e)
@@ -65,6 +67,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
                 List<Horario> horarios = db.GetTodosLosHorariosDeUnProfesor(idSucursal, profesor.IdProfesor, idActividad, dia);
+
                 return PartialView("Horarios_Partial", horarios);
             }
             catch (Exception e)
@@ -82,6 +85,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
                 List<String> fechas = db.GetTodasLasFechasDeUnHorario(idHorario);
                 ViewBag.fechas = fechas;
+
                 return PartialView("Fechas_Partial");
             }
             catch (Exception e)
@@ -99,6 +103,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                 DateTime fecha = Convert.ToDateTime(fechaActividad);
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
                 List<Alumno> alumnos = db.GetAlumnosHorario(idHorario, fecha);
+
                 return PartialView("Alumnos_Partial", alumnos);
             }
             catch (Exception e)
@@ -107,14 +112,13 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
-
-        public JsonResult DarElPresente(int idAlumno, int idHorario, String estado, String fechaActividad)
+        public JsonResult DarElPresente(int idAlumno, int idHorario, String fechaActividad, String estado)
         {
             Database db = new Database();
             DateTime fecha = Convert.ToDateTime(fechaActividad);
-            bool presente = db.TomarAsistencia(idAlumno, idHorario, estado, fecha);
+            bool asistencia = db.TomarAsistencia(idAlumno, idHorario, fecha, estado);
 
-            return Json(presente, JsonRequestBehavior.AllowGet);
+            return Json(asistencia, JsonRequestBehavior.AllowGet);
         }
     }
 }

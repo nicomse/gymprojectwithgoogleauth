@@ -1,6 +1,6 @@
-﻿<div class="form-group col-md-10" style="width:220px">
-    <select class="form-control" name="idFecha" id="fecha_select" required="required" onChange="dameAlumnosDeProfesor()">
-        <option value="" selected disabled>Fecha</option>
+﻿<div class="form-group col-md-10" style="width:228px">
+    <select class="form-control" name="fecha" id="fecha_select" required="required" onChange="dameAlumnosDeProfesor()">
+        <option value="" selected disabled>Seleccione fecha...</option>
         @foreach (var fecha in ViewBag.fechas)
         {
             <option value="@fecha">@fecha</option>

@@ -661,8 +661,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return dias;
         }
 
-
-        public bool TomarAsistencia(int idAlumno, int idHorario, String estado, DateTime fechaActividad)
+        public bool TomarAsistencia(int idAlumno, int idHorario, DateTime fechaActividad, String estado)
         {
             bool modificado = false;
 
@@ -675,15 +674,13 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 };
                 cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
                 cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
-                cmd.Parameters.Add(new SqlParameter("@estado", estado));
                 cmd.Parameters.Add(new SqlParameter("@fechaActividad", fechaActividad));
-               
+                cmd.Parameters.Add(new SqlParameter("@estado", estado));
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     modificado = true;
                 }
-
 
                 CerrarConexion(conn);
             }
@@ -694,8 +691,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return modificado;
         }
-
-
         // FIN DEL MÓDULO DE PROFESORES
 
         // INICIO DEL MÓDULO DE SUCURSALES
