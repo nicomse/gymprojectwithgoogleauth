@@ -624,6 +624,42 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return baja;
         }
+
+        public List<String> GetTodosLosDiasDeUnProfesor(int idSucursal, int idProfesor, int idActividad)
+        {
+            List<String> dias = new List<String>();
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodosLosDiasDeLaActividadDeUnProfesorEnUnaSucursal", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
+                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
+                cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        {
+                            dias.Add(miLectorDeDatos["dia"].ToString());
+                        }
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return dias;
+        }
         // FIN DEL MÓDULO DE PROFESORES
 
         // INICIO DEL MÓDULO DE SUCURSALES
@@ -1485,45 +1521,6 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                             HoraFin = (TimeSpan)miLectorDeDatos["horaFin"],
                             Dia = miLectorDeDatos["dia"].ToString(),
                             Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                        horarios.Add(horario);
-                    }
-                }
-
-                CerrarConexion(conn);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return horarios;
-        }
-
-        public List<Horario> GetTodosLosDiasDeUnProfesor(int idSucursal, int idProfesor, int idActividad)
-        {
-            List<Horario> horarios = new List<Horario>();
-            Horario horario;
-
-            try
-            {
-                SqlConnection conn = AbrirConexion();
-                SqlCommand cmd = new SqlCommand("dbo.getTodosLosDiasDeLaActividadDeUnProfesorEnUnaSucursal", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                cmd.Parameters.Add(new SqlParameter("@idSucursal", idSucursal));
-                cmd.Parameters.Add(new SqlParameter("@idProfesor", idProfesor));
-                cmd.Parameters.Add(new SqlParameter("@idActividad", idActividad));
-                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
-
-                if (miLectorDeDatos.HasRows)
-                {
-                    while (miLectorDeDatos.Read())
-                    {
-                        horario = new Horario
-                        {
-                            Dia = miLectorDeDatos["dia"].ToString(),
                         };
                         horarios.Add(horario);
                     }
