@@ -20,9 +20,9 @@
                                 @item.Nombre @item.Apellido
                             </td>
                             <td>
-                                <label><input type="checkbox" id="pres_cbox" onclick="tomarAsistencia(@item.IdAlumno)"> Presente</label>
-                                <br />
-                                <label><input type="checkbox" id="aus_cbox" onclick="tomarAsistencia(@item.IdAlumno)"> Ausente</label>
+                                <label><input type="radio" onclick="tomarAsistencia(@item.IdAlumno,'Presente')" name="presencia"> Presente</label><br />
+                                <label><input type="radio" onclick="tomarAsistencia(@item.IdAlumno,'Ausente')" name="presencia"> Ausente</label>
+
                             </td>
                         </tr>
                     }

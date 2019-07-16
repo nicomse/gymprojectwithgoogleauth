@@ -106,5 +106,15 @@ namespace GymProjectWithGoogleAuth.Controllers
                 throw e;
             }
         }
+
+
+        public JsonResult DarElPresente(int idAlumno, int idHorario, String estado, String fechaActividad)
+        {
+            Database db = new Database();
+            DateTime fecha = Convert.ToDateTime(fechaActividad);
+            bool presente = db.TomarAsistencia(idAlumno, idHorario, estado, fecha);
+
+            return Json(presente, JsonRequestBehavior.AllowGet);
+        }
     }
 }

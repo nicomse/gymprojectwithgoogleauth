@@ -156,6 +156,29 @@
                     console.log(result)
                 }
             })
-        }
+           
+            }
+    function tomarAsistencia(idAlumno,estado) {
+            var idHorario = $("#horario_select").val();
+            var fechaActividad = $("#fecha_select").val();
+            $.ajax({
+                url: '/Profesor/DarElPresente',
+                data: {
+                    "idAlumno": idAlumno,
+                    "estado": estado,
+                    "fechaActividad": fechaActividad,
+                    "idHorario": idHorario,
+                },
+                type: 'get',
+                success: function (result) {
+                    console.log(result);
+                    location.reload();
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+    }
+
     </script>
 }

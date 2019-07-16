@@ -660,6 +660,42 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
 
             return dias;
         }
+
+
+        public bool TomarAsistencia(int idAlumno, int idHorario, String estado, DateTime fechaActividad)
+        {
+            bool modificado = false;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.cambiarEstadoAlumno", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idAlumno", idAlumno));
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                cmd.Parameters.Add(new SqlParameter("@estado", estado));
+                cmd.Parameters.Add(new SqlParameter("@fechaActividad", fechaActividad));
+               
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    modificado = true;
+                }
+
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return modificado;
+        }
+
+
         // FIN DEL MÓDULO DE PROFESORES
 
         // INICIO DEL MÓDULO DE SUCURSALES
