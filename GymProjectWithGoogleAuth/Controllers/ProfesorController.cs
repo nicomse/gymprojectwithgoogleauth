@@ -72,16 +72,32 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
-        public PartialViewResult DamePartialAlumnos(int idHorario)
+        public PartialViewResult DamePartialFechas(int idHorario)
         {
             Database db = new Database();
 
             try
             {
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
-                // FALTA HACER EL SP (Y SU MÉTODO EN DATABASE) PARA LLENAR LA LISTA alumnos CON LO QUE CORRESPONDE.
-                // List<Alumno> alumnos = db.GetAlumnosHorario(int idHorario);
-                List<Alumno> alumnos = new List<Alumno>();
+                List<String> fechas = db.GetTodasLasFechasDeUnHorario(idHorario);
+                ViewBag.fechas = fechas;
+                return PartialView("Fechas_Partial");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public PartialViewResult DamePartialAlumnos(int idHorario, String fechaActividad)
+        {
+            Database db = new Database();
+
+            try
+            {
+                DateTime fecha = Convert.ToDateTime(fechaActividad);
+                Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
+                List<Alumno> alumnos = db.GetAlumnosHorario(idHorario, fecha);
                 return PartialView("Alumnos_Partial", alumnos);
             }
             catch (Exception e)

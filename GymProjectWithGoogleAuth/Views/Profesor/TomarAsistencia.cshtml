@@ -32,6 +32,10 @@
 
 </div>
 
+<div id="fechas">
+
+</div>
+
 <div id="alumnos">
 
 </div>
@@ -104,19 +108,35 @@
             })
         }
 
-        function dameAlumnosDeProfesor() {
-            var idSucursal = $("#sucursal_select").val();
-            var idActividad = $("#actividad_select").val();
-            var dia = $("#dia_select").val();
+        function dameFechasDeProfesor() {
             var idHorario = $("#horario_select").val();
+
+            $.ajax({
+                url: '/Profesor/DamePartialFechas',
+                data: {
+                    "idHorario": idHorario,
+                },
+                type: 'get',
+                success: function (result) {
+                    // DEVUELVE UN PARTIAL VIEW
+                    $('#fechas').empty()
+                    $('#fechas').append(result)
+                },
+                fail: function (result) {
+                    console.log(result)
+                }
+            })
+        }
+
+        function dameAlumnosDeProfesor() {
+            var idHorario = $("#horario_select").val();
+            var fechaActividad = $("#fecha_select").val();
 
             $.ajax({
                 url: '/Profesor/DamePartialAlumnos',
                 data: {
-                    "idSucursal": idSucursal,
-                    "idActividad": idActividad,
-                    "dia": dia,
                     "idHorario": idHorario,
+                    "fechaActividad": fechaActividad,
                 },
                 type: 'get',
                 success: function (result) {

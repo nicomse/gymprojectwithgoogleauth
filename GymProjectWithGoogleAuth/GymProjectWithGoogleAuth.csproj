@@ -372,6 +372,7 @@
     <Content Include="Views\Profesor\Actividades_Partial.cshtml" />
     <Content Include="Views\Profesor\Dias_Partial.cshtml" />
     <Content Include="Views\Profesor\Alumnos_Partial.cshtml" />
+    <Content Include="Views\Profesor\Fechas_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

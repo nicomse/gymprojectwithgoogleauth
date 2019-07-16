@@ -228,6 +228,51 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return misAlumnos;
         }
 
+        public List<Alumno> GetAlumnosHorario(int idHorario, DateTime fechaActividad)
+        {
+            List<Alumno> misAlumnos = new List<Alumno>();
+            Alumno miAlumno;
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getAlumnosHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                cmd.Parameters.Add(new SqlParameter("@fechaActividad", fechaActividad));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        miAlumno = new Alumno
+                        {
+                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
+                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
+                            Nombre = miLectorDeDatos["nombre"].ToString(),
+                            Apellido = miLectorDeDatos["apellido"].ToString(),
+                            Email = miLectorDeDatos["email"].ToString(),
+                            Telefono = miLectorDeDatos["telefono"].ToString(),
+                            Rol = miLectorDeDatos["rol"].ToString(),
+                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
+                        };
+                        misAlumnos.Add(miAlumno);
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return misAlumnos;
+        }
+
         public Alumno GetAlumnoPorEmail(String EmailAlumno)
         {
             Alumno miAlumno = null;
@@ -1634,6 +1679,38 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             }
 
             return baja;
+        }
+
+        public List<String> GetTodasLasFechasDeUnHorario(int idHorario)
+        {
+            List<String> fechas = new List<String>();
+
+            try
+            {
+                SqlConnection conn = AbrirConexion();
+                SqlCommand cmd = new SqlCommand("dbo.getTodasLasFechasDeUnHorario", conn)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@idHorario", idHorario));
+                SqlDataReader miLectorDeDatos = cmd.ExecuteReader();
+
+                if (miLectorDeDatos.HasRows)
+                {
+                    while (miLectorDeDatos.Read())
+                    {
+                        fechas.Add(miLectorDeDatos["fechaActividad"].ToString());
+                    }
+                }
+
+                CerrarConexion(conn);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return fechas;
         }
         // FIN DEL MÓDULO DE HORARIOS
 
