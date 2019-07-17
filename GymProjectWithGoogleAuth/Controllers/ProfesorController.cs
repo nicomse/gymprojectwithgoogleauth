@@ -102,9 +102,10 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 DateTime fecha = Convert.ToDateTime(fechaActividad);
                 Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
-                List<Alumno> alumnos = db.GetAlumnosHorario(idHorario, fecha);
+                List<List<String>> alumnos = db.GetAlumnosHorario(idHorario, fecha);
+                ViewBag.alumnos = alumnos;
 
-                return PartialView("Alumnos_Partial", alumnos);
+                return PartialView("Alumnos_Partial");
             }
             catch (Exception e)
             {

@@ -228,10 +228,9 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
             return misAlumnos;
         }
 
-        public List<Alumno> GetAlumnosHorario(int idHorario, DateTime fechaActividad)
+        public List<List<String>> GetAlumnosHorario(int idHorario, DateTime fechaActividad)
         {
-            List<Alumno> misAlumnos = new List<Alumno>();
-            Alumno miAlumno;
+            List<List<String>> alumnos = new List<List<String>>();
 
             try
             {
@@ -248,18 +247,12 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 {
                     while (miLectorDeDatos.Read())
                     {
-                        miAlumno = new Alumno
-                        {
-                            IdAlumno = Convert.ToInt32(miLectorDeDatos["idAlumno"]),
-                            IdPersona = Convert.ToInt32(miLectorDeDatos["idPersona"]),
-                            Nombre = miLectorDeDatos["nombre"].ToString(),
-                            Apellido = miLectorDeDatos["apellido"].ToString(),
-                            Email = miLectorDeDatos["email"].ToString(),
-                            Telefono = miLectorDeDatos["telefono"].ToString(),
-                            Rol = miLectorDeDatos["rol"].ToString(),
-                            Estado = Convert.ToInt32(miLectorDeDatos["estado"]),
-                        };
-                        misAlumnos.Add(miAlumno);
+                        alumnos.Add(new List<String> {
+                            miLectorDeDatos["IdAlumno"].ToString(),
+                            miLectorDeDatos["Nombre"].ToString(),
+                            miLectorDeDatos["Apellido"].ToString(),
+                            miLectorDeDatos["Asistencia"].ToString(),
+                         });
                     }
                 }
 
@@ -270,7 +263,7 @@ namespace GymProjectWithGoogleAuth.Models.BaseDeDatos
                 throw e;
             }
 
-            return misAlumnos;
+            return alumnos;
         }
 
         public Alumno GetAlumnoPorEmail(String EmailAlumno)

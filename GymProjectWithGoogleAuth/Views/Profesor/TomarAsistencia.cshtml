@@ -170,9 +170,8 @@
                     "estado": estado
                 },
                 type: 'get',
-                success: function (result) {
-                    console.log(result);
-                    // location.reload();
+                success: function () {
+                    dameAlumnosDeProfesor();
                 },
                 fail: function (result) {
                     console.log(result)
