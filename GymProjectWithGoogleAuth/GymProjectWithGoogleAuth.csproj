@@ -361,7 +361,7 @@
     <Content Include="Views\Shared\_Layout_Alumno.cshtml" />
     <Content Include="Views\Shared\_Layout_Profesor.cshtml" />
     <Content Include="Views\Alumno\ListarCreditos.cshtml" />
-    <Content Include="Views\Alumno\ComprarCreditos.cshtml" />
+    <Content Include="Views\Administrador\AsignarCreditosAlumno.cshtml" />
     <Content Include="Views\Alumno\VerDetalleCredito.cshtml" />
     <Content Include="Views\Alumno\AccesoDenegado.cshtml" />
     <Content Include="Views\Alumno\InscribirActividad.cshtml" />

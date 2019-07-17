@@ -32,24 +32,6 @@ namespace GymProjectWithGoogleAuth.Controllers
             return View();
         }
 
-        public ActionResult ComprarCreditos()
-        {
-            Database db = new Database();
-            List<Pack> packs = db.GetTodosLosPacks();
-
-            return View(packs);
-        }
-
-        public ActionResult ComprarPack(int idPack)
-        {
-            Database db = new Database();
-            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-            Pack pack = db.GetPack(idPack);
-            db.AltaCredito(alumno, pack);
-
-            return RedirectToAction("ListarCreditos");
-        }
-
         public ActionResult ListarCreditos()
         {
             Database db = new Database();

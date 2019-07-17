@@ -436,6 +436,42 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
         }
 
+        // CRÉDITOS
+
+        public ActionResult AsignarCreditosAlumno()
+        {
+            Database db = new Database();
+            List<Pack> packs = db.GetTodosLosPacks();
+
+            return View(packs);
+        }
+
+        [HttpPost]
+        public JsonResult AsignarPack(FormCollection form)
+        {
+            try
+            {
+                int idPack = Convert.ToInt32(form["idPack"]);
+                String emailAlumno = (form["emailAlumno"]).ToString();
+
+                if (emailAlumno == "")
+                {
+                    return Json("Debe ingresar un email.");
+                }
+
+                Database db = new Database();
+                Alumno alumno = db.GetAlumnoPorEmail(emailAlumno);
+                Pack pack = db.GetPack(idPack);
+                db.AltaCredito(alumno, pack);
+
+                return Json("Se le han asignado correctamente los créditos al alumno.");
+            }
+            catch
+            {
+                return Json("El email ingresado es incorrecto.");
+            }
+        }
+
         // ABM HORARIOS
         public ActionResult ListarHorarios()
         {
