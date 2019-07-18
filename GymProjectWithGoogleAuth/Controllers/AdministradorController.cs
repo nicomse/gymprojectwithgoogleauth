@@ -110,16 +110,24 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult EliminarAlumno(int idAlumno)
         {
-            Database db = new Database();
-            try
+            if (ComprobarRolAdministrador())
             {
-                Alumno alumno = db.GetAlumno(idAlumno);
-                db.BajaAlumno(alumno);
-                return RedirectToAction("ListarAlumnos");
+                Database db = new Database();
+
+                try
+                {
+                    Alumno alumno = db.GetAlumno(idAlumno);
+                    db.BajaAlumno(alumno);
+                    return RedirectToAction("ListarAlumnos");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                return View("AccesoDenegado");
             }
         }
 
@@ -213,16 +221,24 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult EliminarProfesor(int idProfesor)
         {
-            Database db = new Database();
-            try
+            if (ComprobarRolAdministrador())
             {
-                Profesor profesor = db.GetProfesor(idProfesor);
-                db.BajaProfesor(profesor);
-                return RedirectToAction("ListarProfesores");
+                Database db = new Database();
+
+                try
+                {
+                    Profesor profesor = db.GetProfesor(idProfesor);
+                    db.BajaProfesor(profesor);
+                    return RedirectToAction("ListarProfesores");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                return View("AccesoDenegado");
             }
         }
 
@@ -322,16 +338,24 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult EliminarSucursal(int idSucursal)
         {
-            Database db = new Database();
-            try
+            if (ComprobarRolAdministrador())
             {
-                Sucursal sucursal = db.GetSucursal(idSucursal);
-                db.BajaSucursal(sucursal);
-                return RedirectToAction("ListarSucursales");
+                Database db = new Database();
+
+                try
+                {
+                    Sucursal sucursal = db.GetSucursal(idSucursal);
+                    db.BajaSucursal(sucursal);
+                    return RedirectToAction("ListarSucursales");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                return View("AccesoDenegado");
             }
         }
 
@@ -438,16 +462,24 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult EliminarActividad(int idActividad)
         {
-            Database db = new Database();
-            try
+            if (ComprobarRolAdministrador())
             {
-                Actividad actividad = db.GetActividad(idActividad);
-                db.BajaActividad(actividad);
-                return RedirectToAction("ListarActividades");
+                Database db = new Database();
+
+                try
+                {
+                    Actividad actividad = db.GetActividad(idActividad);
+                    db.BajaActividad(actividad);
+                    return RedirectToAction("ListarActividades");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                return View("AccesoDenegado");
             }
         }
 
@@ -537,21 +569,28 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult EliminarPack(int idPack)
         {
-            Database db = new Database();
-            try
+            if (ComprobarRolAdministrador())
             {
-                Pack pack = db.GetPack(idPack);
-                db.BajaPack(pack);
-                return RedirectToAction("ListarPacks");
+                Database db = new Database();
+
+                try
+                {
+                    Pack pack = db.GetPack(idPack);
+                    db.BajaPack(pack);
+                    return RedirectToAction("ListarPacks");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                return View("AccesoDenegado");
             }
         }
 
         // CRÉDITOS
-
         public ActionResult AsignarCreditosAlumno()
         {
             if (ComprobarRolAdministrador())
@@ -576,7 +615,7 @@ namespace GymProjectWithGoogleAuth.Controllers
 
                 if (emailAlumno == "")
                 {
-                    return Json("Debe ingresar un email.");
+                    return Json("Debe ingresar un E-Mail.");
                 }
 
                 Database db = new Database();
@@ -588,7 +627,7 @@ namespace GymProjectWithGoogleAuth.Controllers
             }
             catch
             {
-                return Json("El email ingresado es incorrecto.");
+                return Json("El E-Mail ingresado es incorrecto.");
             }
         }
 
@@ -698,16 +737,24 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult EliminarHorario(int idHorario)
         {
-            Database db = new Database();
-            try
+            if (ComprobarRolAdministrador())
             {
-                Horario horario = db.GetHorario(idHorario);
-                db.BajaHorario(horario);
-                return RedirectToAction("ListarHorarios");
+                Database db = new Database();
+
+                try
+                {
+                    Horario horario = db.GetHorario(idHorario);
+                    db.BajaHorario(horario);
+                    return RedirectToAction("ListarHorarios");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                return View("AccesoDenegado");
             }
         }
 
@@ -726,6 +773,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                     comprobado = true;
                 }
             }
+
             return comprobado;
         }
     }

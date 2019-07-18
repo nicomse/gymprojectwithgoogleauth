@@ -151,6 +151,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                     comprobado = true;
                 }
             }
+
             return comprobado;
         }
     }

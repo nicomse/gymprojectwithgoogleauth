@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GymProjectWithGoogleAuth.Models.Clases.Pack>
 
 @{
-    ViewBag.Title = "Asignar Créditos A Alumno";
+    ViewBag.Title = "Asignar Créditos a Alumno";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -18,7 +18,7 @@
                             <th>Cantidad de Créditos</th>
                             <th>Días de Vigencia</th>
                             <th>Precio</th>
-                            <th>Email Alumno</th>
+                            <th>E-Mail Alumno</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -39,7 +39,7 @@
                                 @Html.DisplayFor(modelItem => item.Precio)
                             </td>
                             <td>
-                                <input type="email" class="form-control" id="emailAlumno" required="required" placeholder="Ingrese un email" />
+                                <input type="email" class="form-control" id="emailAlumno" required="required" placeholder="Ingrese un E-Mail..." />
                             </td>
                             <td>
                                 <input type="button" class="btn btn-primary" value="Asignar" onclick="asignar(@item.IdPack, $(this).closest('tr').find('input').val())" />
@@ -74,7 +74,6 @@
     <script type="text/javascript" src="~/Scripts/datatable.js"></script>
     <script>
         function asignar(idPack, emailAlumno) {
-
             $.ajax({
                 url: '/Administrador/AsignarPack',
                 data: {

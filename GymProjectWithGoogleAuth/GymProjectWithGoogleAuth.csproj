@@ -301,6 +301,7 @@
     <Content Include="Content\Images\Administrador.jpg" />
     <Content Include="Content\Images\Alumno.jpg" />
     <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\Login.jpg" />
     <Content Include="Content\Images\Profesor.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

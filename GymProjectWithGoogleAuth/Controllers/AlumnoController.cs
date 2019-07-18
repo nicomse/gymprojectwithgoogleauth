@@ -10,7 +10,6 @@ namespace GymProjectWithGoogleAuth.Controllers
 {
     public class AlumnoController : Controller
     {
-
         // GET: Alumno
         public ActionResult Index()
         {
@@ -212,6 +211,7 @@ namespace GymProjectWithGoogleAuth.Controllers
                     comprobado = true;
                 }
             }
+
             return comprobado;
         }
     }

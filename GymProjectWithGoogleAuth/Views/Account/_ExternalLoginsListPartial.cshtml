@@ -1,7 +1,7 @@
 ﻿@model GymProjectWithGoogleAuth.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 
-<h4>Utilice su cuenta de Google para iniciar sesión.</h4>
+<h4>Haga clic en la imágen para iniciar sesión con su cuenta de Google.</h4>
 <hr />
 
 @{
@@ -14,7 +14,7 @@
             <p>
                 @foreach (AuthenticationDescription p in loginProviders)
                 {
-                    <button type="submit" class="btn btn-primary" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">Google</button>
+                    <center><button type="submit" style="padding: 0px; border: 0px" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType"><img src="~/Content/Images/Login.jpg" width="900" /></button></center>
                 }
             </p>
         </div>
