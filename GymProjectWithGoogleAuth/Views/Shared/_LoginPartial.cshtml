@@ -2,7 +2,7 @@
 @using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 @using GymProjectWithGoogleAuth.Models.Clases;
 
-@if (Request.IsAuthenticated)
+@try
 {
     Database db = new Database();
     Persona persona = db.GetPersonaPorEmail(User.Identity.GetUserName());
@@ -23,7 +23,7 @@
         </ul>
     }
 }
-else
+catch
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>

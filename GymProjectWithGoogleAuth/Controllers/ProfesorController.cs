@@ -12,16 +12,30 @@ namespace GymProjectWithGoogleAuth.Controllers
         // GET: Profesor
         public ActionResult Index()
         {
-            return View();
+            if (ComprobarRolProfesor())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult TomarAsistencia()
         {
-            Database db = new Database();
-            Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
-            List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnProfesor(profesor.IdProfesor);
+            if (ComprobarRolProfesor())
+            {
+                Database db = new Database();
+                Profesor profesor = db.GetProfesorPorEmail(User.Identity.GetUserName());
+                List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnProfesor(profesor.IdProfesor);
 
-            return View(sucursales);
+                return View(sucursales);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public PartialViewResult DamePartialActividades(int idSucursal)
@@ -120,6 +134,24 @@ namespace GymProjectWithGoogleAuth.Controllers
             bool asistencia = db.TomarAsistencia(idAlumno, idHorario, fecha, estado);
 
             return Json(asistencia, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool ComprobarRolProfesor()
+        {
+            bool comprobado = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                Database db = new Database();
+                String email = User.Identity.GetUserName();
+                String rol = db.GetRolPersona(email);
+
+                if (rol == "PROFESOR")
+                {
+                    comprobado = true;
+                }
+            }
+            return comprobado;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using GymProjectWithGoogleAuth.Models.BaseDeDatos;
 using GymProjectWithGoogleAuth.Models.Clases;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -11,20 +12,41 @@ namespace GymProjectWithGoogleAuth.Controllers
         // GET: Administrador
         public ActionResult Index()
         {
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         // ABM ALUMNOS
         public ActionResult ListarAlumnos()
         {
-            Database db = new Database();
-            List<Alumno> alumnos = db.GetTodosLosAlumnos();
-            return View(alumnos);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Alumno> alumnos = db.GetTodosLosAlumnos();
+                return View(alumnos);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult AgregarAlumno()
         {
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -58,9 +80,16 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult ModificarAlumno(int id)
         {
-            Database db = new Database();
-            Alumno alu = db.GetAlumno(id);
-            return View(alu);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                Alumno alu = db.GetAlumno(id);
+                return View(alu);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -97,15 +126,29 @@ namespace GymProjectWithGoogleAuth.Controllers
         // ABM PROFESORES
         public ActionResult ListarProfesores()
         {
-            Database db = new Database();
-            List<Profesor> profesores = db.GetTodosLosProfesores();
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Profesor> profesores = db.GetTodosLosProfesores();
 
-            return View(profesores);
+                return View(profesores);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult AgregarProfesor()
         {
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -139,9 +182,17 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult ModificarProfesor(int id)
         {
-            Database db = new Database();
-            Profesor profesor = db.GetProfesor(id);
-            return View(profesor);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                Profesor profesor = db.GetProfesor(id);
+                return View(profesor);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
+
         }
 
         [HttpPost]
@@ -178,14 +229,28 @@ namespace GymProjectWithGoogleAuth.Controllers
         // ABM SUCURSALES
         public ActionResult ListarSucursales()
         {
-            Database db = new Database();
-            List<Sucursal> sucursales = db.GetTodasLasSucursales();
-            return View(sucursales);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Sucursal> sucursales = db.GetTodasLasSucursales();
+                return View(sucursales);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult AgregarSucursal()
         {
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -219,9 +284,16 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult ModificarSucursal(int id)
         {
-            Database db = new Database();
-            Sucursal sucursal = db.GetSucursal(id);
-            return View(sucursal);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                Sucursal sucursal = db.GetSucursal(id);
+                return View(sucursal);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -266,14 +338,28 @@ namespace GymProjectWithGoogleAuth.Controllers
         // ABM ACTIVIDADES
         public ActionResult ListarActividades()
         {
-            Database db = new Database();
-            List<Actividad> actividades = db.GetTodasLasActividades();
-            return View(actividades);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Actividad> actividades = db.GetTodasLasActividades();
+                return View(actividades);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult AgregarActividad()
         {
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -308,9 +394,16 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult ModificarActividad(int id)
         {
-            Database db = new Database();
-            Actividad actividad = db.GetActividad(id);
-            return View(actividad);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                Actividad actividad = db.GetActividad(id);
+                return View(actividad);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -361,16 +454,30 @@ namespace GymProjectWithGoogleAuth.Controllers
         // ABM PACKS
         public ActionResult ListarPacks()
         {
-            Database db = new Database();
-            List<Pack> packs = db.GetTodosLosPacks();
-            return View(packs);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Pack> packs = db.GetTodosLosPacks();
+                return View(packs);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult AgregarPack()
         {
-            Database db = new Database();
-            ViewBag.data = db.GetTodasLasSucursales();
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                ViewBag.data = db.GetTodasLasSucursales();
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -395,10 +502,17 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult ModificarPack(int id)
         {
-            Database db = new Database();
-            Pack pack = db.GetPack(id);
-            ViewBag.data = db.GetTodasLasSucursales();
-            return View(pack);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                Pack pack = db.GetPack(id);
+                ViewBag.data = db.GetTodasLasSucursales();
+                return View(pack);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -440,10 +554,16 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult AsignarCreditosAlumno()
         {
-            Database db = new Database();
-            List<Pack> packs = db.GetTodosLosPacks();
-
-            return View(packs);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Pack> packs = db.GetTodosLosPacks();
+                return View(packs);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -475,18 +595,32 @@ namespace GymProjectWithGoogleAuth.Controllers
         // ABM HORARIOS
         public ActionResult ListarHorarios()
         {
-            Database db = new Database();
-            List<Horario> horarios = db.GetTodosLosHorarios();
-            return View(horarios);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                List<Horario> horarios = db.GetTodosLosHorarios();
+                return View(horarios);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult AgregarHorario()
         {
-            Database db = new Database();
-            ViewBag.actividades = db.GetTodasLasActividades();
-            ViewBag.profesores = db.GetTodosLosProfesores();
-            ViewBag.sucursales = db.GetTodasLasSucursales();
-            return View();
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                ViewBag.actividades = db.GetTodasLasActividades();
+                ViewBag.profesores = db.GetTodosLosProfesores();
+                ViewBag.sucursales = db.GetTodasLasSucursales();
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -519,12 +653,19 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult ModificarHorario(int id)
         {
-            Database db = new Database();
-            Horario horario = db.GetHorario(id);
-            ViewBag.actividades = db.GetTodasLasActividades();
-            ViewBag.profesores = db.GetTodosLosProfesores();
-            ViewBag.sucursales = db.GetTodasLasSucursales();
-            return View(horario);
+            if (ComprobarRolAdministrador())
+            {
+                Database db = new Database();
+                Horario horario = db.GetHorario(id);
+                ViewBag.actividades = db.GetTodasLasActividades();
+                ViewBag.profesores = db.GetTodosLosProfesores();
+                ViewBag.sucursales = db.GetTodasLasSucursales();
+                return View(horario);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         [HttpPost]
@@ -568,6 +709,24 @@ namespace GymProjectWithGoogleAuth.Controllers
             {
                 throw e;
             }
+        }
+
+        public bool ComprobarRolAdministrador()
+        {
+            bool comprobado = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                Database db = new Database();
+                String email = User.Identity.GetUserName();
+                String rol = db.GetRolPersona(email);
+
+                if (rol == "ADMINISTRADOR")
+                {
+                    comprobado = true;
+                }
+            }
+            return comprobado;
         }
     }
 }

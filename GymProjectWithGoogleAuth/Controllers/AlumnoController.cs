@@ -10,54 +10,67 @@ namespace GymProjectWithGoogleAuth.Controllers
 {
     public class AlumnoController : Controller
     {
-        // POSIBLE MANERA DE RESTRINGIR EL ACCESO A LOS ROLES NO PERMITIDOS
-
-        /* public ActionResult ComprobarRol()
-        {
-            Database db = new Database();
-            String email = User.Identity.GetUserName();
-            String rol = db.GetRolPersona(email);
-
-            if (rol != "ALUMNO")
-            {
-                return RedirectToAction("AccesoDenegado");
-            }
-
-            return View();
-        } */
 
         // GET: Alumno
         public ActionResult Index()
         {
-            return View();
+            if (ComprobarRolAlumno())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult ListarCreditos()
         {
-            Database db = new Database();
-            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-            List<Credito> creditos = db.GetCreditosAlumno(alumno.IdAlumno);
+            if (ComprobarRolAlumno())
+            {
+                Database db = new Database();
+                Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+                List<Credito> creditos = db.GetCreditosAlumno(alumno.IdAlumno);
 
-            return View(creditos);
+                return View(creditos);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult VerDetalleCredito(int id)
         {
-            Database db = new Database();
-            Credito credito = db.GetCredito(id);
-            List<List<String>> detalleCreditos = db.GetDetalleCredito(id);
-            ViewBag.detalleCreditos = detalleCreditos;
+            if (ComprobarRolAlumno())
+            {
+                Database db = new Database();
+                Credito credito = db.GetCredito(id);
+                List<List<String>> detalleCreditos = db.GetDetalleCredito(id);
+                ViewBag.detalleCreditos = detalleCreditos;
 
-            return View(credito);
+                return View(credito);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public ActionResult InscribirActividad()
         {
-            Database db = new Database();
-            Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
-            List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnAlumno(alumno.IdAlumno);
+            if (ComprobarRolAlumno())
+            {
+                Database db = new Database();
+                Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
+                List<Sucursal> sucursales = db.GetTodasLasSucursalesDeUnAlumno(alumno.IdAlumno);
 
-            return View(sucursales);
+                return View(sucursales);
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public PartialViewResult DamePartialHorario(int idSucursal)
@@ -166,7 +179,14 @@ namespace GymProjectWithGoogleAuth.Controllers
 
         public ActionResult CalendarioActividades()
         {
-            return View();
+            if (ComprobarRolAlumno())
+            {
+                return View();
+            }
+            else
+            {
+                return View("AccesoDenegado");
+            }
         }
 
         public JsonResult GetEventosAlumno()
@@ -175,6 +195,24 @@ namespace GymProjectWithGoogleAuth.Controllers
             Alumno alumno = db.GetAlumnoPorEmail(User.Identity.GetUserName());
             List<Dictionary<String, String>> actividades = db.GetActividadesDeUnAlumno(alumno.IdAlumno);
             return Json(actividades, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool ComprobarRolAlumno()
+        {
+            bool comprobado = false;
+
+            if (User.Identity.IsAuthenticated)
+            {
+                Database db = new Database();
+                String email = User.Identity.GetUserName();
+                String rol = db.GetRolPersona(email);
+
+                if (rol == "ALUMNO")
+                {
+                    comprobado = true;
+                }
+            }
+            return comprobado;
         }
     }
 }

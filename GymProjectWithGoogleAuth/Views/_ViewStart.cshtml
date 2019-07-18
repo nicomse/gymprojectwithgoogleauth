@@ -1,20 +1,29 @@
 ﻿@{
     var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
     string cLayout = "";
-    switch (controller)
+
+    if (User.Identity.IsAuthenticated)
     {
-        case "Administrador":
-            cLayout = "~/Views/Shared/_Layout_Administrador.cshtml";
-            break;
-        case "Alumno":
-            cLayout = "~/Views/Shared/_Layout_Alumno.cshtml";
-            break;
-        case "Profesor":
-            cLayout = "~/Views/Shared/_Layout_Profesor.cshtml";
-            break;
-        default:
-            cLayout = "~/Views/Shared/_Layout.cshtml";
-            break;
+        switch (controller)
+        {
+            case "Administrador":
+                cLayout = "~/Views/Shared/_Layout_Administrador.cshtml";
+                break;
+            case "Alumno":
+                cLayout = "~/Views/Shared/_Layout_Alumno.cshtml";
+                break;
+            case "Profesor":
+                cLayout = "~/Views/Shared/_Layout_Profesor.cshtml";
+                break;
+            default:
+                cLayout = "~/Views/Shared/_Layout.cshtml";
+                break;
+        }
     }
+    else
+    {
+        cLayout = "~/Views/Shared/_Layout.cshtml";
+    }
+
     Layout = cLayout;
 }

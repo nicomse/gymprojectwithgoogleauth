@@ -368,10 +368,10 @@ namespace GymProjectWithGoogleAuth.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            /*if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "Account");
-            }
+            }*/
 
             if (ModelState.IsValid)
             {
